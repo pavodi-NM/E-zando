@@ -25,7 +25,7 @@ urlpatterns = [
     path('carte-credit-checkout-payment/<mode_payment>/', CarteCreditPayment.as_view(), name='carte-credit-checkout-payment'),
     path('carte-carte-credit/',stripe_charge_carte_credit, name='stripe-carte-credit'),
 
-    path('payment/<slug>', CheckoutPayment, name='payment'),
+    path('payment/<slug>', CheckoutPayment.as_view(), name='payment'),
     path('checkout-details/', CheckoutView.as_view(), name='checkoutdetails'),
 
     path('vendor-payment/contact-details', vendor_payment_details, name="vendor_contact_details")

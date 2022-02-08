@@ -35,7 +35,6 @@ INSTALLED_APPS = [
     'Help',
     'StandardApps.templatetags',
     'templates.accounts',
-    'templates.vendor-dashboard',
     'templates.chatroom',
     'global_scripts',
     'django_countries',
@@ -114,7 +113,7 @@ TEMPLATES = [
                 'global_scripts.context_processors.anonymous_user_cart',
                 'global_scripts.context_processors.sub_categories_only',
                 # for django responsive 2, to manage screen size and content
-                'responsive.context_processors.device',
+                #'responsive.context_processors.device',
             ],
         },
     },
@@ -131,12 +130,12 @@ ASGI_APPLICATION = "eCommerceBilMarket.asgi.application"
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'bilocost',
-        'USER': 'root',
-        'PASSWORD': '',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'ezando',
+        'USER': 'postgres',
+        'PASSWORD': 'pv@@post001155',
         'HOST': 'localhost',
-        'PORT': '3306',
+        'PORT': '5432',
     }
 }
 
@@ -189,6 +188,9 @@ STATICFILES_DIRS = [
 # STATIC_ROOT = BASE_DIR / 'static_cdn'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
+
+# Define Auto Field in models
+DEFAULT_AUTO_FIELD='django.db.models.AutoField'
 
 # Django allauth dependencies
 AUTHENTICATION_BACKENDS = [

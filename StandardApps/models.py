@@ -179,7 +179,7 @@ class Cart(models.Model):  # Order
     billing_adress = models.ForeignKey('BillingAddress', on_delete=models.SET_NULL, blank=True, null=True)
     payment = models.ForeignKey('Payment', on_delete=models.SET_NULL, blank=True, null=True)
     coupon = models.ForeignKey('Coupon', on_delete=models.SET_NULL, blank=True, null=True)
-    commande_status = models.ForeignKey(CommandeStatus, on_delete=models.SET_NULL, blank=True, null=True)
+    commande_status = models.ForeignKey('CommandeStatus', on_delete=models.SET_NULL, blank=True, null=True)
     en_cours_de_livraison = models.BooleanField(default=False)
     livraison_recue = models.BooleanField(default=False)
     demande_de_remboursement = models.BooleanField(default=False)

@@ -1,5 +1,5 @@
-from django.conf.urls import url
-from django.urls import path
+
+from django.urls import path, re_path
 from .views import *
 app_name = 'account'
 urlpatterns = [
@@ -10,7 +10,7 @@ urlpatterns = [
 
 
     # Contact seller
-    url(r'account/contact-seller/(?P<pk>\d+)/$', ContactSeller.as_view(), name="account_contact_seller"),
+    re_path(r'account/contact-seller/(?P<pk>\d+)/$', ContactSeller.as_view(), name="account_contact_seller"),
 
     
     path('accountPayment/', AccountPayment.as_view(), name='accountPayment'),
@@ -24,10 +24,10 @@ urlpatterns = [
 
     path('accountSingleTicket/', AccountSingleTicket.as_view(), name='accountSingleTicket'),
     path('accountPasswordRecovery/', AccountPasswordRecovery.as_view(), name='accountPasswordRecovery'),
-    url(r'^accounts/signup/client/$', signup_client, name = 'signup-client'),
-    url(r'^accounts/signin/client/$', login_client, name = 'login-client'),
-    url(r'^accounts/motdepasse/change/$', change_password, name = 'password-change-client'),
-    url(r'^accounts/motdepasse/renitialise/$', reset_password, name = 'password-reset-client'),
+    re_path(r'^accounts/signup/client/$', signup_client, name = 'signup-client'),
+    re_path(r'^accounts/signin/client/$', login_client, name = 'login-client'),
+    re_path(r'^accounts/motdepasse/change/$', change_password, name = 'password-change-client'),
+    re_path(r'^accounts/motdepasse/renitialise/$', reset_password, name = 'password-reset-client'),
     # proceed to payment pop up
     path('payment-client-vendor/', radio_client_payment, name="payment-radio-client"),
 

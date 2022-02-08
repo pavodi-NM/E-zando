@@ -7,7 +7,7 @@ from .models import Category
 from . import models
 from .models import *
 from django.contrib.auth.admin import UserAdmin
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 
 admin.site.register(get_user_model())
 
