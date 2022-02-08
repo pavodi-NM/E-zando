@@ -1,0 +1,83 @@
+ <header class="navbar d-block navbar-sticky navbar-expand-lg navbar-dark bg-darker">
+      <div class="container"><a class="navbar-brand d-none d-sm-block me-4 order-lg-1" href="index.html"><img src="img/logo-dark.png" width="142" alt="Cartzilla"></a><a class="navbar-brand d-sm-none me-2 order-lg-1" href="index.html"><img src="img/logo-icon.png" width="74" alt="Cartzilla"></a>
+        <div class="navbar-toolbar d-flex align-items-center order-lg-3">
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"><span class="navbar-toggler-icon"></span></button><a class="navbar-tool d-none d-lg-flex" href="javascript:void(0)" data-bs-toggle="collapse" data-bs-target="#searchBox" role="button" aria-expanded="false" aria-controls="searchBox"><span class="navbar-tool-tooltip">Chercher</span>
+            <div class="navbar-tool-icon-box"><i class="navbar-tool-icon ci-search"></i></div></a>
+            {% if request.user.is_authenticated or accounts %}
+                <a class="navbar-tool ms-2" href="{% url 'account:accountProfile' %}" data-bs-toggle="modal"><span class="navbar-tool-tooltip">Compte</span>
+                <div class="navbar-tool-icon-box"><i class="navbar-tool-icon ci-user"></i></div></a>
+            {% else %}
+                <a class="navbar-tool ms-2" href="#signin-modal" data-bs-toggle="modal"><span class="navbar-tool-tooltip">Compte</span>
+                <div class="navbar-tool-icon-box"><i class="navbar-tool-icon ci-user"></i></div></a>
+            {% endif %}
+            {% comment %} This is the cart total and cart drop dropdown as well {% endcomment %}
+             {% if request.user.is_authenticated or request.user.is_anonymous %}
+          <div class="navbar-tool dropdown ms-3"><a class="navbar-tool-icon-box bg-secondary dropdown-toggle" href="{% url 'shopcart' %}"><span class="navbar-tool-label">{% if cart_total_item %}{{ cart_total_item }}{% else %}0{% endif %}</span><i class="navbar-tool-icon ci-cart"></i></a>
+            <!-- Cart dropdown-->
+            <div class="dropdown-menu dropdown-menu-end">
+              <div class="widget widget-cart px-3 pt-2 pb-3" style="width: 20rem;">
+                <div style="height: 15rem;" data-simplebar data-simplebar-auto-hide="false">
+                    {% for cart_item in cart_user.produits.all %}
+                  <div class="widget-cart-item pb-2 border-bottom">
+                    <button class="btn-close text-danger" type="button" aria-label="Remove"><span aria-hidden="true">&times;</span></button>
+                    <div class="d-flex align-items-center"><a class="d-block" href="{% url 'shopSingleV2' cart_item.produit.slug %}"><img src="{{ cart_item.produit.imageProduit.url }}" width="64" alt="Pizza"></a>
+                      <div class="ps-2">
+                        <h6 class="widget-product-title"><a href="{% url 'shopSingleV2' cart_item.produit.slug %}">{{ cart_item.produit.titreProduit }}</a></h6>
+                        <div class="widget-product-meta"><span class="text-accent me-2">${{ cart_item.produit.prixActual }}.<small>00</small></span><span class="text-muted">x 1</span></div>
+                      </div>
+                    </div>
+                  </div>
+                    {% endfor %}
+                </div>
+                <div class="d-flex flex-wrap justify-content-between align-items-center py-3">
+                  <div class="fs-sm me-2 py-2"><span class="text-muted">Sous-total:</span><span class="text-accent fs-base ms-1">${{ total_cart_user }}.<small>00</small></span></div><a class="btn btn-outline-secondary btn-sm" href="{% url 'shopcart' %}">Voire le Panier<i class="ci-arrow-right ms-1 me-n1"></i></a>
+                </div>
+               {% if total_cart_users > 0 %}
+                  <a class="btn btn-primary btn-sm d-block w-100" href="{% url 'checkout:checkoutdetails' %}"><i class="ci-card me-2 fs-base align-middle"></i>Procéder au paiement</a>
+               {% endif %}
+              </div>
+            </div>
+              {% endif %}
+          </div>
+        </div>
+        <div class="collapse navbar-collapse me-auto order-lg-2" id="navbarCollapse">
+          <form method="GET" onsubmit="return executeQueryMobile();">
+                {% csrf_token %}
+          <!-- Search (mobile)-->
+          <div class="d-lg-none py-3">
+                <div class="input-group"><i class="ci-search position-absolute top-50 start-0 translate-middle-y ms-3"></i>
+                  <input class="form-control rounded-start"  name="search" id="search_here_mobile" type="text" placeholder="De quoi avez-vous besoin?">
+                </div>
+          </div>
+          </form>
+          <!-- Location dropdown-->
+          <ul class="navbar-nav navbar-mega-nav ms-lg-4 pe-lg-2 me-lg-2">
+            <li class="nav-item dropdown"><a class="nav-link dropdown-toggle ps-lg-0" href="#" data-bs-toggle="dropdown"><i class="ci-location me-2"></i>Trier par</a>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="#">Bas Prix</a></li>
+                <li><a class="dropdown-item" href="#">Haut Prix</a></li>
+                <li><a class="dropdown-item" href="#">Recent</a></li>
+                <li><a class="dropdown-item" href="#">Populaire</a></li>
+                <li><a class="dropdown-item" href="#">Low rating</a></li>
+                <li><a class="dropdown-item" href="#">High rating</a></li>
+              </ul>
+            </li>
+          </ul>
+          <!-- Primary menu-->
+
+          <ul class="navbar-nav">
+            <li class="nav-item"><a class="nav-link" href="{% url 'standardApps:home' %}">Home</a></li>
+          </ul>
+        </div>
+      </div>
+      <!-- Search collapse-->
+      <div class="search-box collapse" id="searchBox">
+        <form method="GET" onsubmit="return executeQuery();">
+        <div class="container py-2">
+          <div class="input-group"><i class="ci-search position-absolute top-50 start-0 translate-middle-y ms-3"></i>
+              <input class="form-control rounded-start" name="search" id="search_here" type="text" placeholder="De quoi avez vous besoin?">
+          </div>
+        </div>
+      </form>
+      </div>
+    </header>

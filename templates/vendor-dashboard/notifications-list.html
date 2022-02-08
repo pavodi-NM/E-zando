@@ -1,0 +1,26 @@
+{% load static %}
+{% include 'header-links.html' %}
+{% include 'header-shop-second-type.html' %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="container">
+{{ msg_unseen_count }}
+        {% for notif in produits %}
+                  <div class="d-block d-sm-flex align-items-center py-4 border-bottom"><a class="d-block mb-3 mb-sm-0 me-sm-4 ms-sm-0 mx-auto" href="marketplace-single.html" style="width: 12.5rem;"><img class="rounded-3" src="{{ produit_db.imageProduit.url }}" alt="Product"></a>
+                <div class="text-center text-sm-start">
+                  <h3 class="h6 product-title mb-2"><a href="{% url 'chat-room-vendor' notif.sender__pk notif.produit__slug %}">{{ notif.produit__titreProduit}}</a></h3>
+                  <div class="text-accent fs-sm mb-1">Standard license</div>
+                  <div class="form-check d-table text-start mx-auto mx-sm-0">
+                    <input class="form-check-input" type="checkbox" id="update-info-1" checked>
+                    <label class="form-check-label fs-ms" for="update-info-1">Notification de la part de <strong>{{ notif.sender__user__username }}</strong></label>
+                  </div>
+                </div>
+              </div>
+    {% endfor %}
+</div>
+</body>
+</html>

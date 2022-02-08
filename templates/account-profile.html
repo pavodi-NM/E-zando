@@ -1,0 +1,98 @@
+{% extends 'simple_base.html' %}
+{% load static %}
+{% block title %} Profile {% endblock %}
+{% block body %}
+
+    <!-- Page Title-->
+    <div class="page-title-overlap bg-dark pt-4">
+      <div class="container d-lg-flex justify-content-between py-2 py-lg-3">
+        <div class="order-lg-2 mb-3 mb-lg-0 pt-lg-2">
+          <nav aria-label="breadcrumb">
+            <ol class="breadcrumb breadcrumb-light flex-lg-nowrap justify-content-center justify-content-lg-start">
+              <li class="breadcrumb-item"><a class="text-nowrap" href="{% url 'standardApps:home' %}"><i class="ci-home"></i>Home</a></li>
+              <li class="breadcrumb-item text-nowrap"><a href="#">Compte</a>
+              </li>
+              <li class="breadcrumb-item text-nowrap active" aria-current="page">Profile info</li>
+            </ol>
+          </nav>
+        </div>
+        <div class="order-lg-1 pe-lg-4 text-center text-lg-start">
+          <h1 class="h3 text-light mb-0">Profile info</h1>
+        </div>
+      </div>
+    </div>
+    <div class="container pb-5 mb-2 mb-md-4">
+      <div class="row">
+        <!-- Sidebar-->
+        {% include 'account-aside-dashboard.html' %}
+        <!-- Content  -->
+        <section class="col-lg-8">
+          <!-- Toolbar-->
+          <div class="d-none d-lg-flex justify-content-between align-items-center pt-lg-3 pb-4 pb-lg-5 mb-lg-3">
+            <h6 class="fs-base text-light mb-0">Mettez à jour les détails de votre profil ci-dessous:</h6><a class="btn btn-primary btn-sm" href="vendor-enregistrement.html"><i class="ci-sign-out me-2"></i>Se déconnecter</a>
+          </div>
+          <!-- Profile form-->
+          <form>
+            <div class="bg-secondary rounded-3 p-4 mb-4">
+              <div class="d-flex align-items-center"><img class="rounded" src="{% static 'userdefaultimage/userdefault.png' %}" width="90" alt="{{ request.user.username }}">
+                <div class="ps-3">
+                  <button class="btn btn-light btn-shadow btn-sm mb-2" type="button"><i class="ci-loading me-2"></i>Modifier l'avatar</button>
+                  <div class="p mb-0 fs-ms text-muted">Upload JPG, GIF or PNG image. 300 x 300 required.</div>
+                </div>
+              </div>
+            </div>
+            <div class="row gx-4 gy-3">
+              <div class="col-sm-6">
+                <label class="form-label" for="account-fn">Prénom</label>
+                <input class="form-control" type="text" id="account-fn" value="{{ bil_details.prenom }}">
+              </div>
+              <div class="col-sm-6">
+                <label class="form-label" for="account-ln">Nom de famille</label>
+                <input class="form-control" type="text" id="account-ln" value="{{ bil_details.nom }}">
+              </div>
+              <div class="col-sm-6">
+                <label class="form-label" for="account-email">Adresse e-mail</label>
+                <input class="form-control" type="email" id="account-email" value="{{ request.user.email }}" disabled>
+              </div>
+              <div class="col-sm-6">
+                <label class="form-label" for="account-phone">Numéro de téléphone</label>
+                <input class="form-control" type="text" id="account-phone" value="{{ bil_details.numero_de_telephone }}" required>
+              </div>
+              <div class="col-sm-6">
+                  <div class="card">
+                  <div class="card-body">
+                    <h6 class="card-title">Mot de passe oublié ?</h6>
+                    <p class="card-text fs-sm text-muted">Procédez à cette option si vous avez oublié le mot de passe.</p>
+                    <a href="{% url 'account:password-reset-client' %}" class="btn btn-sm btn-primary">Cliquer ici</a>
+                   </div>
+                  </div>
+              </div>
+
+            <div class="col-sm-6">
+                <div class="card">
+                  <div class="card-body">
+                    <h6 class="card-title">Modification du mot de passe</h6>
+                    <p class="card-text fs-sm text-muted">Procédez à cette option si vous voulez changer votre mot de passe.</p>
+                    <a href="{% url 'account:password-change-client' %}" class="btn btn-sm btn-primary">Cliquer ici</a>
+                  </div>
+                </div>
+            </div>
+              <div class="col-12">
+                <hr class="mt-2 mb-3">
+                <div class="d-flex flex-wrap justify-content-between align-items-center">
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="subscribe_me" checked>
+                    <label class="form-check-label" for="subscribe_me">Inscrivez-moi à la Newsletter</label>
+                  </div>
+                  <button class="btn btn-primary mt-3 mt-sm-0" type="button">Mettre à jour le profil</button>
+                </div>
+              </div>
+            </div>
+          </form>
+        </section>
+      </div>
+    </div>
+    <!-- Footer-->
+
+      {% include 'footer.html' %}
+{% endblock %}

@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% include 'header-shop-primary-type.html' %}
+
+{% block body %}
+    <div class="container mt-lg-5">
+    <div class="row pt-2 mx-n2" id="box">
+    {% for item in cart %}
+    <div class="col-lg-3 col-md-4 col-sm-6 px-2 mb-4">
+     <div class="card" style="max-width: 540px;">
+      <div class="row g-0">
+        <div class="col-sm-4">
+          <img src="{{ item.produit.imageProduit.url }}" class="rounded-start" alt="Card image">
+            <p class="text-center">Payment possible</p>
+        </div>
+        <div class="col-sm-8">
+          <div class="card-body">
+            <h5 class="card-title">Contact details</h5>
+            <i class="ci-phone h3 mt-2 mb-4 text-primary"></i>
+            <p class="card-text fs-sm text-muted">{{ item.produit.vendeur.telephone }}</p>
+            <i class="ci-mail h3 mt-2 mb-4 text-primary"></i>
+            <p>{{ item.produit.vendeur.user.email }}</p>
+            <a href="{% url 'chat:chat-room' item.produit.vendeur.pk item.produit.slug %}" class="btn btn-sm btn-primary">Chat</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+     {% endfor %}
+    </div>
+    </div>
+
+    {% include 'footer.html' %}
+{% endblock %}

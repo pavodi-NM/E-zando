@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% block title %} {{ category.titre }}{% endblock %}
+{% block body %}
+    <div class="container py-5 mb-lg-3">
+      <div class="row justify-content-center pt-lg-4 text-center">
+        <div class="col-lg-5 col-md-7 col-sm-9">
+          <h1 class="display-404 py-lg-3">404</h1>
+          <h2 class="h3 mb-4">Nous ne parvenons pas à trouver la page que vous recherchez..</h2>
+          <p class="fs-md mb-4">
+            <u>Voici plutôt quelques liens utiles:</u>
+          </p>
+        </div>
+      </div>
+      <div class="row justify-content-center">
+        <div class="col-xl-8 col-lg-10">
+          <div class="row">
+            <div class="col-sm-4 mb-3"><a class="card h-100 border-0 shadow-sm" href="{% url 'standardApps:home' %}">
+                <div class="card-body">
+                  <div class="d-flex align-items-center"><i class="ci-home text-primary h4 mb-0"></i>
+                    <div class="ps-3">
+                      <h5 class="fs-sm mb-0">Homepage</h5><span class="text-muted fs-ms">Retour à la page d'accueil</span>
+                    </div>
+                  </div>
+                </div></a></div>
+            <div class="col-sm-4 mb-3"><a class="card h-100 border-0 shadow-sm" href="#">
+                <div class="card-body">
+                  <div class="d-flex align-items-center"><i class="ci-search text-success h4 mb-0"></i>
+                    <div class="ps-3">
+                      <h5 class="fs-sm mb-0">Search</h5><span class="text-muted fs-ms">Trouver avec la recherche avancée</span>
+                    </div>
+                  </div>
+                </div></a></div>
+            <div class="col-sm-4 mb-3"><a class="card h-100 border-0 shadow-sm" href="{% url 'helpTopics' %}">
+                <div class="card-body">
+                  <div class="d-flex align-items-center"><i class="ci-help text-info h4 mb-0"></i>
+                    <div class="ps-3">
+                      <h5 class="fs-sm mb-0">Aide et support</h5><span class="text-muted fs-ms">Visitez notre centre d'aide</span>
+                    </div>
+                  </div>
+                </div></a></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Footer-->
+    {% include 'footer.html' %}
+    <!-- Toolbar for handheld devices (Default)-->
+    <div class="handheld-toolbar">
+      <div class="d-table table-layout-fixed w-100"><a class="d-table-cell handheld-toolbar-item" href="account-wishlist.html"><span class="handheld-toolbar-icon"><i class="ci-heart"></i></span><span class="handheld-toolbar-label">Wishlist</span></a><a class="d-table-cell handheld-toolbar-item" href="javascript:void(0)" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" onclick="window.scrollTo(0, 0)"><span class="handheld-toolbar-icon"><i class="ci-menu"></i></span><span class="handheld-toolbar-label">Menu</span></a><a class="d-table-cell handheld-toolbar-item" href="shop-cart.html"><span class="handheld-toolbar-icon"><i class="ci-cart"></i><span class="badge bg-primary rounded-pill ms-1">4</span></span><span class="handheld-toolbar-label">$265.00</span></a></div>
+    </div>
+    <!-- Back To Top Button--><a class="btn-scroll-top" href="#top" data-scroll><span class="btn-scroll-top-tooltip text-muted fs-sm me-2">Top</span><i class="btn-scroll-top-icon ci-arrow-up">   </i></a>
+    <!-- Vendor scrits: js libraries and plugins-->
+    <script src="vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="vendor/simplebar/dist/simplebar.min.js"></script>
+    <script src="vendor/tiny-slider/dist/min/tiny-slider.js"></script>
+    <script src="vendor/smooth-scroll/dist/smooth-scroll.polyfills.min.js"></script>
+    <!-- Main theme script-->
+    <script src="js/theme.min.js"></script>
+
+{% endblock %}

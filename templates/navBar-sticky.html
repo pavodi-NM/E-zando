@@ -1,0 +1,84 @@
+{% load static %}
+{% load cart_template_tags %}
+{% load socialaccount %}
+{% if get_social_accounts %}
+{% get_social_accounts user as accounts %}
+{% endif %}
+
+<div class="navbar-sticky">
+        <div class="navbar navbar-expand-lg navbar-dark bg-dark">
+          <div class="container"><a class="navbar-brand d-none d-sm-block me-4 order-lg-1" href="{% url 'standardApps:home' %}"><img src="{% static 'img/home/icones/ezando-1.png' %}" width="142" alt="E-zando"></a><a class="navbar-brand d-sm-none me-2 order-lg-1" href="index.html"><img src="img/logo-icon-light.png" width="74" alt="Cartzilla"></a>
+            <div class="navbar-toolbar d-flex align-items-center order-lg-3">
+              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"><span class="navbar-toggler-icon"></span></button>
+            <!-- sub categories display list -->
+               <div class="d-flex justify-content-between align-items-center">
+                <div class="d-flex align-items-center">
+                  <label class="d-none d-lg-block fs-sm text-light text-nowrap opacity-75 me-2" for="order-sort">Trier les produits:</label>
+                  <label class="d-lg-none fs-sm text-nowrap opacity-75 me-2" for="order-sort">Trier les produits:</label>
+                      <select class="form-select" id="order-sort" onchange="location=this.value;">
+                            <option disabled selected>Categories de produits</option>
+                          {% for subcat in subcategory %}
+                            <option value="{% url 'standardApps:search-single-category' subcat.slug %}">{{ subcat.titre|title }}</option>
+                           {% endfor %}
+                      </select>
+                  </div>
+                 </di>
+               <!-- Shop now button -->
+             <a class="navbar-tool d-none d-lg-flex" href="{% url 'standardApps:show-now' %}"><span class="navbar-tool-tooltip">shopping rapide</span>
+                 <div class="navbar-tool-icon-box"><i class="navbar-tool-icon ci-cart"></i></div></a>
+
+             <a class="navbar-tool d-none d-lg-flex" href="javascript:void(0)" data-bs-toggle="collapse" data-bs-target="#searchBox" role="button" aria-expanded="false" aria-controls="searchBox"><span class="navbar-tool-tooltip">Chercher</span>
+                    <div class="navbar-tool-icon-box"><i class="navbar-tool-icon ci-search"></i></div></a>
+                {% if request.user.is_authenticated or accounts %}
+                    <a class="navbar-tool d-none d-lg-flex" href="{% url 'account:accountWishlist' %}"><span class="navbar-tool-tooltip">Liste de souhaits</span>
+                    <div class="navbar-tool-icon-box"><i class="navbar-tool-icon ci-heart"></i></div></a>
+                {% else %}
+                    <a class="navbar-tool d-none d-lg-flex" href="#signin-modal" data-bs-toggle="modal"><span class="navbar-tool-tooltip">connectez-vous</span>
+                    <div class="navbar-tool-icon-box"><i class="navbar-tool-icon ci-heart"></i></div></a>
+                {% endif %}
+               {% comment %}<a class="navbar-tool ms-1 ms-lg-0 me-n1 me-lg-2" href="{% url 'account:login-client' %}" data-bs-toggle="modal"> {% endcomment %}
+                {% if request.user.is_authenticated or accounts %}
+                    <a class="navbar-tool ms-1 ms-lg-0 me-n1 me-lg-2" href="{% url 'account:accountProfile' %}" data-bs-toggle="modal">
+                    <div class="navbar-tool-icon-box"><i class="navbar-tool-icon ci-user"></i></div>
+                    <div class="navbar-tool-text ms-n3"><small>Bienvenu, {{ request.user.username }}!</small>Mon Compte</div></a>
+                {% else %}
+                    <a class="navbar-tool ms-1 ms-lg-0 me-n1 me-lg-2" href="#signin-modal" data-bs-toggle="modal"><span class="navbar-tool-tooltip">Salut, sign in</span>
+                    <div class="navbar-tool-icon-box"><i class="navbar-tool-icon ci-user"></i></div></a>
+                {% endif %}
+                   {% comment %} This is the cart total and cart drop dropdown as well {% endcomment %}
+                {% if request.user.is_authenticated or request.user.is_anonymous %}
+                    <div class="navbar-tool dropdown ms-3"><a class="navbar-tool-icon-box bg-secondary dropdown-toggle" href="{% url 'shopcart' %}"><span class="navbar-tool-label">{% if cart_total_item %}{{ cart_total_item }}{% else %}0{% endif %}</span><i class="navbar-tool-icon ci-cart"></i></a>
+
+                <!-- Cart dropdown-->
+                <div class="dropdown-menu dropdown-menu-end">
+                  <div class="widget widget-cart px-3 pt-2 pb-3" style="width: 20rem;">
+                    <div style="height: 15rem;" data-simplebar data-simplebar-auto-hide="false">
+                         {% for cart_item in cart_user.produits.all %}
+                      <div class="widget-cart-item pb-2 border-bottom">
+                        <button class="btn-close text-danger" type="button" aria-label="Remove"><span aria-hidden="true">&times;</span></button>
+                        <div class="d-flex align-items-center"><a class="flex-shrink-0" href="{% url 'shopSingleV2' cart_item.produit.slug %}"><img src="{{ cart_item.produit.imageProduit.url }}" width="64" alt="Product"></a>
+                          <div class="ps-2">
+                            <h6 class="widget-product-title"><a href="{% url 'shopSingleV2' cart_item.produit.slug %}">{{ cart_item.produit.titreProduit }}</a></h6>
+                            <div class="widget-product-meta"><span class="text-accent me-2">${{ cart_item.produit.prixActual }}.<small>00</small></span><span class="text-muted">x 1</span></div>
+                          </div>
+                        </div>
+                      </div>
+                         {% endfor %}
+                    </div>
+
+                        <div class="d-flex flex-wrap justify-content-between align-items-center py-3">
+                            <div class="fs-sm me-2 py-2"><span class="text-muted">Sous-total:</span><span class="text-accent fs-base ms-1">${{ total_cart_user }}.<small>00</small></span></div><a class="btn btn-outline-secondary btn-sm" href="{% url 'shopcart' %}">Voire le Panier<i class="ci-arrow-right ms-1 me-n1"></i></a>
+                        </div>
+
+                         {% if total_cart_user > 0 %}
+                            <a class="btn btn-primary btn-sm d-block w-100" href="{% url 'checkout:checkoutdetails' %}"><i class="ci-card me-2 fs-base align-middle"></i>Procéder au paiement</a>
+                         {% endif %}
+                  </div>
+                </div>
+              {% endif %}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>

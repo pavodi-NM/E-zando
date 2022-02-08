@@ -1,0 +1,171 @@
+{% load static %}
+{% load mptt_tags %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>{% block title %} {% endblock %}</title>
+    <!-- SEO Meta Tags-->
+    <meta name="description" content="Cartzilla - Bootstrap E-commerce Template">
+    <meta name="keywords" content="bootstrap, shop, e-commerce, market, modern, responsive,  business, mobile, bootstrap, html5, css3, js, gallery, slider, touch, creative, clean">
+    <meta name="author" content="Createx Studio">
+    <!-- Viewport-->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Favicon and Touch Icons-->
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+    <link rel="manifest" href="site.webmanifest">
+    <link rel="mask-icon" color="#fe6a6a" href="safari-pinned-tab.svg">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="theme-color" content="#ffffff">
+    <!-- Vendor Styles including: Font Icons, Plugins, etc.-->
+    <link rel="stylesheet" media="screen" href="{% static 'vendor/simplebar/dist/simplebar.min.css' %}"/>
+    <link rel="stylesheet" media="screen" href="{% static 'vendor/tiny-slider/dist/tiny-slider.css' %}"/>
+    <!-- Main Theme Styles + Bootstrap-->
+    <link rel="stylesheet" media="screen" href="{% static 'css/theme.min.css' %}">
+  </head>
+  <!-- Body-->
+
+  <body class="handheld-toolbar-enabled">
+  <style>
+       .blink_me {
+          animation: blinker 1s linear infinite;
+        }
+
+        @keyframes blinker {
+          50% {
+            opacity: 0;
+          }
+        }
+  </style>
+    <!-- Sign in / sign up modal-->
+    {% include 'signIn-sinUp-Modal.html' %}
+
+    <!-- Navbar Marketplace-->
+    <!-- Remove "navbar-sticky" class to make navigation bar scrollable with the page.-->
+    <header class="bg-light shadow-sm navbar-sticky">
+      <div class="navbar navbar-expand-lg navbar-light">
+       <div class="container"> {% comment %}<a class="navbar-brand d-none d-sm-block flex-shrink-0 me-4 order-lg-1" href="{% url 'dashboadLinkToIndexPage' %}"><img src="{% static 'img/logo-dark.png' %}" width="142" alt="Bilocost"></a><a class="navbar-brand d-sm-none me-2 order-lg-1" href="{% url 'dashboadLinkToIndexPage' %}"><img src="{% static 'img/logo-icon.png' %}" width="74" alt="Bilocost"></a> {% endcomment %}
+          <!-- Toolbar-->
+          <div class="navbar-toolbar d-flex align-items-center order-lg-3">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"><span class="navbar-toggler-icon"></span></button><a class="navbar-tool d-none d-lg-flex" href="javascript:void(0)" data-bs-toggle="collapse" data-bs-target="#searchBox" role="button" aria-expanded="false" aria-controls="searchBox"><span class="navbar-tool-tooltip">Chercher</span>
+              <div class="navbar-tool-icon-box"><i class="navbar-tool-icon ci-search"></i></div></a>
+              <div class="navbar-tool ms-4"><a class="navbar-tool-icon-box bg-secondary dropdown-toggle" href="#"><span class="navbar-tool-label">0</span><i class="navbar-tool-icon ci-bell"></i></a></div>
+              <a class="navbar-tool d-none d-lg-flex" href="{% url 'vendor-list-notifications' %}"><span class="navbar-tool-tooltip">Chat</span>
+              <div class="navbar-tool-icon-box"><i class="navbar-tool-icon ci-chat"></i></div></a>
+              <a class="navbar-tool d-none d-lg-flex" href="{% url 'dashboardFavorites' %}"><span class="navbar-tool-tooltip">Favorits</span>
+              <div class="navbar-tool-icon-box"><i class="navbar-tool-icon ci-heart"></i></div></a>
+              <div class="navbar-tool dropdown ms-2"><a class="navbar-tool-icon-box border dropdown-toggle" href="{% url 'dashboardSales' %}"><img src="{% static 'img/marketplace/account/avatar-sm.png' %}" width="32" alt="Createx Studio"></a><a class="navbar-tool-text ms-n1" href="{% url 'dashboardSales' %}"><small>{{ business.nom_business }}.</small>{% if not total %}<small></small>{% else %}${{ total}} {% endif %}</a>
+              <div class="dropdown-menu dropdown-menu-end">
+                <div style="min-width: 14rem;">
+                  <h6 class="dropdown-header">Compte</h6><a class="dropdown-item d-flex align-items-center" href="{% url 'dashboardSettings' %}"><i class="ci-settings opacity-60 me-2"></i>Parametres</a><a class="dropdown-item d-flex align-items-center" href="{% url 'dashboardPurchases' %}"><i class="ci-basket opacity-60 me-2"></i>Achats</a><a class="dropdown-item d-flex align-items-center" href="{% url 'dashboardFavorites' %}"><i class="ci-heart opacity-60 me-2"></i>Favorits<span class="fs-xs text-muted ms-auto">4</span></a>
+                  <div class="dropdown-divider"></div>
+                  <h6 class="dropdown-header">Tableau de bord du Vendeur</h6><a class="dropdown-item d-flex align-items-center" href="{% url 'dashboardSales' %}"><i class="ci-dollar opacity-60 me-2"></i>Ventes<span class="fs-xs text-muted ms-auto">${{ total }}</span></a><a class="dropdown-item d-flex align-items-center" href="{% url 'dashboardProducts' %}"><i class="ci-package opacity-60 me-2"></i>Produits<span class="fs-xs text-muted ms-auto">{{ prodcount }}</span></a><a class="dropdown-item d-flex align-items-center" href="{% url 'dashboardAddNewProduct' %}"><i class="ci-cloud-upload opacity-60 me-2"></i>Ajouter un Produit</a><a class="dropdown-item d-flex align-items-center" href="{% url 'dashboardPayouts' %}"><i class="ci-currency-exchange opacity-60 me-2"></i>Payouts</a>
+                  <div class="dropdown-divider"></div><a class="dropdown-item d-flex align-items-center" href="{% url 'vendorlogout' %}"><i class="ci-sign-out opacity-60 me-2"></i>Se deconnecter</a>
+                </div>
+              </div>
+            </div>
+            <div class="navbar-tool ms-4"><a class="navbar-tool-icon-box bg-secondary dropdown-toggle" href="{% url 'dashboardProducts' %}"><span class="navbar-tool-label">{{ prodcount }}</span><i class="navbar-tool-icon ci-cloud-upload"></i></a></div>
+          </div>
+          <div class="collapse navbar-collapse me-auto order-lg-2" id="navbarCollapse">
+            <!-- Search-->
+            <div class="input-group d-lg-none my-3"><a href="#"><i class="ci-search position-absolute top-50 start-0 translate-middle-y text-muted fs-base ms-3"></i></a>
+              <input class="form-control rounded-start" type="text" placeholder="Search marketplace">
+            </div>
+            <!-- Categories dropdown-->
+              {% comment  %}
+                <ul class="navbar-nav navbar-mega-nav pe-lg-2 me-lg-2">
+                  <li class="nav-item dropdown"><a class="nav-link dropdown-toggle ps-lg-0" href="#" data-bs-toggle="dropdown"><i class="ci-menu align-middle mt-n1 me-2"></i>Categories</a>
+                    <ul class="dropdown-menu py-1">
+                        {% recursetree categories %}
+                      <li class="dropdown"><a class="dropdown-item dropdown-toggle" href="#" data-bs-toggle="dropdown">{{ node.titre }}</a>
+                        <ul class="dropdown-menu">
+                          <li class="dropdown-item product-title fw-medium"><a href="shop-all-category.html">Tous les {{ node.titre }}<i class="ci-arrow-right fs-xs ms-1"></i></a></li>
+                            {% if not node.is_leaf_node %}
+                          <li class="dropdown-divider"></li>
+                          <li><a class="dropdown-item" href="shop-all-category.html">{{ children }}</a></li>
+                            {% endif %}
+                        </ul>
+                      </li>
+                        {% endrecursetree %}
+                    </ul>
+                  </li>
+                </ul>
+              {% endcomment %}
+            <!-- Primary menu-->
+            <ul class="navbar-nav">
+              <li class="nav-item"><a class="nav-link" href="{% url  'standardApps:home' %}">Verifier mes produits</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <!-- Search collapse-->
+      <div class="search-box collapse" id="searchBox">
+        <div class="card pt-2 pb-4 border-0 rounded-0">
+          <div class="container">
+            <div class="input-group"><i class="ci-search position-absolute top-50 start-0 translate-middle-y text-muted fs-base ms-3"></i>
+              <input class="form-control rounded-start" type="text" placeholder="Cherchez vos produits">
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+
+      <!-- Dashboard header-->
+    <div class="page-title-overlap bg-accent ">
+      <div class="container d-flex flex-wrap flex-sm-nowrap justify-content-center justify-content-sm-between align-items-center pt-2">
+        <div class="d-flex align-items-center pb-3">
+          <div class="img-thumbnail rounded-circle position-relative flex-shrink-0" style="width: 6.375rem;"><img class="rounded-circle" src="{% static 'img/marketplace/account/avatar.png' %}" alt="Createx Studio"></div>
+          <div class="ps-3">
+            <h3 class="text-light fs-lg mb-0">E-zando</h3><span class="d-block text-light fs-ms opacity-60 py-1">Membre depuis {{ vendeur.joined.day }}/{{ vendeur.joined.month|title }}/{{ vendeur.joined.year }}</span>
+              <span class="text-light ">Periode d'essai gratuit jusqu'au <strong style="color:red" class="blink_me">{{ three_month_period.day }}/{{ three_month_period.month }}/{{ three_month_period.year }}</strong><small class="opacity-60"> (3 mois d'utilisation gratuite)</small></span>
+          </div>
+        </div>
+        <div class="d-flex">
+          <div class="text-sm-end me-5">
+            <div class="text-light fs-base">Ventes totales </div>
+                <h3 class="text-light">${{ total }}  </h3>
+          </div>
+          <div class="text-sm-end">
+            <div class="text-light fs-base">Note de vendeurs</div>
+            <div class="star-rating"><i class="star-rating-icon ci-star-filled active"></i><i class="star-rating-icon ci-star-filled active"></i><i class="star-rating-icon ci-star-filled active"></i><i class="star-rating-icon ci-star-filled active"></i><i class="star-rating-icon ci-star"></i>
+            </div>
+            <div class="text-light opacity-60 fs-xs">Sur la base de 98 commentaires</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--
+    <div class="container mb-5 pb-3">
+      <div class="bg-light shadow-lg rounded-3 overflow-hidden">
+        <div class="row">
+          Sidebar-->
+    <!--
+        </div>
+      </div>
+    </div>
+    -->
+
+
+        <div class="mt-20">
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-{{ message.tags }}" role="alert">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+        </div>
+        <div class="container mb-5 pb-3">
+         <div class="bg-light shadow-lg rounded-3 overflow-hidden">
+          <div class="row">
+                {% block body %}
+
+              {% endblock %}
+        </div>
+      </div>
+    </div>
+
+  </body>

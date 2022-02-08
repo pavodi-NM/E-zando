@@ -1,0 +1,117 @@
+{% extends 'base.html' %}
+
+{% block title %} Soumettre une requête {% endblock %}
+{% block body %}
+
+    <!-- Page Title (Light)-->
+    <div class="bg-secondary py-4">
+      <div class="container d-lg-flex justify-content-between py-2 py-lg-3">
+        <div class="order-lg-2 mb-3 mb-lg-0 pt-lg-2">
+          <nav aria-label="breadcrumb">
+            <ol class="breadcrumb flex-lg-nowrap justify-content-center justify-content-lg-start">
+              <li class="breadcrumb-item"><a class="text-nowrap" href="index.html"><i class="ci-home"></i>Home</a></li>
+              <li class="breadcrumb-item text-nowrap"><a href="{% url 'helpTopics' %}">Centre d'assistance</a>
+              </li>
+              <li class="breadcrumb-item text-nowrap active" aria-current="page">Soumettre une requête</li>
+            </ol>
+          </nav>
+        </div>
+        <div class="order-lg-1 pe-lg-4 text-center text-lg-start">
+          <h1 class="h3 mb-0">Soumettre une requête</h1>
+        </div>
+      </div>
+    </div>
+    <div class="container py-5 mt-md-2 mb-md-4">
+      <div class="row">
+        <div class="col-lg-3">
+          <!-- Related articles sidebar-->
+          <div class="offcanvas offcanvas-collapse border-end" id="help-sidebar">
+            <div class="offcanvas-cap align-items-center shadow-sm">
+              <h2 class="h5 mb-0">Related articles</h2>
+              <button class="btn-close ms-auto" type="button" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            </div>
+            <div class="offcanvas-body py-grid-gutter py-lg-1" data-simplebar data-simplebar-auto-hide="true">
+              <!-- Links-->
+              <div class="widget widget-links">
+                <h3 class="widget-title d-none d-lg-block">Articles connexes</h3>
+                <ul class="widget-list">
+                  <li class="widget-list-item"><a class="widget-list-link" href="#"><i class="ci-book opacity-60 align-middle mt-n1 me-1"></i>Gestion du compte</a></li>
+                  <li class="widget-list-item"><a class="widget-list-link" href="#"><i class="ci-book opacity-60 align-middle mt-n1 me-1"></i>Travailler avec le tableau de bord</a></li>
+                  <li class="widget-list-item"><a class="widget-list-link" href="#"><i class="ci-book opacity-60 align-middle mt-n1 me-1"></i>Modes de paiement disponibles</a></li>
+                  <li class="widget-list-item"><a class="widget-list-link" href="#"><i class="ci-book opacity-60 align-middle mt-n1 me-1"></i>Informations sur la livraison</a></li>
+                  <li class="widget-list-item"><a class="widget-list-link" href="#"><i class="ci-book opacity-60 align-middle mt-n1 me-1"></i>Instructions de suivi de la commande</a></li>
+                  <li class="widget-list-item"><a class="widget-list-link" href="#"><i class="ci-book opacity-60 align-middle mt-n1 me-1"></i>Politique de remboursement</a></li>
+                  <li class="widget-list-item"><a class="widget-list-link" href="#"><i class="ci-book opacity-60 align-middle mt-n1 me-1"></i>Offres et réductions</a></li>
+                  <li class="widget-list-item"><a class="widget-list-link" href="#"><i class="ci-book opacity-60 align-middle mt-n1 me-1"></i>Points de fidélité</a></li>
+                  <li class="widget-list-item"><a class="widget-list-link" href="#"><i class="ci-book opacity-60 align-middle mt-n1 me-1"></i>Programme d'affiliation</a></li>
+                  <li class="widget-list-item"><a class="widget-list-link" href="#"><i class="ci-book opacity-60 align-middle mt-n1 me-1"></i>Assistance après-vente</a></li>
+                  <li class="widget-list-item"><a class="widget-list-link" href="#"><i class="ci-book opacity-60 align-middle mt-n1 me-1"></i>Conditions de service &amp ; conditions</a></li>
+                  <li class="widget-list-item"><a class="widget-list-link" href="#"><i class="ci-book opacity-60 align-middle mt-n1 me-1"></i>Questions les plus populaires</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-9">
+          <div class="alert alert-info d-flex fs-sm mb-4" role="alert">
+            <div class="alert-icon"><i class="ci-announcement"></i></div>
+            <div>Notre sympathique équipe d'assistance est toujours là pour vous aider. Commencez par sélectionner un sujet pour lequel nous pouvons vous aider.</div>
+          </div>
+          <form class="needs-validation" novalidate method="post" enctype="multipart/form-data">
+          {% csrf_token %}
+            <div class="row gx-4 gy-3">
+              <div class="col-sm-6">
+                <label class="form-label" for="help-topic">Sélectionnez un sujet <strong class='text-danger'>*</strong></label>
+                <select name="type_sujet" class="form-select" required id="help-topic">
+                    {% for sujet in enquiry_sujet %}
+                        <option value="{{ sujet.sujet }}">{{ sujet.sujet }}</option>
+                    {% endfor %}
+                </select>
+              </div>
+              <div class="col-sm-6">
+                <label class="form-label" for="help-subject">Sujet de la demande </label>
+                {{ form.sujet }}
+              </div>
+              <div class="col-12">
+                <label class="form-label" for="help-message">Message <strong class='text-danger'>*</strong></label>
+                {{ form.message }}
+                <div class="invalid-feedback">Veuillez fournir une description détaillée de votre problème !</div>
+              </div>
+              <div class="col-sm-6">
+                <label class="form-label" for="help-name">Votre Nome <strong class='text-danger'>*</strong></label>
+                  {% if request.user.is_authenticated %}
+                <input value="{{ request.user.username }}" class="form-control" name="nom" type="text" id="su-name" placeholder="John Doe" required>
+                  {% else %}
+                <input class="form-control" name="nom" type="text" id="su-name" placeholder="John Doe" required>
+                  {% endif %}
+                <div class="invalid-feedback">Veuillez entrer votre nom!</div>
+              </div>
+              <div class="col-sm-6">
+                <label class="form-label" for="help-email">Votre adresse e-mail<strong class='text-danger'>*</strong></label>
+                  {% if request.user.is_authenticated %}
+                <input class="form-control" value="{{ request.user.email }}" name="email" type="email" id="su-email" placeholder="johndoe@example.com" required>
+                  {% else %}
+                <input class="form-control" name="email" type="email" id="su-email" placeholder="johndoe@example.com" required>
+                  {% endif %}
+                <div class="invalid-feedback">Veuillez saisir une adresse électronique valide !</div>
+              </div>
+              <div class="col-sm-6">
+                <label class="form-label" for="help-url">Inclure un URL pertinent</label>
+                {{ form.url }}
+              </div>
+              <div class="col-sm-6">
+                <label class="form-label" for="help-file">Pièces jointes</label>
+                {{ form.image }}
+              </div>
+              <div class="col-12 pt-2">
+                <button class="btn btn-primary me-4" type="submit">Soumettre une requête</button><a class="nav-link-style fw-medium d-inline-block align-middle fs-sm py-2" href="#">
+                  <u>Politique de confidentialité</u></a>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <!-- Footer-->
+    {% include 'footer.html' %}
+{% endblock %}

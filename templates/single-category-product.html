@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+{% include "header-shop-primary-type.html" %}
+
+{% block body %}
+     <section class="container">
+         {% if list_product %}
+      <!-- Heading-->
+      <div class="d-flex flex-wrap justify-content-between align-items-center pt-1 border-bottom pb-4 mb-4">
+        <h5 class="h3 mb-0 pt-1 me-2 text-center">{{ sous_cat|title }}</h5>
+      </div>
+      <div class="row pt-2 mx-n2" id="box">
+        {% for plist in list_product %}
+        <!-- Product-->
+        <div class="col-lg-3 col-md-4 col-sm-6 px-2 mb-4">
+          <div class="card product-card">
+            <div class="product-card-actions d-flex align-items-center"><a class="btn-action nav-link-style me-2" href="{% url 'standardApps:compare-products' plist.slug %}"><i class="ci-compare me-1"></i>Compare</a>
+              <a class="btn-wishlist btn-sm" href="{% url 'account:addWishlist' plist.slug %}" type="button" data-bs-toggle="tooltip" data-bs-placement="left" title="Ajouter à la liste de souhaits"><i class="ci-heart"></i></a>
+            </div><a class="card-img-top d-block overflow-hidden" href="{{ plist.get_absolute_url }}"><img src="{{ plist.imageProduit.url}}" alt="Product"></a>
+            <div class="card-body py-2"><a class="product-meta d-block fs-xs pb-1" href="#">{{ plist.titreProduit }} </a>
+              <h3 class="product-title fs-sm"><a href="shop-single-v2.html">{{ plist.DescriptionProduit }}</a></h3>
+              <div class="d-flex justify-content-between">
+                <div class="product-price"><span class="text-accent">${{ plist.prixActual }}.<small>00</small></span></div>
+                <div class="star-rating"><i class="star-rating-icon ci-star-filled active"></i><i class="star-rating-icon ci-star-filled active"></i><i class="star-rating-icon ci-star-filled active"></i><i class="star-rating-icon ci-star-filled active"></i><i class="star-rating-icon ci-star-filled active"></i>
+                </div>
+              </div>
+            </div>
+            <div class="card-body card-body-hidden">
+              <a  class="btn btn-primary btn-sm d-block w-100 mb-2 " href="{{ plist.get_adding_to_cart_url }}" type="button"><i class="ci-cart fs-sm me-1"></i>Ajouter au panier</a>
+              <div class="text-center"><a class="nav-link-style fs-ms" href="{% url 'chat:chat-room' plist.vendeur.pk plist.slug %}" ><i class="ci-phone align-middle me-1"></i>Contacter le vendeur</a></div>
+            </div>
+          </div>
+          <hr class="d-sm-none">
+        </div>
+           {% endfor %}
+      </div>
+      {% else %}
+     <p>Aucun produit n'est disponible dans cette categorie</p>
+   {% endif %}
+    </section>
+    <!-- pagination -->
+       <div class="d-flex justify-content-between pt-2" aria-label="Page navigation">
+      {% if list_product.has_previous %}
+        <ul class="pagination">
+          <li class="page-item"><a class="page-link" href="{% url 'standardApps:show-now' %}?page=1" ><i class="ci-arrow-left me-2"></i>Premier</a></li>
+          <li class="page-item"><a class="page-link" href="{% url 'standardApps:show-now' %}?page={{ list_product.previous_page_number }}" disabled><i class="ci-arrow-left me-2"></i>Précédent</a></li>
+        </ul>
+          {% else %}
+        <ul class="pagination">
+          <li class="page-item"><a type="button" class="page-link" href="{% url 'standardApps:show-now' %}?page=1" disabled="disabled"><i class="ci-arrow-left me-2"></i>Premier</a></li>
+        </ul>
+          {% endif %}
+        <ul class="pagination">
+              {% for num in list_product.paginator.page_range %}
+
+                  {% if list_product.number == num %}
+                      <li class="page-item d-none d-sm-block"><a class="btn btn-danger" href="?page={{ num }}">{{ num }}</a></li>
+                      {% elif num > list_product.number|add:'-3' and num < list_product.number|add:'3' %}
+                      <li class="page-item d-none d-sm-block"><a class="btn btn-outline-info" href="?page={{ num }}">{{ num }}</a></li>
+                  {% endif %}
+              {% endfor %}
+        </ul>
+      {% if list_product.has_next %}
+        <ul class="pagination">
+          <li class="page-item"><a class="page-link" href="{% url 'standardApps:show-now' %}?page={{ list_product.next_page_number }}" aria-label="Next">suivant<i class="ci-arrow-right ms-2"></i></a></li>
+          <li class="page-item"><a class="page-link" href="{% url 'standardApps:show-now' %}?page={{ list_product.paginator.num_pages }}" aria-label="Next">Dernier<i class="ci-arrow-right ms-2"></i></a></li>
+        </ul>
+      {% else %}
+        <ul class="pagination">
+          <li class="page-item"><a class="page-link" href="{% url 'standardApps:show-now' %}?page={{ list_product.paginator.num_pages }}" aria-label="Next">Dernier<i class="ci-arrow-right ms-2"></i></a></li>
+        </ul>
+      {% endif %}
+      </div>
+
+
+    {% include 'footer.html' %}
+{% endblock %}
+
+

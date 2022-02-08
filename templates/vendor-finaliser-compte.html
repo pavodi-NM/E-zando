@@ -1,0 +1,89 @@
+{% extends 'simple_base.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+{% block title %} Details Checkout {% endblock %}
+{% block body %}
+    <script>
+                function terms_changed(termsCheckBox){
+            if(termsCheckBox.checked){
+                document.getElementById('senddata').disabled = false;
+            } else {
+                document.getElementById('senddata').disabled = true;
+            }
+        }
+    </script>
+
+    <!-- Page Title-->
+    <div class="page-title-overlap bg-dark pt-4">
+      <div class="container d-lg-flex justify-content-between py-2 py-lg-3">
+        <div class="order-lg-2 mb-3 mb-lg-0 pt-lg-2">
+          <nav aria-label="breadcrumb">
+            <ol class="breadcrumb breadcrumb-light flex-lg-nowrap justify-content-center justify-content-lg-start">
+              <li class="breadcrumb-item"><a class="text-nowrap" href="{% url 'standardApps:home' %}"><i class="ci-home"></i>Home</a></li>
+              <li class="breadcrumb-item text-nowrap"><a href="shop-grid-ls.html">vendor enregistrement</a>
+              </li>
+
+            </ol>
+          </nav>
+        </div>
+
+      </div>
+    </div>
+    <div class="container pb-5 mb-2 mb-md-4">
+       <div class="d-flex justify-content-center h-100">
+        <section class="col-lg-6">
+          <!-- Steps-->
+              <div class="steps steps-light pt-2 pb-3 mb-5"><a class="step-item active" href="{% url 'vendor-enregistrement' %}">
+              <div class="step-progress"><span class="step-count">1</span></div>
+              <div class="step-label"><i class="ci-user-circle"></i>Infos personnelles</div></a><a class="step-item active" href="{% url 'vendor-enregistrement-business' %}">
+              <div class="step-progress"><span class="step-count">2</span></div>
+              <div class="step-label"><i class="ci-cart"></i>infos business</div></a><a class="step-item active" href="{% url 'vendor-final-compte' %}">
+              <div class="step-progress"><span class="step-count">3</span></div>
+              <div class="step-label"><i class="ci-locked"></i>Finaliser le compte</div></a></div>
+
+          <!-- Autor info-->
+
+          <!-- Shipping address-->
+          <h2 class="h6 pt-1 pb-3 mb-3 border-bottom">Termes et conditions de la plateforme concernant les vendeurs</h2>
+                     <div class="card border-0 shadow">
+                            <div class="card-body">
+             <h2 class="h4 mb-3">Notre objectif est de garantir votre intérêt!</h2>
+                <p class="fs-sm text-muted mb-4">Ceci nous permet de vous presenter les avantages et obligations de la plateforme.</p>
+
+                 <form class="needs-validation" novalidate method="POST">
+                    {% csrf_token %}
+
+
+                <div class="row gx-4 gy-3">
+
+                  <div class="mb-3 pb-2">
+                      <label class="form-label" for="unp-product-name">Termes et conditions</label>
+                          <div class="form-check">
+                          <input name="politique" class="form-check-input" type="checkbox" value="agree" id="checkme" onclick="terms_changed(this)">
+                          <label class="form-check-label" for="flexCheckDefault">
+                            J'accepte <a href="{% url 'pdf' %}" target="_blank" rel="noopener noreferrer"> les termes et conditions </a> qui régissent les vendeurs sur cette plateforme.
+                          </label>
+                        </div>
+
+                    </div>
+                     <hr class="mt-4">
+
+                     <small> Vous devez lire les termes et conditions fournies au lien ci-haut. en cochant la case,
+                         vous avez pleinement et librement approuvé  à ces conditions </small>
+
+                      <div class="col-12 text-end">
+                        <button class="btn btn-primary" type="submit" name="senddata" id="senddata" disabled><i class="ci-user me-2 ms-n1"></i>Finaliser</button>
+                      </div>
+
+                    </div>
+                  </form>
+                </div>
+               </div>
+        </section>
+
+    </div>
+    </div>
+
+    <!-- Footer-->
+  {% include 'footer.html' %}
+{% endblock %}

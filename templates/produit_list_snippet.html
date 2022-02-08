@@ -1,0 +1,34 @@
+     {% if list_product %}
+        {% for plist in list_product %}
+
+        <div class="col-lg-3 col-md-4 col-sm-6 px-2 mb-4">
+
+          <div class="card product-card">
+            <div class="product-card-actions d-flex align-items-center"><a class="btn-action nav-link-style me-2" href="#"><i class="ci-compare me-1"></i>Compare</a>
+              <a class="btn-wishlist btn-sm" href="{% url 'account:addWishlist' plist.slug %}" type="button" data-bs-toggle="tooltip" data-bs-placement="left" title="Ajouter à la liste de souhaits"><i class="ci-heart"></i></a>
+            </div><a class="card-img-top d-block overflow-hidden" href="{{ plist.get_absolute_url }}"><img src="{{ plist.imageProduit.url}}" alt="Product"></a>
+            <div class="card-body py-2"><a class="product-meta d-block fs-xs pb-1" href="#">{{ plist.titreProduit }} </a>
+              <h3 class="product-title fs-sm"><a href="shop-single-v2.html">{{ plist.DescriptionProduit }}</a></h3>
+              <div class="d-flex justify-content-between">
+                <div class="product-price"><span class="text-accent">${{ plist.prixActual }}.<small>00</small></span></div>
+                <div class="star-rating"><i class="star-rating-icon ci-star-filled active"></i><i class="star-rating-icon ci-star-filled active"></i><i class="star-rating-icon ci-star-filled active"></i><i class="star-rating-icon ci-star-filled active"></i><i class="star-rating-icon ci-star-filled active"></i>
+                </div>
+              </div>
+            </div>
+            <div class="card-body card-body-hidden">
+              <a  class="btn btn-primary btn-sm d-block w-100 mb-2 " href="{{ plist.get_adding_to_cart_url }}" type="button"><i class="ci-cart fs-sm me-1"></i>Ajouter au panier</a>
+              <div class="text-center"><a class="nav-link-style fs-ms" href="#quick-view-electro" data-bs-toggle="modal"><i class="ci-eye align-middle me-1"></i>Quick view</a></div>
+            </div>
+          </div>
+
+          <hr class="d-sm-none">
+
+        </div>
+        {% endfor %}
+     {% else %}
+       <div class="col-lg-3 col-md-4 col-sm-6 px-2 mb-4">
+          <div class="card product-card">
+             <p>Il n'y a pas de résultats correspondant à votre recherche: {{ query }}</p>
+          </div>
+       </div>
+     {% endif %}

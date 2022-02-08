@@ -1,0 +1,103 @@
+
+
+{% load i18n %}
+{% load account socialaccount %}
+{% block content %}
+{% include 'header-links.html' %}
+    {% comment %}
+            <div class="mt-20">
+{% if form.errors %}
+{% for field in form %}
+    {% for error in field.errors %}
+        <div class="alert alert-error">
+            <strong>{{ error|escape }}</strong>
+        </div>
+    {% endfor %}
+{% endfor %}
+{% for error in form.non_field_errors %}
+    <div class="alert alert-error">
+        <strong>{{ error|escape }}</strong>
+    </div>
+{% endfor %}
+{% endif %}
+    </div>
+{% endcomment %}
+    <div class="container h-100 py-4 py-lg-5 my-4">
+		<div class="d-flex justify-content-center h-100">
+            <div class="col-md-6">
+              {% if form.errors %}
+               <small class="text-danger">{{form.non_field_errors}}</small>
+              {% endif %}
+			<div class="user_card">
+              <div class="card border-0 shadow">
+               <div class="card-body">
+                    <h1>{% trans "Connexion" %}</h1>
+
+                        {% get_providers as socialaccount_providers %}
+
+                        {% if socialaccount_providers %}
+                        <div class="py-3">
+                        {% comment %}
+                            <p>{% blocktrans with site.name as site_name %}Avec un Compte social:{% endblocktrans %}</p>
+
+                            <div class="socialaccount_ballot">
+                                  <ul class="socialaccount_providers">
+                                    {% include "socialaccount/snippets/provider_list.html" with process="login" %}
+                                  </ul>
+                                <a href="{% provider_login_url "facebook"  method="oauth2" %}" class="btn-social bs-facebook me-2 mb-2" data-bs-toggle="tooltip" ><i class="ci-facebook"></i></a>
+                                <a  href="{% provider_login_url 'google'  %}">Login With Google</a>
+                            </div>
+                            {% endcomment %}
+                           <div class="py-3">
+                            <h3 class="d-inline-block align-middle fs-base fw-medium mb-2 me-2">{% blocktrans with site.name as site_name %}Avec un Compte social:{% endblocktrans %}</h3>
+                            <div class="d-inline-block align-middle"><a class="btn-social bs-google me-2 mb-2" href="{% provider_login_url 'google'  %}" data-bs-toggle="tooltip" title="Connectez-vous avec Google"><i class="ci-google"></i></a><a class="btn-social bs-facebook me-2 mb-2" href="{% provider_login_url "facebook"  method="oauth2" %}" data-bs-toggle="tooltip" title="Connectez-vous avec Facebook"><i class="ci-facebook"></i></a><a class="btn-social bs-twitter me-2 mb-2" href="#" data-bs-toggle="tooltip" title="Connectez-vous avec  Twitter"><i class="ci-twitter"></i></a></div>
+                            </div>
+                        </div>
+                         <hr>
+
+                            {% include "socialaccount/snippets/login_extra.html" %}
+
+                                {% else %}
+                            <div class="py-3">
+                            <p>{% blocktrans %}Si vous n'avez pas encore créé de compte, alors veuillez
+                            <a href="{{ signup_url }}">S'inscrire</a> d'abord.{% endblocktrans %}</p>
+                            </div>
+                            <hr>
+                    {% endif %}
+                     <h3 class="fs-base pt-4 pb-2">Ou en utilisant ce formulaire</h3>
+                    <form class="login" method="POST" action="{% url 'account:login-client' %}">
+                      {% csrf_token %}
+
+                     <div class="input-group mb-3"><i class="ci-user position-absolute top-50 translate-middle-y text-muted fs-base ms-3"></i>
+                  {{ form.login }}
+                </div>
+                <div class="input-group mb-3"><i class="ci-locked position-absolute top-50 translate-middle-y text-muted fs-base ms-3"></i>
+                  <div class="password-toggle w-100">
+                    {{ form.password }}
+                    <label class="password-toggle-btn" aria-label="Show/hide password">
+                      <input class="password-toggle-check" type="checkbox"><span class="password-toggle-indicator"></span>
+                    </label>
+                  </div>
+                </div>
+                <div class="d-flex flex-wrap justify-content-between">
+                  <div class="form-check">
+                    {{ form.remember }}
+                    <label class="form-check-label" for="remember_me">se souvenir de moi</label>
+                     </div><a class="button secondaryAction" href="{% url 'account_reset_password' %}">{% trans "Mot de passe oublié?" %}</a>
+                </div>
+                <hr class="mt-4">
+                <small>	Pas de compte? </small><a href="{{ signup_url }}{% if request.GET.next %}?nex={{ request.GET.next }}{% endif %}" class="ml-2">S'inscrire ici</a>
+  {% if redirect_field_value %}
+  <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+  {% endif %}
+   <div class="text-end pt-4">
+    <button class="btn btn-primary"  type="submit"><i class="ci-sign-in me-2 ms-n21"></i>{% trans "Se connecter" %}</button>
+   </div>
+</form>
+               </div>
+              </div>
+            </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

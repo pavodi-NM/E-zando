@@ -1,0 +1,50 @@
+ {% load static %}
+  <aside class="col-lg-4 pt-4 pt-lg-0 ps-xl-5">
+          <div class="bg-white rounded-3 shadow-lg p-4 ms-lg-auto">
+            <div class="py-2 px-xl-2">
+              <div class="widget mb-3">
+                <h2 class="widget-title text-center">Résumé de la commande</h2>
+                  {% for cart_item in cart.produits.all %}
+                <div class="d-flex align-items-center pb-2 border-bottom"><a class="d-block flex-shrink-0" href="{{ cart_item.produit.get_absolute_url }}"><img src="{{ cart_item.produit.imageProduit.url }}" width="64" alt="Product"></a>
+                  <div class="ps-2">
+                    <h6 class="widget-product-title"><a href="{% url 'shopSingleV1' %}">{{ cart_item.produit.titreProduit }}</a></h6>
+                    <div class="widget-product-meta"><span class="text-accent me-2">${{ cart_item.get_final_price }}.<small>00</small></span><span class="text-muted">x {{ cart_item.quantite }}</span></div>
+                  </div>
+                </div>
+                  {% endfor %}
+                </div>
+              </div>
+
+              <ul class="list-unstyled fs-sm pb-2 border-bottom">
+                <li class="d-flex justify-content-between align-items-center"><span class="me-2">Sous-total:</span><span class="text-end">${{ cart.get_total }}.<small>00</small></span></li>
+                <li class="d-flex justify-content-between align-items-center"><span class="me-2">Livraison:</span><span class="text-end">—</span></li>
+                <li class="d-flex justify-content-between align-items-center"><span class="me-2">Quantite:</span><span class="text-end">{{ cart.produits.count }}<small></small></span></li>
+                <li class="d-flex justify-content-between align-items-center"><span class="me-2">Réduction:</span><span class="text-end">
+                    {% if cart.produits.prixDiscount %}
+                        $ {{ cart.produits.get_amount_saved }}
+                    {% endif %}
+                </span></li>
+              </ul>
+              <h3 class="fw-normal text-center my-4">{% if cart.get_total %} ${{ cart.get_total }} {% endif %}.<small>00</small></h3>
+
+              {% if cart.coupon %}
+              <div><small>Promo code: <span class="text-danger">{{ cart.coupon.code }}</span></small></div>
+              <div class="mb-3">
+                  <small>Valeur: <span class="text-danger">${{ cart.coupon.amount_coupon }}</span></small>
+              </div>
+            {% endif %}
+           {% comment %} This is when the coupon form has already been rendered {% endcomment %}
+          {% if DISPLAY_COUPON_FORM %}
+              <form class="needs-validation" action="{% url 'checkout:add-coupon' %}" method="post" novalidate>
+                  {% csrf_token %}
+                <div class="mb-3">
+                 {% comment %} <input class="form-control" type="text" placeholder="Promo code" required> {% endcomment %}
+                    {{ couponform.code }}
+                  <div class="invalid-feedback">Veuillez fournir le code promo.</div>
+                </div>
+                <button class="btn btn-outline-primary d-block w-100" type="submit">Appliquer le code promo</button>
+              </form>
+            {% endif %}
+            </div>
+          </div>
+        </aside>

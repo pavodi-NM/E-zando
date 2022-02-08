@@ -1,0 +1,52 @@
+{% extends 'header-dashboard.html' %}
+{% block title %} Bilocost | Produits {% endblock %}
+{% block body %}
+        {% include 'sideBar-Dashboard.html' %}
+
+          <!-- Content-->
+          <section class="col-lg-8 pt-lg-4 pb-4 mb-3">
+            <div class="pt-2 px-4 ps-lg-0 pe-xl-5">
+              <!-- Title-->
+
+                <h2 class="h3 py-2 me-2 text-center text-sm-start">Vos produits<span class="badge bg-faded-accent fs-sm text-body align-middle ms-2">{{ products.count }}</span></h2>
+                <div class="form-control mb-5">
+                      <select class="form-select" id="order-sort" onchange="location=this.value;">
+                            <option disabled selected>Categories de produits</option>
+                          {% for subcat in subcategory %}
+                            <option value="{% url 'sorted-products' subcat.slug %}">{{ subcat.titre|title }}</option>
+                           {% endfor %}
+                      </select>
+                </div>
+            <hr/>
+              <!-- Product-->
+                {% if products.count != 0 %}
+                {% for prod in products %}
+              <div class="d-block d-sm-flex align-items-center py-4 border-bottom"><a class="d-block mb-3 mb-sm-0 me-sm-4 ms-sm-0 mx-auto" href="{% url 'single-product' prod.slug %}" style="width: 12.5rem;"><img class="rounded-3" src="{{ prod.imageProduit.url }}" alt="Product"></a>
+                <div class="text-center text-sm-start">
+
+                  <h3 class="h6 product-title mb-2"><a href="{% url 'single-product' prod.slug %}">{{ prod.titreProduit }}</a></h3>
+                  <div class="d-inline-block text-accent">${{ prod.prixActual }}.<small>00</small></div>
+                  <div class="d-inline-block text-muted fs-ms border-start ms-2 ps-2">Ventes: <span class="fw-medium">--</span></div>
+                  <div class="d-inline-block text-muted fs-ms border-start ms-2 ps-2">revenus: <span class="fw-medium">$--.<small>00</small></span></div>
+                  <div class="d-inline-block text-muted fs-ms border-start ms-2 ps-2">Quantite en stock: <span class="fw-medium">{{ prod.quantite_du_stock }}.<small></small></span></div>
+
+                  <div class="d-flex justify-content-center justify-content-sm-start pt-3">
+                    <button class="btn bg-faded-accent btn-icon me-2" type="button" data-bs-toggle="tooltip" title="Télécharger"><i class="ci-download text-accent"></i></button>
+                    <a class="btn bg-faded-info btn-icon me-2" href="{% url 'manageproduct' prod.id %}?action=edit" type="button" data-bs-toggle="tooltip" title="Modifier"><i class="ci-edit text-info"></i></a>
+                    <a class="btn bg-faded-danger btn-icon" href="{% url 'manageproduct' prod.id %}?action=rmv" type="button" data-bs-toggle="tooltip" title="Supprimer"><i class="ci-trash text-danger"></i></a>
+                  </div>
+                    <div class="mt-lg-3">
+                    <small>Nombre de vues</small>: <span class="badge" style="background: red"> {{ prod.viewCount }}</span>
+                    </div>
+                </div>
+              </div>
+                {% endfor %}
+                 {% else %}
+                    <p> Vous n'avez aucun produit sur le site a present. Ajouter de produits et commencer vos ventes en ligne</p>
+                {% endif %}
+            </div>
+          </section>
+
+    <!-- Footer-->
+     {% include 'dahsboard-footer.html' %}
+{% endblock %}

@@ -1,0 +1,76 @@
+{% extends 'header-dashboard.html' %}
+{% block title %} Bilocost | Ventes{% endblock %}
+{% block body %}
+        {% include 'sideBar-Dashboard.html' %}
+          <!-- Content-->
+          <section class="col-lg-8 pt-lg-4 pb-4 mb-3">
+            <div class="pt-2 px-4 ps-lg-0 pe-xl-5">
+              <h2 class="h3 py-2 text-center text-sm-start">Vos ventes / revenus / </h2>
+              <div class="row mx-n2 pt-2">
+                <div class="col-md-4 col-sm-6 px-2 mb-4">
+                  <div class="bg-secondary h-100 rounded-3 p-4 text-center">
+                    <h3 class="fs-sm text-muted">Revenus sur la totalite de produits</h3>
+                    <p class="h2 mb-2">${{ total }}.<small>00</small></p>
+                    <p class="fs-ms text-muted mb-0">À verser le 8/1/2021 - 8/15/2021</p>
+                  </div>
+                </div>
+                <div class="col-md-4 col-sm-6 px-2 mb-4">
+                  <div class="bg-secondary h-100 rounded-3 p-4 text-center">
+                    <h3 class="fs-sm text-muted">Revenu sur les ventes</h3>
+                    <p class="h2 mb-2">$0.<small>00</small></p>
+                    <p class="fs-ms text-muted mb-0">À verser le 8/15/2021</p>
+                  </div>
+                </div>
+                <div class="col-md-4 col-sm-12 px-2 mb-4">
+                  <div class="bg-secondary h-100 rounded-3 p-4 text-center">
+                    <h3 class="fs-sm text-muted">quantite du stock</h3>
+                    <p class="h2 mb-2">
+                    {% if products %}
+                        {% for pro in products|slice:'2' %}
+                            {{ pro.quantite_du_stock}},
+                        {% endfor %}
+                        ...
+                    {% else %}
+                        <small>Vous n'avez aucun produit</small>
+                    {% endif %}
+                        <small></small></p>
+                    <p class="fs-ms text-muted mb-0">Sur la base de la liste de produits</p>
+                  </div>
+                </div>
+              </div>
+              <div class="row mx-n2">
+                <div class="col-lg-8 px-2">
+                  <div class="card mb-4">
+                    <div class="card-body">
+                      <h3 class="fs-sm pb-3 mb-3 border-bottom">Revenus sur les ventes, USD <span class="fw-normal fs-xs text-muted">(Past 2 weeks)</span></h3>
+                      <div class="ct-chart ct-perfect-fourth" data-line-chart="{&quot;labels&quot;: [&quot;22 Jul&quot;, &quot;&quot;, &quot;24 Jul&quot;, &quot;&quot;, &quot;26 Jul&quot;, &quot;&quot;, &quot;28 Jul&quot;, &quot;&quot;, &quot;30 Jul&quot;, &quot;&quot;, &quot;01 Aug&quot;, &quot;&quot;, &quot;03 Aug&quot;, &quot;&quot;, &quot;05 Aug&quot;], &quot;series&quot;: [[0, 100, 200, 150, 50, 0, 0, 50, 0, 50, 50, 50, 0, 100, 0]]}"></div>
+                    </div>
+                  </div>
+                  <div class="card mb-4 mb-lg-2">
+                    <div class="card-body">
+                      <h3 class="fs-sm pb-3 mb-3 border-bottom">Nombre de commandes <span class="fw-normal fs-xs text-muted">(Past 2 weeks)</span></h3>
+                      <div class="ct-chart ct-perfect-fourth" data-line-chart="{&quot;labels&quot;: [&quot;22 Jul&quot;, &quot;&quot;, &quot;24 Jul&quot;, &quot;&quot;, &quot;26 Jul&quot;, &quot;&quot;, &quot;28 Jul&quot;, &quot;&quot;, &quot;30 Jul&quot;, &quot;&quot;, &quot;01 Aug&quot;, &quot;&quot;, &quot;03 Aug&quot;, &quot;&quot;, &quot;05 Aug&quot;], &quot;series&quot;: [[0, 2, 4, 3, 1, 0, 0, 1, 0, 1, 1, 1, 0, 2, 0]]}" data-options="{&quot;axisY&quot;: {&quot;onlyInteger&quot;: true}}"></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-4 px-2">
+                  <div class="card">
+                    <div class="card-body">
+                      <h3 class="fs-sm pb-3 mb-0 border-bottom">Produits recemment telecharges</h3>
+                        {% for pro in products %}
+                      <div class="d-flex justify-content-between align-items-center fs-sm py-2 border-bottom">
+                        <div class="d-flex align-items-start py-1"><a href="{% url 'dashboardProducts' %}"><img src="{{ pro.imageProduit.url }}" width="20" alt="produit"></a>
+                            <div class="ps-1"><a href="{% url 'dashboardProducts' %}">{{ pro.titreProduit }}</a></div>
+                        </div><span>${{ pro.prixActual }}</span>
+                      </div>
+                        {% endfor %}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+    <!-- Footer-->
+      {% include 'dahsboard-footer.html' %}
+{% endblock %}

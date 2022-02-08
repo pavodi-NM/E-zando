@@ -1,0 +1,155 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} Aide {% endblock %}
+{% block body %}
+
+
+    <!-- Page Title (Light)-->
+    <div class="bg-secondary py-4">
+      <div class="container d-lg-flex justify-content-between py-2 py-lg-3">
+        <div class="order-lg-2 mb-3 mb-lg-0 pt-lg-2">
+          <nav aria-label="breadcrumb">
+            <ol class="breadcrumb flex-lg-nowrap justify-content-center justify-content-lg-start">
+              <li class="breadcrumb-item"><a class="text-nowrap" href="index.html"><i class="ci-home"></i>Home</a></li>
+              <li class="breadcrumb-item text-nowrap"><a href="help-topics.html">Centre d'assistance</a>
+              </li>
+              <li class="breadcrumb-item text-nowrap active" aria-current="page">Sujet simple</li>
+            </ol>
+          </nav>
+        </div>
+        <div class="order-lg-1 pe-lg-4 text-center text-lg-start">
+          <h1 class="h3 mb-0">Sujet simple</h1>
+        </div>
+      </div>
+    </div>
+    <div class="container py-5 mt-md-2 mb-2">
+      <div class="row">
+        <div class="col-lg-3">
+          <!-- Related articles sidebar-->
+          <div class="offcanvas offcanvas-collapse border-end" id="help-sidebar">
+            <div class="offcanvas-cap align-items-center shadow-sm">
+              <h2 class="h5 mb-0">Related articles</h2>
+              <button class="btn-close ms-auto" type="button" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            </div>
+            <div class="offcanvas-body py-grid-gutter py-lg-1" data-simplebar data-simplebar-auto-hide="true">
+              <!-- Links-->
+                <div class="widget widget-links">
+                <h3 class="widget-title d-none d-lg-block">Articles connexes</h3>
+                <ul class="nav nav-tabs" role="tablist">
+                  <li class="widget-list-item"><a class="widget-list-link active" href="#gestioncompte" data-bs-toggle="tab" role="tab"><i class="ci-book opacity-60 align-middle mt-n1 me-1"></i>Gestion du compte</a></li>
+                  <li class="widget-list-item"><a class="widget-list-link" href="#tableaubord" data-bs-toggle="tab" role="tab"><i class="ci-book opacity-60 align-middle mt-n1 me-1"></i>Travailler avec le tableau de bord</a></li>
+                  <li class="widget-list-item"><a class="widget-list-link" href="#modepayment" data-bs-toggle="tab" role="tab"><i class="ci-book opacity-60 align-middle mt-n1 me-1"></i>Modes de paiement disponibles</a></li>
+                  <li class="widget-list-item"><a class="widget-list-link" href="#livraisoninfo" data-bs-toggle="tab" role="tab"><i class="ci-book opacity-60 align-middle mt-n1 me-1"></i>Informations sur la livraison</a></li>
+                  <li class="widget-list-item"><a class="widget-list-link" href="#suivicommande" data-bs-toggle="tab" role="tab"><i class="ci-book opacity-60 align-middle mt-n1 me-1"></i>Instructions de suivi de la commande</a></li>
+                  <li class="widget-list-item"><a class="widget-list-link" href="#policyrefund" data-bs-toggle="tab" role="tab"><i class="ci-book opacity-60 align-middle mt-n1 me-1"></i>Politique de remboursement</a></li>
+                  <li class="widget-list-item"><a class="widget-list-link" href="#offre-reduction" data-bs-toggle="tab" role="tab"><i class="ci-book opacity-60 align-middle mt-n1 me-1"></i>Offres et réductions</a></li>
+
+                  <li class="widget-list-item"><a class="widget-list-link" href="#pointsfildelite" data-bs-toggle="tab" role="tab"><i class="ci-book opacity-60 align-middle mt-n1 me-1"></i>Coupon ou Points de fidelite</a></li>
+
+                  <li class="widget-list-item"><a class="widget-list-link" href="#affiliation" data-bs-toggle="tab" role="tab"><i class="ci-book opacity-60 align-middle mt-n1 me-1"></i>Programme d'affiliation</a></li>
+                  <li class="widget-list-item"><a class="widget-list-link" href="#apresvente" data-bs-toggle="tab" role="tab"><i class="ci-book opacity-60 align-middle mt-n1 me-1"></i>Assistance après-vente</a></li>
+                  <li class="widget-list-item"><a class="widget-list-link" href="#terms" data-bs-toggle="tab" role="tab"><i class="ci-book opacity-60 align-middle mt-n1 me-1"></i>Conditions de service &amp ; conditions</a></li>
+                  <li class="widget-list-item"><a class="widget-list-link" href="#questions" data-bs-toggle="tab" role="tab"><i class="ci-book opacity-60 align-middle mt-n1 me-1"></i>Questions les plus populaires</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-9">
+            <div class="tab-content">
+            <div class="tab-pane fade show active" id="gestioncompte" role="tabpanel">
+                <p class="fs-sm">Gestion Compte denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua, retro synth master cleanse. Mustache cliche tempor, williamsburg carles vegan helvetica. Reprehenderit butcher retro keffiyeh dreamcatcher synth. Cosby sweater eu banh mi, qui irure terry richardson ex squid. Aliquip placeat salvia cillum iphone. Seitan aliquip quis cardigan american apparel, butcher voluptate nisi qui. Excepteur sint occaecat cupidatat non proident.</p>
+            </div>
+            <div class="tab-pane fade" id="tableaubord" role="tabpanel">
+                <p class="fs-sm">Tableau de bord you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua, retro synth master cleanse. Mustache cliche tempor, williamsburg carles vegan helvetica. Reprehenderit butcher retro keffiyeh dreamcatcher synth. Cosby sweater eu banh mi, qui irure terry richardson ex squid. Aliquip placeat salvia cillum iphone. Seitan aliquip quis cardigan american apparel, butcher voluptate nisi qui. Excepteur sint occaecat cupidatat non proident.</p>
+            </div>
+            <div class="tab-pane fade" id="modepayment" role="tabpanel">
+            <h2 class="h4 pb-3">Méthodes de paiement disponibles lors du passage à la caisse</h2>
+              <p class="fs-md">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore.</p>
+                <p class="fs-md">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore.</p>
+                <div class="row pt-3 pb-4 mb-2 mb-md-4">
+                <div class="col-md-7"><img class="w-100 img-thumbnail" src="{% static 'img/pages/help-article.jpg' %}" style="max-width: 508px;" alt="Help image"></div>
+                <div class="col-md-5 pt-4">
+                  <h3 class="h6">Les avantages de nos modes de paiement</h3>
+                  <ul class="list-unstyled fs-sm pt-2">
+                    <li class="d-flex align-items-center mb-2"><i class="ci-check text-success me-2"></i><span>Ut enim ad minima veniam, quis nostrum</span></li>
+                    <li class="d-flex align-items-center mb-2"><i class="ci-check text-success me-2"></i><span>At vero eos et accusamus et iusto odio</span></li>
+                    <li class="d-flex align-items-center mb-2"><i class="ci-check text-success me-2"></i><span>Nam libero tempore, cum soluta nobis</span></li>
+                    <li class="d-flex align-items-center mb-2"><i class="ci-check text-success me-2"></i><span>Et harum quidem rerum facilis est et expedita</span></li>
+                    <li class="d-flex align-items-center mb-2"><i class="ci-check text-success me-2"></i><span>Quis autem vel eum iure reprehenderit</span></li>
+                    <li class="d-flex align-items-center mb-2"><i class="ci-check text-success me-2"></i><span>Excepteur sint occaecat cupidatat non</span></li>
+                  </ul>
+                </div>
+              </div>
+              <h2 class="h4 pb-3">Détails sur les méthodes de paiement</h2>
+              <div class="accordion accordion-flush" id="methods">
+                <div class="accordion-item">
+                  <h3 class="accordion-header"><a class="accordion-button" href="#methodOne" role="button" data-bs-toggle="collapse" aria-expanded="false" aria-controls="methodOne">Cartes de crédit / débit</a></h3>
+                  <div class="accordion-collapse collapse show" id="methodOne" data-bs-parent="#methods">
+                    <div class="card-body fs-md">
+                      <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga.</p>
+                      <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore.</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="accordion-item">
+                  <h3 class="accordion-header"><a class="accordion-button collapsed" href="#methodTwo" role="button" data-bs-toggle="collapse" aria-expanded="false" aria-controls="methodTwo">Payez avec PayPal</a></h3>
+                  <div class="accordion-collapse collapse" id="methodTwo" data-bs-parent="#methods">
+                    <div class="card-body fs-md">
+                      <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga.</p>
+                      <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore.</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="accordion-item">
+                  <h3 class="accordion-header"></h3><a class="accordion-button collapsed" href="#methodThree" role="button" data-bs-toggle="collapse" aria-expanded="false" aria-controls="methodThree">Points de récompense ou Coupon</a>
+                  <div class="accordion-collapse collapse" id="methodThree" data-bs-parent="#methods">
+                    <div class="card-body fs-md">
+                      <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga.</p>
+                      <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="tab-pane fade" id="livraisoninfo" role="tabpanel">
+                <p class="fs-sm">Livraison info you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua, retro synth master cleanse. Mustache cliche tempor, williamsburg carles vegan helvetica. Reprehenderit butcher retro keffiyeh dreamcatcher synth. Cosby sweater eu banh mi, qui irure terry richardson ex squid. Aliquip placeat salvia cillum iphone. Seitan aliquip quis cardigan american apparel, butcher voluptate nisi qui. Excepteur sint occaecat cupidatat non proident.</p>
+            </div>
+            <div class="tab-pane fade" id="suivicommande" role="tabpanel">
+                <p class="fs-sm">Suivi commande info you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua, retro synth master cleanse. Mustache cliche tempor, williamsburg carles vegan helvetica. Reprehenderit butcher retro keffiyeh dreamcatcher synth. Cosby sweater eu banh mi, qui irure terry richardson ex squid. Aliquip placeat salvia cillum iphone. Seitan aliquip quis cardigan american apparel, butcher voluptate nisi qui. Excepteur sint occaecat cupidatat non proident.</p>
+            </div>
+            <div class="tab-pane fade" id="policyrefund" role="tabpanel">
+                <p class="fs-sm">Remboursement info you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua, retro synth master cleanse. Mustache cliche tempor, williamsburg carles vegan helvetica. Reprehenderit butcher retro keffiyeh dreamcatcher synth. Cosby sweater eu banh mi, qui irure terry richardson ex squid. Aliquip placeat salvia cillum iphone. Seitan aliquip quis cardigan american apparel, butcher voluptate nisi qui. Excepteur sint occaecat cupidatat non proident.</p>
+            </div>
+            <div class="tab-pane fade" id="offre-reduction" role="tabpanel">
+                <p class="fs-sm">Reduction you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua, retro synth master cleanse. Mustache cliche tempor, williamsburg carles vegan helvetica. Reprehenderit butcher retro keffiyeh dreamcatcher synth. Cosby sweater eu banh mi, qui irure terry richardson ex squid. Aliquip placeat salvia cillum iphone. Seitan aliquip quis cardigan american apparel, butcher voluptate nisi qui. Excepteur sint occaecat cupidatat non proident.</p>
+            </div>
+            <div class="tab-pane fade" id="pointsfildelite" role="tabpanel">
+                <p class="fs-sm">Points de fidellite you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua, retro synth master cleanse. Mustache cliche tempor, williamsburg carles vegan helvetica. Reprehenderit butcher retro keffiyeh dreamcatcher synth. Cosby sweater eu banh mi, qui irure terry richardson ex squid. Aliquip placeat salvia cillum iphone. Seitan aliquip quis cardigan american apparel, butcher voluptate nisi qui. Excepteur sint occaecat cupidatat non proident.</p>
+            </div>
+            <div class="tab-pane fade" id="affiliation" role="tabpanel">
+                <p class="fs-sm">Affiliation you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua, retro synth master cleanse. Mustache cliche tempor, williamsburg carles vegan helvetica. Reprehenderit butcher retro keffiyeh dreamcatcher synth. Cosby sweater eu banh mi, qui irure terry richardson ex squid. Aliquip placeat salvia cillum iphone. Seitan aliquip quis cardigan american apparel, butcher voluptate nisi qui. Excepteur sint occaecat cupidatat non proident.</p>
+            </div>
+            <div class="tab-pane fade" id="apresvente" role="tabpanel">
+                <p class="fs-sm">suivi apres vente you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua, retro synth master cleanse. Mustache cliche tempor, williamsburg carles vegan helvetica. Reprehenderit butcher retro keffiyeh dreamcatcher synth. Cosby sweater eu banh mi, qui irure terry richardson ex squid. Aliquip placeat salvia cillum iphone. Seitan aliquip quis cardigan american apparel, butcher voluptate nisi qui. Excepteur sint occaecat cupidatat non proident.</p>
+            </div>
+            <div class="tab-pane fade" id="terms" role="tabpanel">
+                <p class="fs-sm">Terms and conditions you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua, retro synth master cleanse. Mustache cliche tempor, williamsburg carles vegan helvetica. Reprehenderit butcher retro keffiyeh dreamcatcher synth. Cosby sweater eu banh mi, qui irure terry richardson ex squid. Aliquip placeat salvia cillum iphone. Seitan aliquip quis cardigan american apparel, butcher voluptate nisi qui. Excepteur sint occaecat cupidatat non proident.</p>
+            </div>
+            <div class="tab-pane fade" id="questions" role="tabpanel">
+                <p class="fs-sm">questions you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua, retro synth master cleanse. Mustache cliche tempor, williamsburg carles vegan helvetica. Reprehenderit butcher retro keffiyeh dreamcatcher synth. Cosby sweater eu banh mi, qui irure terry richardson ex squid. Aliquip placeat salvia cillum iphone. Seitan aliquip quis cardigan american apparel, butcher voluptate nisi qui. Excepteur sint occaecat cupidatat non proident.</p>
+            </div>
+
+            </div>
+
+          <!-- Submit request-->
+          <section class="container text-center pt-5 mt-2">
+            <h2 class="h4 pb-3">Vous n'avez pas trouvé la réponse ? Nous pouvons vous aider.</h2><i class="ci-help h3 text-primary d-block mb-4"></i><a class="btn btn-primary" href="help-submit-request.html">Soumettre une requête</a>
+            <p class="fs-sm pt-4">Contactez-nous et nous vous répondrons dans les plus brefs délais.</p>
+          </section>
+        </div>
+      </div>
+    </div>
+    <!-- Footer-->
+    {% include 'footer.html' %}
+{% endblock %}

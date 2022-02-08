@@ -1,0 +1,28 @@
+    <aside class="col-lg-4 pe-xl-5">
+            <!-- Account menu toggler (hidden on screens larger 992px)-->
+            <div class="d-block d-lg-none p-4"><a class="btn btn-outline-accent d-block" href="#account-menu" data-bs-toggle="collapse"><i class="ci-menu me-2"></i>Menu du compte</a></div>
+            <!-- Actual menu-->
+            <div class="h-100 border-end mb-2">
+              <div class="d-lg-block collapse" id="account-menu">
+                <div class="bg-secondary p-4">
+                  <h3 class="fs-sm mb-0 text-muted">Compte</h3>
+                </div>
+                <ul class="list-unstyled mb-0">
+                  <li class="border-bottom mb-0"><a class="nav-link-style d-flex align-items-center px-4 py-3" href="{% url 'dashboardSettings' %}"><i class="ci-settings opacity-60 me-2"></i>Parametres</a></li>
+                  <li class="border-bottom mb-0"><a class="nav-link-style d-flex align-items-center px-4 py-3" href="{% url 'dashboardPurchases' %}"><i class="ci-basket opacity-60 me-2"></i>Achats</a></li>
+                  <li class="mb-0"><a class="nav-link-style d-flex align-items-center px-4 py-3" href="{% url 'dashboardFavorites' %}"><i class="ci-heart opacity-60 me-2"></i>Favorits<span class="fs-sm text-muted ms-auto">4</span></a></li>
+                </ul>
+                <div class="bg-secondary p-4">
+                  <h3 class="fs-sm mb-0 text-muted">Tableau de bord du Vendeur</h3>
+                </div>
+                <ul class="list-unstyled mb-0">
+                  <li class="border-bottom mb-0"><a class="nav-link-style d-flex align-items-center px-4 py-3" href="{% url 'dashboardSales' %}"><i class="ci-dollar opacity-60 me-2"></i>Ventes<span class="fs-sm text-muted ms-auto">${{total}}</span></a></li>
+                  <li class="border-bottom mb-0"><a class="nav-link-style d-flex align-items-center px-4 py-3" href="{% url 'dashboardProducts' %}"><i class="ci-package opacity-60 me-2"></i>Produits<span class="fs-sm text-muted ms-auto">{{ prodcount }}</span></a></li>
+                  <li class="border-bottom mb-0"><a class="nav-link-style d-flex align-items-center px-4 py-3 active" href="{% url 'dashboardAddNewProduct' %}"><i class="ci-cloud-upload opacity-60 me-2"></i>Ajouter un Produit</a></li>
+                  <li class="border-bottom mb-0"><a class="nav-link-style d-flex align-items-center px-4 py-3" href="{% url 'dashboardPayouts' %}"><i class="ci-currency-exchange opacity-60 me-2"></i>Versements</a></li>
+                  <li class="mb-0"><a class="nav-link-style d-flex align-items-center px-4 py-3" href="{% url 'vendorlogout' %}"><i class="ci-sign-out opacity-60 me-2"></i>Se deconnecter</a></li>
+                </ul>
+                <hr>
+              </div>
+            </div>
+          </aside>

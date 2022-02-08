@@ -1,0 +1,11 @@
+
+
+{% block body %}
+<p>This is the time</p>
+ {% for pc in cart.cartproduit_set.all %}
+   <h4>  {{ pc.produit.titreProduit }} </h4>
+   <h4>  {{ pc.produit.prixActual }} </h4>
+   <h4>  {{ pc.produit.garantieProduit }} </h4>
+ {% endfor %}
+
+{% endblock %}

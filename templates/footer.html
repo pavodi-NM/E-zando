@@ -1,0 +1,144 @@
+{% load static %}
+<footer class="bg-dark pt-5">
+      <div class="container">
+        <div class="row pb-2">
+          <div class="col-md-4 col-sm-6">
+            <div class="widget widget-links widget-light pb-2 mb-4">
+              <h3 class="widget-title text-light">Categories</h3>
+              <ul class="widget-list">
+                  {% for subcat in subcategory %}
+                <li class="widget-list-item"><a class="widget-list-link" href="#">{{ subcat.titre|title }}</a></li>
+                  {% endfor %}
+              </ul>
+            </div>
+          </div>
+          <div class="col-md-4 col-sm-6">
+            <div class="widget widget-links widget-light pb-2 mb-4">
+              <h3 class="widget-title text-light">Compte &amp ; info sur la livraison</h3>
+              <ul class="widget-list">
+                <li class="widget-list-item"><a class="widget-list-link" href="#">Ton compte</a></li>
+                <li class="widget-list-item"><a class="widget-list-link" href="#">Tarifs de livraison &amp; politiques</a></li>
+                <li class="widget-list-item"><a class="widget-list-link" href="#">Remboursements &amp ; remplacements</a></li>
+                <li class="widget-list-item"><a class="widget-list-link" href="#">Suivi des commandes</a></li>
+                <li class="widget-list-item"><a class="widget-list-link" href="#">Infos sur la livraison</a></li>
+                <li class="widget-list-item"><a class="widget-list-link" href="#">Taxes &amp; frais</a></li>
+              </ul>
+            </div>
+            <div class="widget widget-links widget-light pb-2 mb-4">
+              <h3 class="widget-title text-light">A propos de nous</h3>
+              <ul class="widget-list">
+                <li class="widget-list-item"><a class="widget-list-link" href="#">À propos de l'entreprise</a></li>
+                <li class="widget-list-item"><a class="widget-list-link" href="#">Notre équipe</a></li>
+                <li class="widget-list-item"><a class="widget-list-link" href="#">Careers</a></li>
+                <li class="widget-list-item"><a class="widget-list-link" href="#">Actualités</a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="widget pb-2 mb-4">
+              <h3 class="widget-title text-light pb-1">Restez informé</h3>
+              <form class="subscription-form validate" action="https://studio.us12.list-manage.com/subscribe/post?u=c7103e2c981361a6639545bd5&amp;amp;id=29ca296126" method="post" name="mc-embedded-subscribe-form" target="_blank" novalidate>
+                <div class="input-group flex-nowrap"><i class="ci-mail position-absolute top-50 translate-middle-y text-muted fs-base ms-3"></i>
+                  <input class="form-control rounded-start" type="email" name="EMAIL" placeholder="Votre e-mail" required>
+                  <button class="btn btn-primary" type="submit" name="subscribe">S'abonner*</button>
+                </div>
+                <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+                <div style="position: absolute; left: -5000px;" aria-hidden="true">
+                  <input class="subscription-form-antispam" type="text" name="b_c7103e2c981361a6639545bd5_29ca296126" tabindex="-1">
+                </div>
+                <div class="form-text text-light opacity-50">*Inscrivez-vous à notre bulletin d'information pour recevoir des offres de réduction anticipée, des mises à jour et des informations sur les nouveaux produits..</div>
+                <div class="subscription-status"></div>
+              </form>
+            </div>
+            <div class="widget pb-2 mb-4">
+              <h3 class="widget-title text-light pb-1">Téléchargez notre appli</h3>
+              <div class="d-flex flex-wrap">
+                <div class="me-2 mb-2"><a class="btn-market btn-apple" href="#" role="button"><span class="btn-market-subtitle">Télécharger sur le</span><span class="btn-market-title">App Store</span></a></div>
+                <div class="mb-2"><a class="btn-market btn-google" href="#" role="button"><span class="btn-market-subtitle">Télécharger sur le</span><span class="btn-market-title">Google Play</span></a></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="pt-5 bg-darker">
+        <div class="container">
+          <div class="row pb-3">
+            <div class="col-md-3 col-sm-6 mb-4">
+              <div class="d-flex"><i class="ci-rocket text-primary" style="font-size: 2.25rem;"></i>
+                <div class="ps-3">
+                  <h6 class="fs-base text-light mb-1">Livraison rapide et gratuite</h6>
+                  <p class="mb-0 fs-ms text-light opacity-50">Livraison gratuite pour toute commande supérieure à 200</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-3 col-sm-6 mb-4">
+              <div class="d-flex"><i class="ci-currency-exchange text-primary" style="font-size: 2.25rem;"></i>
+                <div class="ps-3">
+                  <h6 class="fs-base text-light mb-1">Garantie de remboursement</h6>
+                  <p class="mb-0 fs-ms text-light opacity-50">Nous remboursons l'argent dans les jours qui suivent</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-3 col-sm-6 mb-4">
+              <div class="d-flex"><i class="ci-support text-primary" style="font-size: 2.25rem;"></i>
+                <div class="ps-3">
+                  <h6 class="fs-base text-light mb-1">Assistance clientèle 24/7</h6>
+                  <p class="mb-0 fs-ms text-light opacity-50">Une assistance clientèle amicale 24/7</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-3 col-sm-6 mb-4">
+              <div class="d-flex"><i class="ci-card text-primary" style="font-size: 2.25rem;"></i>
+                <div class="ps-3">
+                  <h6 class="fs-base text-light mb-1">Paiement en ligne sécurisé</h6>
+                  <p class="mb-0 fs-ms text-light opacity-50">Nous possédons le certificat SSL / Secure сertificate</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <hr class="hr-light mb-5">
+          <div class="row pb-2">
+            <div class="col-md-6 text-center text-md-start mb-4">
+              <div class="text-nowrap mb-4"><a class="d-inline-block align-middle mt-n1 me-3" href="#"><img class="d-block" src="{% static 'img/home/icones/ezando-1.png' %}" width="117" alt="E-zando"></a>
+                <div class="btn-group dropdown disable-autohide">
+                  <button class="btn btn-outline-light border-light btn-sm dropdown-toggle px-2" type="button" data-bs-toggle="dropdown"><img class="me-2" src="{% static 'img/flags/en.png' %}" width="20" alt="English">Eng / $</button>
+                  <ul class="dropdown-menu my-1">
+                    <li class="dropdown-item">
+                      <select class="form-select form-select-sm">
+                        <option value="usd">$ USD</option>
+                        <option value="eur">€ EUR</option>
+                      </select>
+                    </li>
+                    <li><a class="dropdown-item pb-1" href="#"><img class="me-2" src="{% static 'img/flags/fr.png' %}" width="20" alt="Français">Français</a></li>
+                  </ul>
+                </div>
+              </div>
+              <div class="widget widget-links widget-light">
+                <ul class="widget-list d-flex flex-wrap justify-content-center justify-content-md-start">
+                  <li class="widget-list-item me-4"><a class="widget-list-link" href="#">Points de vente</a></li>
+                  <li class="widget-list-item me-4"><a class="widget-list-link" href="#">Affiliés</a></li>
+                  <li class="widget-list-item me-4"><a class="widget-list-link" href="#">Support</a></li>
+                  <li class="widget-list-item me-4"><a class="widget-list-link" href="#">Confidentialité</a></li>
+                  <li class="widget-list-item me-4"><a class="widget-list-link" href="#">Conditions d'utilisation</a></li>
+                </ul>
+              </div>
+            </div>
+            <div class="col-md-6 text-center text-md-end mb-4">
+              <div class="mb-3"><a class="btn-social bs-light bs-twitter ms-2 mb-2" href="#"><i class="ci-twitter"></i></a><a class="btn-social bs-light bs-facebook ms-2 mb-2" href="#"><i class="ci-facebook"></i></a><a class="btn-social bs-light bs-instagram ms-2 mb-2" href="#"><i class="ci-instagram"></i></a><a class="btn-social bs-light bs-pinterest ms-2 mb-2" href="#"><i class="ci-pinterest"></i></a><a class="btn-social bs-light bs-youtube ms-2 mb-2" href="#"><i class="ci-youtube"></i></a></div><img class="d-inline-block" src="{% static 'img/cards-alt.png' %}" width="187" alt="Modes de paiement">
+            </div>
+          </div>
+          <div class="pb-4 fs-xs text-light opacity-50 text-center text-md-start">© Tous droits réservés. Par  <a class="text-light" href="https://createx.studio/" target="_blank" rel="noopener">Focus Digital</a></div>
+        </div>
+      </div>
+
+    </footer>
+
+        <!-- Toolbar for handheld devices (Default)-->
+{% if request.user.clients or request.user.is_anonymous %}
+    <div class="handheld-toolbar">
+      <div class="d-table table-layout-fixed w-100"><a class="d-table-cell handheld-toolbar-item" href="{% url 'account:accountWishlist' %}"><span class="handheld-toolbar-icon"><i class="ci-heart"></i></span><span class="handheld-toolbar-label">Souhaits</span></a><a class="d-table-cell handheld-toolbar-item" href="javascript:void(0)" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" onclick="window.scrollTo(0, 0)"><span class="handheld-toolbar-icon"><i class="ci-menu"></i></span><span class="handheld-toolbar-label">Menu</span></a><a class="d-table-cell handheld-toolbar-item" href="{% url 'shopcart' %}"><span class="handheld-toolbar-icon"><i class="ci-cart"></i><span class="badge bg-primary rounded-pill ms-1">{% if cart_total_item %}{{ cart_total_item }}{% else %}0{% endif %}</span></span><span class="handheld-toolbar-label">${% if cart_total_item %}{{ cart_total_item }}{% else %}0{% endif %}</span></a></div>
+    </div>
+{% endif %}
+    <!-- Back To Top Button--><a class="btn-scroll-top" href="#top" data-scroll><span class="btn-scroll-top-tooltip text-muted fs-sm me-2">Top</span><i class="btn-scroll-top-icon ci-arrow-up">   </i></a>
+    <!-- Vendor scrits: js libraries and plugins-->
+    {% include 'footer_links.html' %}

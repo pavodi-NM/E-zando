@@ -1,0 +1,422 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load mptt_tags %}
+{% block title %} Home {% endblock %}
+{% load socialaccount %}
+{% if get_social_accounts %}
+{% get_social_accounts user as accounts %}
+{% endif %}
+{% block body %}
+    <style>
+
+    </style>
+<script>
+
+
+</script>
+     <!-- Quick View Modal is hidden guys, lol-->
+    <div class="modal-quick-view modal fade" id="modal-{{last_other_item.id}}" tabindex="-1">
+      <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title product-title"><a href="shop-single-v2.html" data-bs-toggle="tooltip" data-bs-placement="right" title="Go to product page">Smartwatch Youth Edition<i class="ci-arrow-right fs-lg ms-2"></i></a></h4>
+            <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <div class="row">
+              <!-- Product gallery-->
+              <div class="col-lg-7 pe-lg-0">
+                <div class="product-gallery">
+                  <div class="product-gallery-preview order-sm-2">
+                    <div class="product-gallery-preview-item active" id="first"><img class="image-zoom" src="{% static 'img/shop/single/gallery/05.jpg' %}" data-zoom="{% static 'img/shop/single/gallery/05.jpg' %}" alt="Product image">
+                      <div class="image-zoom-pane"></div>
+                    </div>
+                    <div class="product-gallery-preview-item" id="second"><img class="image-zoom" src="{% static 'img/shop/single/gallery/06.jpg' %}" data-zoom="{% static 'img/shop/single/gallery/06.jpg' %}" alt="Product image">
+                      <div class="image-zoom-pane"></div>
+                    </div>
+                    <div class="product-gallery-preview-item" id="third"><img class="image-zoom" src="{% static 'img/shop/single/gallery/07.jpg' %}" data-zoom="{% static 'img/shop/single/gallery/07.jpg' %}" alt="Product image">
+                      <div class="image-zoom-pane"></div>
+                    </div>
+                    <div class="product-gallery-preview-item" id="fourth"><img class="image-zoom" src="{% static 'img/shop/single/gallery/08.jpg' %}" data-zoom="{% static 'img/shop/single/gallery/08.jpg' %}" alt="Product image">
+                      <div class="image-zoom-pane"></div>
+                    </div>
+                  </div>
+                  <div class="product-gallery-thumblist order-sm-1"><a class="product-gallery-thumblist-item active" href="#first"><img src="{% static 'img/shop/single/gallery/th05.jpg' %}" alt="Product thumb"></a><a class="product-gallery-thumblist-item" href="#second"><img src="{% static 'img/shop/single/gallery/th06.jpg' %}" alt="Product thumb"></a><a class="product-gallery-thumblist-item" href="#third"><img src="{% static 'img/shop/single/gallery/th07.jpg' %}" alt="Product thumb"></a><a class="product-gallery-thumblist-item" href="#fourth"><img src="{% static 'img/shop/single/gallery/th08.jpg' %}" alt="Product thumb"></a></div>
+                </div>
+              </div>
+              <!-- Product details-->
+              <div class="col-lg-5 pt-4 pt-lg-0 image-zoom-pane">
+                <div class="product-details ms-auto pb-3">
+                  <div class="mb-2">
+                    <div class="star-rating"><i class="star-rating-icon ci-star-filled active"></i><i class="star-rating-icon ci-star-filled active"></i><i class="star-rating-icon ci-star-filled active"></i><i class="star-rating-icon ci-star-filled active"></i><i class="star-rating-icon ci-star"></i>
+                    </div><span class="d-inline-block fs-sm text-body align-middle mt-1 ms-1">74 Reviews</span>
+                  </div>
+                  <div class="h3 fw-normal text-accent mb-3 me-1">$124.<small>99</small></div>
+                  <div class="fs-sm mb-4"><span class="text-heading fw-medium me-1">Color:</span><span class="text-muted" id="colorOptionText">Dark blue/Orange</span></div>
+                  <div class="position-relative me-n4 mb-3">
+                    <div class="form-check form-option form-check-inline mb-2">
+                      <input class="form-check-input" type="radio" name="color" id="color1" data-bs-label="colorOptionText" value="Dark blue/Orange" checked>
+                      <label class="form-option-label rounded-circle" for="color1"><span class="form-option-color rounded-circle" style="background-color: #f25540;"></span></label>
+                    </div>
+                    <div class="form-check form-option form-check-inline mb-2">
+                      <input class="form-check-input" type="radio" name="color" id="color2" data-bs-label="colorOptionText" value="Dark gray/Green">
+                      <label class="form-option-label rounded-circle" for="color2"><span class="form-option-color rounded-circle" style="background-color: #65805b;"></span></label>
+                    </div>
+                    <div class="form-check form-option form-check-inline mb-2">
+                      <input class="form-check-input" type="radio" name="color" id="color3" data-bs-label="colorOptionText" value="White">
+                      <label class="form-option-label rounded-circle" for="color3"><span class="form-option-color rounded-circle" style="background-color: #f5f5f5;"></span></label>
+                    </div>
+                    <div class="form-check form-option form-check-inline mb-2">
+                      <input class="form-check-input" type="radio" name="color" id="color4" data-bs-label="colorOptionText" value="Black">
+                      <label class="form-option-label rounded-circle" for="color4"><span class="form-option-color rounded-circle" style="background-color: #333;"></span></label>
+                    </div>
+                    <div class="product-badge product-available mt-n1"><i class="ci-security-check"></i>Product available</div>
+                  </div>
+                  <div class="d-flex align-items-center pt-2 pb-4">
+                    <select class="form-select me-3" style="width: 5rem;">
+                      <option value="1">1</option>
+                      <option value="2">2</option>
+                      <option value="3">3</option>
+                      <option value="4">4</option>
+                      <option value="5">5</option>
+                    </select>
+                    <button class="btn btn-primary btn-shadow d-block w-100" type="button"><i class="ci-cart fs-lg me-2"></i>Add to Cart</button>
+                  </div>
+                  <div class="d-flex mb-4">
+                    <div class="w-100 me-3">
+                      <button class="btn btn-secondary d-block w-100" type="button"><i class="ci-heart fs-lg me-2"></i><span class='d-none d-sm-inline'>Add to </span>Wishlist</button>
+                    </div>
+                    <div class="w-100">
+                      <a class="btn btn-secondary  d-block w-100" href="" type="button"><i class="ci-compare fs-lg me-2"></i>Compare</a>
+                    </div>
+                  </div>
+                  <h5 class="h6 mb-3 py-2 border-bottom"><i class="ci-announcement text-muted fs-lg align-middle mt-n1 me-2"></i>Product info</h5>
+                  <h6 class="fs-sm mb-2">General</h6>
+                  <ul class="fs-sm pb-2">
+                    <li><span class="text-muted">Model: </span>Amazfit Smartwatch</li>
+                    <li><span class="text-muted">Gender: </span>Unisex</li>
+                    <li><span class="text-muted">OS campitibility: </span>Android / iOS</li>
+                  </ul>
+                  <h6 class="fs-sm mb-2">Physical specs</h6>
+                  <ul class="fs-sm pb-2">
+                    <li><span class="text-muted">Shape: </span>Rectangular</li>
+                    <li><span class="text-muted">Body material: </span>Plastics / Ceramics</li>
+                    <li><span class="text-muted">Band material: </span>Silicone</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Page Title-->
+{% if request.user.est_client or accounts or request.user.is_anonymous %}
+        <!-- Product Section-->
+    <section class="container pt-2">
+      <!-- Heading-->
+      <div class="d-flex flex-wrap justify-content-between align-items-center pt-1 border-bottom pb-4 mb-4">
+        <h5 class="h3 mb-0 pt-1 me-2 text-center">Bienvenue sur E-zando, faites vos achats</h5>
+      </div>
+      <!-- Grid-->
+
+   {% if list_product %}
+      <div class="row pt-2 mx-n2" id="box">
+        {% for plist in list_product %}
+        <!-- Product-->
+        <div class="col-lg-3 col-md-4 col-sm-6 px-2 mb-4">
+          <div class="card product-card">
+            <div class="product-card-actions d-flex align-items-center"><a class="btn-action nav-link-style me-2" href="{% url 'standardApps:compare-products' plist.slug %}"><i class="ci-compare me-1"></i>Compare</a>
+              <a class="btn-wishlist btn-sm" href="{% url 'account:addWishlist' plist.slug %}" type="button" data-bs-toggle="tooltip" data-bs-placement="left" title="Ajouter à la liste de souhaits"><i class="ci-heart"></i></a>
+            </div><a class="card-img-top d-block overflow-hidden" href="{{ plist.get_absolute_url }}"><img src="{{ plist.imageProduit.url}}" alt="Product"></a>
+            <div class="card-body py-2"><a class="product-meta d-block fs-xs pb-1" href="#">{{ plist.titreProduit }} </a>
+              <h3 class="product-title fs-sm"><a href="shop-single-v2.html">{{ plist.DescriptionProduit }}</a></h3>
+              <div class="d-flex justify-content-between">
+                <div class="product-price"><span class="text-accent">${{ plist.prixActual }}.<small>00</small></span></div>
+                <div class="star-rating"><i class="star-rating-icon ci-star-filled active"></i><i class="star-rating-icon ci-star-filled active"></i><i class="star-rating-icon ci-star-filled active"></i><i class="star-rating-icon ci-star-filled active"></i><i class="star-rating-icon ci-star-filled active"></i>
+                </div>
+              </div>
+            </div>
+            <div class="card-body card-body-hidden">
+              <a  class="btn btn-primary btn-sm d-block w-100 mb-2 " href="{{ plist.get_adding_to_cart_url }}" type="button"><i class="ci-cart fs-sm me-1"></i>Ajouter au panier</a>
+              <div class="text-center"><a class="nav-link-style fs-ms" href="{% url 'chat:chat-room' plist.vendeur.pk plist.slug %}" ><i class="ci-phone align-middle me-1"></i>Contacter le vendeur</a></div>
+            </div>
+          </div>
+          <hr class="d-sm-none">
+        </div>
+           {% endfor %}
+      </div>
+   {% endif %}
+    </section>
+          <!-- Pagination-->
+    <div class="d-flex justify-content-between pt-2" aria-label="Page navigation">
+      {% if list_product.has_previous %}
+        <ul class="pagination">
+          <li class="page-item"><a class="page-link" href="{% url 'standardApps:home' %}?page=1" ><i class="ci-arrow-left me-2"></i>Premier</a></li>
+          <li class="page-item"><a class="page-link" href="{% url 'standardApps:home' %}?page={{ list_product.previous_page_number }}" disabled><i class="ci-arrow-left me-2"></i>Précédent</a></li>
+        </ul>
+          {% else %}
+        <ul class="pagination">
+          <li class="page-item"><a type="button" class="page-link" href="{% url 'standardApps:home' %}?page=1" disabled="disabled"><i class="ci-arrow-left me-2"></i>Premier</a></li>
+        </ul>
+          {% endif %}
+        <ul class="pagination">
+              {% for num in list_product.paginator.page_range %}
+
+                  {% if list_product.number == num %}
+                      <li class="page-item d-none d-sm-block"><a class="btn btn-danger" href="?page={{ num }}">{{ num }}</a></li>
+                      {% elif num > list_product.number|add:'-3' and num < list_product.number|add:'3' %}
+                      <li class="page-item d-none d-sm-block"><a class="btn btn-outline-info" href="?page={{ num }}">{{ num }}</a></li>
+                  {% endif %}
+              {% endfor %}
+        </ul>
+      {% if list_product.has_next %}
+        <ul class="pagination">
+          <li class="page-item"><a class="page-link" href="{% url 'standardApps:home' %}?page={{ list_product.next_page_number }}" aria-label="Next">suivant<i class="ci-arrow-right ms-2"></i></a></li>
+          <li class="page-item"><a class="page-link" href="{% url 'standardApps:home' %}?page={{ list_product.paginator.num_pages }}" aria-label="Next">Dernier<i class="ci-arrow-right ms-2"></i></a></li>
+        </ul>
+      {% else %}
+        <ul class="pagination">
+          <li class="page-item"><a class="page-link" href="{% url 'standardApps:home' %}?page={{ list_product.paginator.num_pages }}" aria-label="Next">Dernier<i class="ci-arrow-right ms-2"></i></a></li>
+        </ul>
+      {% endif %}
+      </div>
+    <!-- Sidebar and promotional products-->
+    <div class="container pb-5 mb-2 mb-md-10 mt-lg-4">
+      <div class="row">
+        <!-- Sidebar-->
+        <aside class="col-lg-3">
+            //side bar
+        </aside>
+        <!-- Content  -->
+        <section class="col-lg-9 mt-2">
+
+          <!-- Banner-->
+          <div class="py-sm-2">
+            <div class="d-sm-flex justify-content-between align-items-center bg-secondary overflow-hidden mb-4 rounded-3">
+              <div class="py-4 my-2 my-md-0 py-md-5 px-4 ms-md-3 text-center text-sm-start">
+                <h4 class="fs-lg fw-light mb-2">Converse All Star</h4>
+                <h3 class="mb-4">Make Your Day Comfortable</h3><a class="btn btn-primary btn-shadow btn-sm" href="#">Shop Now</a>
+              </div><img class="d-block ms-auto" src="img/shop/catalog/banner.jpg" alt="Shop Converse">
+            </div>
+          </div>
+          <!-- Products grid-->
+
+          <hr class="my-3">
+          <!-- Pagination-->
+          <section class="pt-3 pt-md-4">
+            <!-- Heading-->
+            <div class="d-flex flex-wrap justify-content-between align-items-center pt-1 border-bottom pb-4 mb-4">
+              <h2 class="h3 mb-0 pt-3 me-3">Produits en promotion</h2>
+              <div class="pt-3"><a class="btn btn-outline-accent btn-sm" href="grocery-catalog.html">Plus de produits<i class="ci-arrow-right ms-1 me-n1"></i></a></div>
+            </div>
+            <div class="tns-carousel tns-controls-static tns-controls-outside tns-nav-enabled pt-2">
+              <div class="tns-carousel-inner" data-carousel-options="{&quot;items&quot;: 2, &quot;gutter&quot;: 16, &quot;controls&quot;: true, &quot;autoHeight&quot;: true, &quot;responsive&quot;: {&quot;0&quot;:{&quot;items&quot;:1}, &quot;480&quot;:{&quot;items&quot;:2}, &quot;720&quot;:{&quot;items&quot;:3}, &quot;991&quot;:{&quot;items&quot;:2}, &quot;1140&quot;:{&quot;items&quot;:3}, &quot;1300&quot;:{&quot;items&quot;:4}, &quot;1500&quot;:{&quot;items&quot;:5}}}">
+                <!-- Product-->
+                  {% for disc_prod in discount_products %}
+                <div>
+                  <div class="card product-card card-static pb-3"><span class="badge bg-danger badge-shadow">Promo</span>
+                    <a class="btn-wishlist btn-sm" href="{% url 'account:addWishlist' disc_prod.slug %}"  type="button" data-bs-toggle="tooltip" data-bs-placement="left" title="Ajouter à la liste de souhaits"><i class="ci-heart"></i></a><a class="card-img-top d-block overflow-hidden" href="{% url 'shopSingleV2' disc_prod.slug %}"><img src="{{ disc_prod.imageProduit.url }}" alt="Product"></a>
+                    <div class="card-body py-2"><a class="product-meta d-block fs-xs pb-1" href="#">{{ disc_prod.titreProduit }}</a>
+                      <h3 class="product-title fs-sm text-truncate"><a href="{% url 'shopSingleV2' disc_prod.slug %}">{{ disc_prod.DescriptionProduit|slice:'20' }}...</a></h3>
+                      <div class="product-price"><a class="text-decoration-line-through">${{ disc_prod.prixActual }}.<small>00</small></a>
+                      </div>
+                        <span class="fs-sm text-muted">${{ disc_prod.prixDiscount }}.<small>00</small></span>
+                    </div>
+                    <div class="product-floating-btn">
+                      <a href="{{ disc_prod.get_adding_to_cart_url }}"  class="btn btn-primary btn-shadow btn-sm" type="button">+<i class="ci-cart fs-base ms-1"></i></a>
+                    </div>
+                  </div>
+                </div>
+                  {% endfor %}
+              </div>
+            </div>
+          </section>
+        </section>
+      </div>
+    </div>
+
+   <!-- Promo banner-->
+    <section class="container mt-4 mb-grid-gutter">
+      <div class="bg-faded-info rounded-3 py-4">
+        <div class="row align-items-center">
+          <div class="col-md-5">
+            <div class="px-4 pe-sm-0 ps-sm-5"><span class="badge bg-danger">Limited Offer</span>
+              <h3 class="mt-4 mb-1 text-body fw-light">All new</h3>
+              <h2 class="mb-1">Last Gen iPad Pro</h2>
+              <p class="h5 text-body fw-light">at discounted price. Hurry up!</p>
+              <div class="countdown py-2 h4" data-countdown="07/01/2021 07:00:00 PM">
+                <div class="countdown-days"><span class="countdown-value"></span><span class="countdown-label text-muted">d</span></div>
+                <div class="countdown-hours"><span class="countdown-value"></span><span class="countdown-label text-muted">h</span></div>
+                <div class="countdown-minutes"><span class="countdown-value"></span><span class="countdown-label text-muted">m</span></div>
+                <div class="countdown-seconds"><span class="countdown-value"></span><span class="countdown-label text-muted">s</span></div>
+              </div><a class="btn btn-accent" href="#">View offers<i class="ci-arrow-right fs-ms ms-1"></i></a>
+            </div>
+          </div>
+          <div class="col-md-7"><img src="{% static 'img/home/banners/offer.jpg' %}" alt="iPad Pro Offer"></div>
+        </div>
+      </div>
+    </section>
+    <!-- Brands carousel-->
+    <section class="container mb-5">
+      <div class="tns-carousel border-end">
+        <div class="tns-carousel-inner" data-carousel-options="{ &quot;nav&quot;: false, &quot;controls&quot;: false, &quot;autoplay&quot;: true, &quot;autoplayTimeout&quot;: 4000, &quot;loop&quot;: true, &quot;responsive&quot;: {&quot;0&quot;:{&quot;items&quot;:1},&quot;360&quot;:{&quot;items&quot;:2},&quot;600&quot;:{&quot;items&quot;:3},&quot;991&quot;:{&quot;items&quot;:4},&quot;1200&quot;:{&quot;items&quot;:4}} }">
+          <div><a class="d-block bg-white border py-4 py-sm-5 px-2" href="#" style="margin-right: -.0625rem;"><img class="d-block mx-auto" src="{% static 'img/shop/brands/13.png' %}" style="width: 165px;" alt="Brand"></a></div>
+          <div><a class="d-block bg-white border py-4 py-sm-5 px-2" href="#" style="margin-right: -.0625rem;"><img class="d-block mx-auto" src="{% static 'img/shop/brands/14.png' %}" style="width: 165px;" alt="Brand"></a></div>
+          <div><a class="d-block bg-white border py-4 py-sm-5 px-2" href="#" style="margin-right: -.0625rem;"><img class="d-block mx-auto" src="{% static 'img/shop/brands/17.png' %}" style="width: 165px;" alt="Brand"></a></div>
+          <div><a class="d-block bg-white border py-4 py-sm-5 px-2" href="#" style="margin-right: -.0625rem;"><img class="d-block mx-auto" src="{% static 'img/shop/brands/16.png' %}" style="width: 165px;" alt="Brand"></a></div>
+          <div><a class="d-block bg-white border py-4 py-sm-5 px-2" href="#" style="margin-right: -.0625rem;"><img class="d-block mx-auto" src="{% static 'img/shop/brands/15.png' %}" style="width: 165px;" alt="Brand"></a></div>
+          <div><a class="d-block bg-white border py-4 py-sm-5 px-2" href="#" style="margin-right: -.0625rem;"><img class="d-block mx-auto" src="{% static 'img/shop/brands/18.png' %}" style="width: 165px;" alt="Brand"></a></div>
+          <div><a class="d-block bg-white border py-4 py-sm-5 px-2" href="#" style="margin-right: -.0625rem;"><img class="d-block mx-auto" src="{% static 'img/shop/brands/19.png' %}" style="width: 165px;" alt="Brand"></a></div>
+          <div><a class="d-block bg-white border py-4 py-sm-5 px-2" href="#" style="margin-right: -.0625rem;"><img class="d-block mx-auto" src="{% static 'img/shop/brands/20.png' %}" style="width: 165px;" alt="Brand"></a></div>
+        </div>
+      </div>
+    </section>
+        <!-- Product widgets-->
+    <section class="container pb-4 pb-md-5">
+      <div class="row">
+        <!-- Highest price products-->
+         <div class="col-md-4 col-sm-6 mb-2 py-3">
+          <div class="widget">
+            <h3 class="widget-title">Les produits les plus chers</h3>
+              {% for high_prods in highest_price_products %}
+            <div class="d-flex align-items-center pb-2 border-bottom"><a class="d-block flex-shrink-0" href="{% url 'shopSingleV2' high_prods.slug %}"><img src="{{ high_prods.imageProduit.url }}" width="64" alt="Product"></a>
+              <div class="ps-2">
+                <h6 class="widget-product-title"><a href="{% url 'shopSingleV2' high_prods.slug %}">{{ high_prods.titreProduit }}</a></h6>
+                <div class="widget-product-meta"><span class="text-accent">${{ high_prods.prixActual }}.<small>00</small></span></div>
+              </div>
+            </div>
+               {% endfor %}
+
+            <p class="mb-0">...</p><a class="fs-sm" href="{% url 'shopGridLS' %}">View more<i class="ci-arrow-right fs-xs ms-1"></i></a>
+          </div>
+        </div>
+        <!-- New arrivals-->
+        <div class="col-md-4 col-sm-6 mb-2 py-3">
+          <div class="widget">
+            <h3 class="widget-title">Nouveaux produits</h3>
+              {% for new_prod in new_arrivals %}
+            <div class="d-flex align-items-center pb-2 border-bottom"><a class="d-block flex-shrink-0" href="{% url 'shopSingleV2' new_prod.slug %}"><img src="{{ new_prod.imageProduit.url }}" width="64" alt="Product"></a>
+              <div class="ps-2">
+                <h6 class="widget-product-title"><a href="{% url 'shopSingleV2' new_prod.slug %}">{{ new_prod.titreProduit }}</a></h6>
+                <div class="widget-product-meta"><span class="text-accent">${{ new_prod.prixActual }}.<small>00</small></span></div>
+              </div>
+            </div>
+               {% endfor %}
+
+            <p class="mb-0">...</p><a class="fs-sm" href="{% url 'shopGridLS' %}">View more<i class="ci-arrow-right fs-xs ms-1"></i></a>
+          </div>
+        </div>
+        <!-- Lowest price products-->
+        <div class="col-md-4 col-sm-6 mb-2 py-3">
+          <div class="widget">
+            <h3 class="widget-title">Les produits les moins chers</h3>
+              {% for low_prods in lowest_price_products %}
+            <div class="d-flex align-items-center pb-2 border-bottom"><a class="d-block flex-shrink-0" href="{% url 'shopSingleV2' low_prods.slug %}"><img src="{{ low_prods.imageProduit.url }}" width="64" alt="Product"></a>
+              <div class="ps-2">
+                <h6 class="widget-product-title"><a href="{% url 'shopSingleV2' low_prods.slug %}">{{ low_prods.titreProduit }}</a></h6>
+                <div class="widget-product-meta"><span class="text-accent">${{ low_prods.prixActual }}.<small>00</small></span></div>
+              </div>
+            </div>
+               {% endfor %}
+
+            <p class="mb-0">...</p><a class="fs-sm" href="{% url 'shopGridLS' %}">View more<i class="ci-arrow-right fs-xs ms-1"></i></a>
+          </div>
+        </div>
+
+      </div>
+    </section>
+        {% elif request.user.est_vendeur %}
+             <!-- List of products of the current vendor-->
+            <section class="container pt-2">
+              <!-- Heading-->
+              <div class="d-flex flex-wrap justify-content-between align-items-center pt-1 border-bottom pb-4 mb-4">
+                <h5 class="h3 mb-0 pt-1 me-2 text-center">Voici vos produits téléchargés sur le marché E-zando en ligne.</h5>
+              </div>
+              <!-- Grid-->
+
+           {% if product_vendor %}
+              <div class="row pt-2 mx-n2" id="box">
+                {% for plist in product_vendor %}
+                <!-- Product-->
+                <div class="col-lg-3 col-md-4 col-sm-6 px-2 mb-4">
+                  <div class="card product-card">
+                    <div class="product-card-actions d-flex align-items-center"><a class="btn-action nav-link-style me-2" href="{% url 'standardApps:compare-products' plist.slug %}"><i class="ci-compare me-1"></i>Compare</a>
+                      <a class="btn-wishlist btn-sm" href="{% url 'account:addWishlist' plist.slug %}" type="button" data-bs-toggle="tooltip" data-bs-placement="left" title="Ajouter à la liste de souhaits"><i class="ci-heart"></i></a>
+                    </div><a class="card-img-top d-block overflow-hidden" href="{{ plist.get_absolute_url }}"><img src="{{ plist.imageProduit.url}}" alt="Product"></a>
+                    <div class="card-body py-2"><a class="product-meta d-block fs-xs pb-1" href="#">{{ plist.titreProduit }} </a>
+                      <h3 class="product-title fs-sm"><a href="shop-single-v2.html">{{ plist.DescriptionProduit }}</a></h3>
+                      <div class="d-flex justify-content-between">
+                        <div class="product-price"><span class="text-accent">${{ plist.prixActual }}.<small>00</small></span></div>
+                        <div class="star-rating"><i class="star-rating-icon ci-star-filled active"></i><i class="star-rating-icon ci-star-filled active"></i><i class="star-rating-icon ci-star-filled active"></i><i class="star-rating-icon ci-star-filled active"></i><i class="star-rating-icon ci-star-filled active"></i>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <hr class="d-sm-none">
+                </div>
+                   {% endfor %}
+              </div>
+           {% else %}
+              <p>Vous n'avez aucun produit en ligne</p>
+           {% endif %}
+            </section>
+        {% endif %}
+
+
+   <!-- Cartzilla features section-->
+      <!-- YouTube feed-->
+    <section class="container pb-5 mb-md-3">
+      <div class="border rounded-3 p-3">
+        <div class="row">
+          <div class="col-md-4 mb-3 mb-md-0">
+            <div class="bg-secondary p-5 text-center"><img class="d-block mb-4 mx-auto" src="{% static 'img/home/yt-logo.png' %}" width="120" alt="YouTube">
+              <div class="d-flex justify-content-center align-items-center mb-4"><img class="me-2" src="{% static 'img/home/yt-subscribers.png' %}" width="126" alt="YouTube Subscribers"><span class="fs-sm">250k+</span></div><a class="btn btn-primary border-0 btn-sm mb-3" href="#" style="background-color: #ff0000;"><i class="ci-add-user me-2"></i>Souscrire*</a>
+              <p class="fs-sm mb-0">*View latest gadgets reviews available for purchase in our store.</p>
+            </div>
+          </div>
+          <div class="col-md-8">
+            <div class="embed-responsive embed-responsive-16by9">
+                <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/vS93u75NnPo" allowfullscreen></iframe>
+            </div>
+            <div class="row g-0">
+              <div class="col-lg-4 col-6 mb-3"><div class="embed-responsive embed-responsive-16by9"><iframe class="embed-responsive-item" src="https://www.youtube.com/embed/vS93u75NnPo" allowfullscreen>
+                  <div class="position-relative mb-2"><span class="badge bg-dark position-absolute bottom-0 end-0 mb-2 me-2">6:16</span><img class="w-100" src="{% static 'img/home/video/cover01.jpg' %}" alt="Video cover"></div>
+                  <h6 class="fs-sm pt-1">5 New Cool Gadgets You Must See on Cartzilla - Cheap Budget</h6></iframe></div></div>
+              <div class="col-lg-4 col-6 mb-3"><a class="d-block text-decoration-0 px-2" href="https://www.youtube.com/embed/B6LaYgGogf0" data-bs-toggle="video">
+                  <div class="position-relative mb-2"><span class="badge bg-dark position-absolute bottom-0 end-0 mb-2 me-2">7:27</span><img class="w-100" src="{% static 'img/home/video/cover02.jpg' %}" alt="Video cover"></div>
+                  <h6 class="fs-sm pt-1">5 Super Useful Gadgets on Cartzilla You Must Have in 2020</h6></a></div>
+              <div class="col-lg-4 col-6 mb-3"><a class="d-block text-decoration-0 px-2" href="https://www.youtube.com/embed/kB-ROfRS9V4" data-bs-toggle="video">
+                  <div class="position-relative mb-2"><span class="badge bg-dark position-absolute bottom-0 end-0 mb-2 me-2">6:20</span><img class="w-100" src="{% static 'img/home/video/cover03.jpg' %}" alt="Video cover"></div>
+                  <h6 class="fs-sm pt-1">Top 5 New Amazing Gadgets on Cartzilla You Must See</h6></a></div>
+              <div class="col-lg-4 col-6 mb-3 d-lg-none"><a class="d-block text-decoration-0 px-2" href="https://www.youtube.com/embed/sJK67XXE_Rg" data-bs-toggle="video">
+                  <div class="position-relative mb-2"><span class="badge bg-dark position-absolute bottom-0 end-0 mb-2 me-2">6:11</span><img class="w-100" src="{% static 'img/home/video/cover04.jpg' %}" alt="Video cover"></div>
+                  <h6 class="fs-sm fw-bold pt-1">5 Amazing Construction Inventions and Working Tools Available...</h6></a></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Blog + Instagram info cards-->
+    <section class="container-fluid px-0">
+      <div class="row g-0">
+        <div class="col-md-6"><a class="card border-0 rounded-0 text-decoration-none py-md-4 bg-faded-primary" href="blog-list-sidebar.html">
+            <div class="card-body text-center"><i class="ci-edit h3 mt-2 mb-4 text-primary"></i>
+              <h3 class="h5 mb-1">Lire le blog</h3>
+              <p class="text-muted fs-sm">Dernières boutiques, actualités et tendances de la mode</p>
+            </div></a></div>
+        <div class="col-md-6"><a class="card border-0 rounded-0 text-decoration-none py-md-4 bg-faded-accent" href="#">
+            <div class="card-body text-center"><i class="ci-instagram h3 mt-2 mb-4 text-accent"></i>
+              <h3 class="h5 mb-1">Suivre sur Instagram</h3>
+              <p class="text-muted fs-sm">#ShopAvecE-zando</p>
+            </div></a></div>
+      </div>
+    </section>
+
+
+
+    <!-- Footer-->
+
+  {% include 'footer.html' %}
+
+{% endblock %}
