@@ -1,0 +1,203 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} Shop-cart {% endblock %}
+
+
+{% block body %}
+    <!-- Page Title-->
+    <div class="page-title-overlap bg-dark pt-4">
+      <div class="container d-lg-flex justify-content-between py-2 py-lg-3">
+        <div class="order-lg-2 mb-3 mb-lg-0 pt-lg-2">
+          <nav aria-label="breadcrumb">
+            <ol class="breadcrumb breadcrumb-light flex-lg-nowrap justify-content-center justify-content-lg-start">
+              <li class="breadcrumb-item"><a class="text-nowrap" href="{% url 'standardApps:home' %}"><i class="ci-home"></i>Home</a></li>
+              <li class="breadcrumb-item text-nowrap"><a href="shop-grid-ls.html">Shop</a>
+              </li>
+              <li class="breadcrumb-item text-nowrap active" aria-current="page">Cart</li>
+            </ol>
+          </nav>
+        </div>
+        <div class="order-lg-1 pe-lg-4 text-center text-lg-start">
+          <h1 class="h3 text-light mb-0">Votre panier</h1>
+        </div>
+      </div>
+    </div>
+    <div class="container pb-5 mb-2 mb-md-4">
+      <div class="row">
+        <!-- List of items-->
+        <section class="col-lg-8">
+
+          <div class="d-flex justify-content-between align-items-center pt-3 pb-4 pb-sm-5 mt-1">
+            <h2 class="h6 text-light mb-0">Produits</h2><a class="btn btn-outline-primary btn-sm ps-2" href="{% url 'standardApps:home' %}"><i class="ci-arrow-left me-2"></i>Poursuivre les achats</a>
+        {% if total_cart_user != 0 %}
+           <a  class="btn btn-outline-primary btn-sm ps-2"  href="{% url 'emptycart' %}">Vider le panier</a>
+        {% endif %}
+          </div>
+
+        {% for cart_item in cart.produits.all %}
+          <!-- Item-->
+
+          <div class="d-sm-flex justify-content-between align-items-center my-2 pb-3 border-bottom">
+            <div class="d-block d-sm-flex align-items-center text-center text-sm-start"><a class="d-inline-block flex-shrink-0 mx-auto me-sm-4" href="{% url 'shopSingleV1' %}"><img src="{{ cart_item.produit.imageProduit.url }}" width="160" alt="Produit"></a>
+              <div class="pt-2">
+                <h3 class="product-title fs-base mb-2"><a href="{{ cart_item.produit.get_absolute_url }}">{{ cart_item.produit.titreProduit }}:</a><small> A</small> {{ cart_item.produit.prixActual }}</h3>
+                <div class="fs-sm"><span class="text-muted me-2">Brand:</span>Tommy Hilfiger</div>
+                <div class="fs-sm"><span class="text-muted me-2">Color:</span>Khaki</div>
+                <div class="fs-lg text-accent pt-2"><span class="text-muted me-2">Sous-total:</span>
+                    {% if cart_item.produit.prixDiscount %}
+                        ${{ cart_item.get_total_discount_produit_price }}
+                        <i> (Epargner ${{ cart_item.get_amount_saved }}) </i>
+                    {% else %}
+                        ${{ cart_item.get_total_produit_price }}
+                    {% endif %}
+                    </div>
+              </div>
+            </div>
+            <div class="pt-2 pt-sm-0 ps-sm-3 mx-auto mx-sm-0 text-center text-sm-start" style="max-width: 9rem;">
+              <label class="form-label" for="quantity2">Quantité: </label> {{ cart_item.quantite }}
+                <div>
+                    <a class="btn btn-primary btn-sm" href="{% url 'managecart' cart_item.id %}?action=inc"> + </a>
+                    <a class="btn btn-warning btn-sm" href="{% url 'managecart' cart_item.id %}?action=dcr"> - </a>
+                </div>
+                <a class="btn btn-link px-0 text-danger" href="{% url 'managecart' cart_item.id %}?action=rmv" type="button"><i class="ci-close-circle me-2"></i><span class="fs-sm">Supprimer</span></a>
+            </div>
+          </div>
+
+            {% empty %}
+            <tr>
+                <td colspan="5">Votre panier est vide</td>
+            </tr>
+              <a href="{% url 'standardApps:home' %}" class="btn btn-outline-primary d-block w-100 mt-4 float-end" type="button"><i class="ci-cart me-2"></i>Continuer les achats</a>
+
+            {% endfor %}
+
+        <!-- to be reviewed later concerning cart -->
+
+
+        {% if cart.get_total != 0 %}
+        <div class="d-inline-block w-100">
+          <a href="{% url 'standardApps:home' %}" class="btn btn-outline-primary d-block w-40 mt-4 float-end" type="button"><i class="ci-cart me-2"></i>Continuer les achats</a>
+          <button class="btn btn-outline-accent d-block w-40 mt-4 float-right" type="button"><i class="ci-loading fs-base me-2"></i>Mettre à jour le panier</button>
+        </div>
+        {% endif %}
+        </section>
+        <!-- Sidebar-->
+        <aside class="col-lg-4 pt-4 pt-lg-0 ps-xl-5">
+          <div class="bg-white rounded-3 shadow-lg p-4">
+            <div class="py-2 px-xl-2">
+              <div class="text-center mb-4 pb-3 border-bottom">
+                <h2 class="h6 mb-3 pb-1">Total</h2>
+                <h3 class="fw-normal">$ {{ cart.get_total }}<small>,00</small></h3>
+              </div>
+              <div class="mb-3 mb-4">
+r                <label class="form-label mb-3" for="order-comments"><span class="badge bg-info fs-xs me-2">Note</span><span class="fw-medium">Commentaires supplémentaires</span></label>
+                <textarea class="form-control" rows="6" id="order-comments"></textarea>
+              </div>
+              <div class="accordion" id="order-options">
+                <div class="accordion-item">
+                  <h3 class="accordion-header"><a class="accordion-button" href="#promo-code" role="button" data-bs-toggle="collapse" aria-expanded="true" aria-controls="promo-code">Appliquer le code promo</a></h3>
+                  <div class="accordion-collapse collapse show" id="promo-code" data-bs-parent="#order-options">
+                    <form class="accordion-body needs-validation" method="post" novalidate>
+                      <div class="mb-3">
+                          <small>Procedez au paiement pour utiliser le code promo.</small>
+                      </div>
+                      <button class="btn btn-outline-primary d-block w-100" type="#">Appliquer le code promo</button>
+                    </form>
+                  </div>
+                </div>
+                <div class="accordion-item">
+                  <h3 class="accordion-header"><a class="accordion-button collapsed" href="#shipping-estimates" role="button" data-bs-toggle="collapse" aria-expanded="true" aria-controls="shipping-estimates">Estimation de livraison</a></h3>
+                  <div class="accordion-collapse collapse" id="shipping-estimates" data-bs-parent="#order-options">
+                    <div class="accordion-body">
+                      <form class="needs-validation" novalidate>
+                        <div class="mb-3">
+                          <select class="form-select" required>
+                            <option value="">Choose your country</option>
+                            <option value="Australia">Australia</option>
+                            <option value="Belgium">Belgium</option>
+                            <option value="Canada">Canada</option>
+                            <option value="Finland">Finland</option>
+                            <option value="Mexico">Mexico</option>
+                            <option value="New Zealand">New Zealand</option>
+                            <option value="Switzerland">Switzerland</option>
+                            <option value="United States">United States</option>
+                          </select>
+                          <div class="invalid-feedback">Please choose your country!</div>
+                        </div>
+                        <div class="mb-3">
+                          <select class="form-select" required>
+                            <option value="">Choose your city</option>
+                            <option value="Bern">Bern</option>
+                            <option value="Brussels">Brussels</option>
+                            <option value="Canberra">Canberra</option>
+                            <option value="Helsinki">Helsinki</option>
+                            <option value="Mexico City">Mexico City</option>
+                            <option value="Ottawa">Ottawa</option>
+                            <option value="Washington D.C.">Washington D.C.</option>
+                            <option value="Wellington">Wellington</option>
+                          </select>
+                          <div class="invalid-feedback">Please choose your city!</div>
+                        </div>
+                        <div class="mb-3">
+                          <input class="form-control" type="text" placeholder="ZIP / Postal code" required>
+                          <div class="invalid-feedback">Please provide a valid zip!</div>
+                        </div>
+                        <button class="btn btn-outline-primary d-block w-100" type="submit">Calculer l'expédition</button>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+                {% if cart.get_total != 0 %}
+                <a class="btn btn-primary btn-shadow d-block w-100 mt-4" href="{% url 'checkout:checkoutdetails' %}"><i class="ci-card fs-lg me-2"></i>Procéder au paiement</a>
+                {% endif %}
+
+                <a class="btn btn-primary btn-shadow d-block w-100 mt-4" href="#payment-modal" data-bs-toggle="modal"><i class="ci-card fs-lg me-2"></i>Procéder au paiement</a>
+
+            </div>
+          </div>
+        </aside>
+      </div>
+    </div>
+        {% comment %} proceed to payment pop up {% endcomment %}
+    <div class="modal fade" id="payment-modal" tabindex="-1" role="dialog">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header bg-secondary">
+            <ul class="nav nav-tabs card-header-tabs" role="tablist">
+              <li class="nav-item"><a class="nav-link fw-medium active" href="#signin-tab" data-bs-toggle="tab" role="tab" aria-selected="true"><i class="ci-unlocked me-2 mt-n1"></i>Mode de paiement</a></li>
+            </ul>
+            <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body tab-content py-4">
+            <form class="needs-validation tab-pane fade show active" method="POST" action="{% url 'account:payment-radio-client' %}" autocomplete="off" novalidate id="signin-tab">
+                {% csrf_token %}
+
+              <div class="mb-3">
+                 <div class="form-check">
+                    <input class="form-check-input" type="radio" id="su-name" name="payment" value="vendor_contact" checked>
+                    <label class="form-label" for="su-name">Payer <strong>en contactant le vendeur</strong></label>
+                  </div>
+              </div>
+              <div class="mb-3">
+              <div class="form-check">
+                <input class="form-check-input" type="radio" id="su-name" name="payment" value="online_pay">
+                <label class="form-label" for="su-name">Payer <strong>en ligne</strong></label>
+              </div>
+              </div>
+              <button class="btn btn-primary btn-shadow d-block w-100" type="submit">Payer</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+        <!-- Footer-->
+        {% include 'footer.html' %}
+{% endblock %}
+
+
+
+
+

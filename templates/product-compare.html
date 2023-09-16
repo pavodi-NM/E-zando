@@ -1,0 +1,81 @@
+{% extends 'simple_base.html' %}
+{% load static %}
+{% load mptt_tags %}
+{% block body %}
+  <!-- Body-->
+  <body class="handheld-toolbar-enabled">
+    <!-- Sign in / sign up modal-->
+    {% include 'signIn-sinUp-Modal.html' %}
+    <!-- Navbar for Food Delivery Service demo-->
+    <!-- Remove "navbar-sticky" class to make navigation bar scrollable with the page.-->
+    {% include 'simple_header.html' %}
+    <!-- Page title-->
+    <section class="bg-darker bg-size-cover bg-position-center py-5" style="background-image:url({{ product.imageProduit.url }});">
+      <div class="container py-md-4">
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb breadcrumb-light flex-lg-nowrap justify-content-center justify-content-lg-start">
+            <li class="breadcrumb-item"><a style="color: red;"  class="text-nowrap" href="{% url 'standardApps:home' %}"><i class="ci-home" style="color: red;"></i>Home</a></li>
+            <li  class="breadcrumb-item text-nowrap"><a style="color: red;" href="{% url 'shopCategories' %}">Toutes les categories</a>
+            </li>
+            <li style="color: red;" class="breadcrumb-item text-nowrap active" aria-current="page">{{ product.titreProduit }} </li>
+          </ol>
+        </nav>
+        <h1 class="text-light text-center text-lg-start pt-3">{{ product.titreProduit|title }} <img class="avatar" width="50" height="50" src="{{ product.imageProduit.url }}"></h1>
+      </div>
+    </section>
+    <!-- Categories-->
+    <section class="bg-secondary py-4">
+      <div class="container" data-simplebar>
+        <div class="d-flex justify-content-between">
+             {% recursetree category %}
+                <a class="d-block py-3 pe-sm-3 pe-lg-5 me-5" href="product-compare.html"><img class="d-block mx-auto mb-3" src="{% static 'img/category/icons/category.png' %}" width="60" alt="Noodles">
+                <h6 class="fs-base text-center text-nowrap">{{ node.titre }}</h6></a>
+            {% endrecursetree %}
+        </div>
+      </div>
+    </section>
+
+    <!-- Items grid-->
+    <section class="container py-4 py-sm-5">
+      <div class="row pt-3 pt-sm-0">
+      {% for sim_prod in similar %}
+        <div class="col-md-4 col-sm-6 mb-grid-gutter"><a class="card product-card h-100 border-0 shadow pb-2" href="food-delivery-single.html"><span class="badge badge-end badge-shadow bg-success fs-md fw-medium" data-bs-toggle="tooltip" title="Average meal cost">Prix: ${{ sim_prod.prixActual }}.<small>00</small></span><img class="card-img-top" src="{{ sim_prod.imageProduit.url }}" alt="McDonald's">
+            <div class="bg-white rounded-3 pt-1 px-2 mx-auto mt-n5" style="width: 175px;"><img class="d-block rounded-3 mx-auto" src="{{ sim_prod.imageProduit.url }}" width="150" alt="Brand"></div>
+            <div class="card-body text-center pt-3 pb-4">
+              <h3 class="h5 mb-2">{{ sim_prod.titreProduit }}</h3>
+              <div class="fs-ms text-muted">{{ sim_prod.DescriptionProduit }}</div>
+            </div></a></div>
+        {% endfor %}
+      </div>
+    </section>
+    <!-- Footer-->
+    {% include 'simple_footer.html' %}
+    <!-- Toolbar for handheld devices (Food delivery)-->
+    <div class="handheld-toolbar">
+      <div class="d-table table-layout-fixed w-100">
+          <a class="d-table-cell handheld-toolbar-item" href="#signin-modal" data-bs-toggle="modal"><span class="handheld-toolbar-icon"><i class="ci-user"></i></span><span class="handheld-toolbar-label">Compte</span></a>
+          <a class="d-table-cell handheld-toolbar-item" href="javascript:void(0)" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" onclick="window.scrollTo(0, 0)"><span class="handheld-toolbar-icon"><i class="ci-menu"></i></span><span class="handheld-toolbar-label">Menu</span></a>
+          <a class="d-table-cell handheld-toolbar-item" href="{% url 'shopcart' %}"><span class="handheld-toolbar-icon"><i class="ci-cart"></i><span class="badge bg-primary rounded-pill ms-1">{% if cart_total_item %}{{ cart_total_item }}{% else %}0{% endif %}</span></span><span class="handheld-toolbar-label">${{ total_cart_user}}.00</span></a></div>
+    </div>
+    <!-- Back To Top Button--><a class="btn-scroll-top" href="#top" data-scroll><span class="btn-scroll-top-tooltip text-muted fs-sm me-2">Top</span><i class="btn-scroll-top-icon ci-arrow-up">   </i></a>
+    <!-- Vendor scrits: js libraries and plugins-->
+    {% include 'footer_links.html' %}
+  </body>
+
+<script>
+        function executeQuery(){
+        var query = document.getElementById("search_here").value;
+        if (query){
+        window.location.replace("{% url 'standardApps:search_produit' %}?search=" +query);
+        return false;
+            }
+        }
+        function executeQueryMobile(){
+        var query = document.getElementById("search_here_mobile").value;
+        if (query){
+        window.location.replace("{% url 'standardApps:search_produit' %}?search=" +query);
+        return false;
+            }
+    }
+</script>
+{% endblock %}

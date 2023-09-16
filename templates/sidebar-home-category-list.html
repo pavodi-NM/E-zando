@@ -1,0 +1,113 @@
+
+{% load mptt_tags %}
+<header>
+  {% comment %}     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"> {% endcomment %}
+      <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</header>
+
+{% block body %}
+    <script>
+
+    </script>
+ <style>
+nav {
+
+    margin-top: 0px;
+    width: 300px;
+    position: relative;
+;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 5px 7px 10px rgba(0, 0, 0, 0.1);
+}
+.mynav ul {
+    position: relative;
+    list-style-type: none;
+
+}
+.mynav ul li a {
+    display:flex;
+    align-items: center;
+    font-family: arial;
+    font-size: small;
+    text-decoration: none;
+    text-transform: capitalize;
+    color: #000;
+
+
+    transition: .5s ease;
+    border-radius: 0px 30px;
+}
+.mynav ul li a:hover {
+        background:rgba(0, 0, 0, 0.7);
+        color: #fff;
+}
+.mynav ul ul {
+    position: absolute;
+    left:230px;
+    width:250px;
+    top: 0px;
+    display: none;
+    /*background:rgba(155, 39, 176, 0.4);*/
+    border-radius: 5px;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 1)
+
+}
+nav ul ul .card-item {
+    position:relative;
+
+    top:0px;
+    background: red;
+
+
+
+}
+nav ul ul .dropdown-items-item a{
+
+
+}
+.mynav ul span {
+    position: absolute;
+    right:20px;
+    font-size: 1.5em;
+}
+.mynav ul .dropdown{
+    /*position: relative;*/
+}
+.mynav ul .dropdown:hover ul{
+    display:initial;
+}
+
+ </style>
+
+<nav class="mynav">
+
+  <ul class="dropdown">
+{% recursetree parent_children_categories %}
+    <li class="dropdown-divider"></li>
+    <li class="dropdown"><a id="no"  href="/category/{{ node.id }}/{{ node.slug }}" {% if node.is_leaft_node %} data-bs-toggle="dropdown" aria-expanded="true"  {% endif %}>{{ node.titre }} <span>&rsaquo;</span></a>
+    <ul class="dropdown-menu">
+
+
+        {% if not node.is_child_node %}
+         <li class="dropdown-item product-title fw-medium"><a href="/all-category/{{ node.id }}/{{ node.slug }}">Tous les {{ node.titre|slice:':15'  }}...<i class="ci-arrow-right fs-xs ms-1"></i></a></li>
+
+        <div class="card product-card">
+
+         <li><a href="#" class="dropdown-items" aria-expanded="true" >{{ children}}</a></li>
+
+
+        </div>
+        {% endif %}
+    </ul>
+    </li>
+{% endrecursetree %}
+ </ul>
+
+</nav>
+
+
+
+
+
+{% endblock %}

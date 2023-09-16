@@ -1,0 +1,50 @@
+
+<form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+                <div class="mb-3 pb-2">
+                  <label class="form-label" for="unp-product-name">Nom du produit</label>
+                  {{ formu.titre }}
+                  <div class="form-text">Maximum de 100 characters. Pas de HTML or emoji.</div>
+                </div>
+              <div class="mb-3 py-2">
+              <label class="form-label" for="unp-product-tags">Étiquettes des produits</label>
+                {{ formu.slug }}
+              <div class="form-text">Jusqu'à 10 mots-clés qui décrivent votre article. Les mots-clés doivent tous être en minuscules et séparés par une virgule..</div>
+              </div>
+                  <label class="form-label" for="unp-product-tags">Étiquettes des produits</label>
+                {{ formu.description }}
+              <div class="form-text">Jusqu'à 10 mots-clés qui décrivent votre article. Les mots-clés doivent tous être en minuscules et séparés par une virgule..</div>
+
+              </div>
+
+                    <div class="file-drop-area mb-3">
+                  <div class="file-drop-icon ci-cloud-upload"></div><span class="file-drop-message">Faites un glisser-déposer ici pour télécharger la capture ou la photo du produit</span>
+                 {% comment %} <input class="file-drop-input" type="file"> {% endcomment %}
+                    {{ formu.image }}
+                  <button class="file-drop-btn btn btn-primary btn-sm mb-2" type="button">Ou sélectionnez le fichier</button>
+                  <div class="form-text">1000 x 800px ideal size for hi-res displays</div>
+                </div>
+             <div class="py-2">
+                    <label class="form-label" for="unp-product-tags">Choisissez la categorie</label>
+                  <select class="form-select me-2" id="unp-category" name="category">
+                        <option value="{{ formu.category }}"></option>
+                  </select>
+                </div>
+                  <div class="row">
+                  <div class="col-sm-6 mb-3">
+                    <label class="form-label" for="unp-standard-price">Prix sans reduction</label>
+                    <div class="input-group"><span class="input-group-text"><i class="ci-dollar"></i></span>
+                      {{ formu.prix_sans_red }}
+                    </div>
+                    <div class="form-text">Le prix moyen du marché pour cette catégorie est de $15.</div>
+                  </div>
+                  <div class="col-sm-6 mb-3">
+                    <label class="form-label" for="unp-extended-price">Prix avec Reduction</label>
+                    <div class="input-group"><span class="input-group-text"><i class="ci-dollar"></i></span>
+                      {{ formu.prix_red }}
+                    </div>
+                    <div class="form-text">Typically 10x of the Standard license price.</div>
+                  </div>
+                </div>
+    <button class="btn btn-primary d-block w-100" type="submit">Télécharger le produit</button>
+</form>

@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block title %} Complete Checkout {% endblock %}
+{% block body %}
+
+    <div class="container pb-5 mb-sm-4">
+      <div class="pt-5">
+        <div class="card py-3 mt-sm-3">
+          <div class="card-body text-center">
+            <h2 class="h4 pb-3">Merci pour votre commande !</h2>
+            <p class="fs-sm mb-2">Votre commande a été passée et sera traitée dès que possible.</p>
+            <p class="fs-sm mb-2">Assurez-vous de noter votre numéro de commande, qui est <span class='fw-medium'>{{ code }}</span></p>
+            <p class="fs-sm">Vous recevrez sous peu un courriel de confirmation de votre commande. <u>Vous pouvez maintenant:</u></p><a class="btn btn-secondary mt-3 me-3" href="{% url 'standardApps:home' %}">Retourner faire des achats</a><a class="btn btn-primary mt-3" href="{% url 'standardApps:orderTracking' %}"><i class="ci-location"></i>&nbsp;Suivi de la commande</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Footer-->
+ {% include 'footer.html' %}
+{% endblock %}

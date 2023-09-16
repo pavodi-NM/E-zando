@@ -1,0 +1,110 @@
+{% extends 'simple_base.html' %}
+{% block title %}  Paiement en ligne par carte de crédit ou carte de débit {% endblock %}
+{% block body %}
+    <!-- Page Title-->
+    <div class="page-title-overlap bg-dark pt-4">
+      <div class="container d-lg-flex justify-content-between py-2 py-lg-3">
+        <div class="order-lg-2 mb-3 mb-lg-0 pt-lg-2">
+          <nav aria-label="breadcrumb">
+            <ol class="breadcrumb breadcrumb-light flex-lg-nowrap justify-content-center justify-content-lg-start">
+              <li class="breadcrumb-item"><a class="text-nowrap" href="{% url 'standardApps:home' %}"><i class="ci-home"></i>Home</a></li>
+              <li class="breadcrumb-item text-nowrap"><a href="{% url 'checkout:checkoutdetails' %}">Adresse de facturation</a>
+              </li>
+              <li class="breadcrumb-item text-nowrap active" aria-current="page">Paypal</li>
+            </ol>
+          </nav>
+        </div>
+        <div class="order-lg-1 pe-lg-4 text-center text-lg-start">
+          <h1 class="h3 text-light mb-0">Paiement en ligne</h1>
+        </div>
+      </div>
+    </div>
+    <div class="container pb-5 mb-2 mb-md-4">
+      <div class="row">
+        <section class="col-lg-8">
+              <!-- Steps-->
+                {% include 'checkout-payment-steps.html' %}
+              <!-- Payment methods accordion-->
+              <h2 class="h6 pb-3 mb-2">Vous avez choisi le mode de paiement Paypal</h2>
+            <hr/>
+
+                          <!-- Paypal integration -->
+                        <div class="mt-5" id="paypal-button-container"></div>
+
+        </section>
+            <!-- Sidebar-->
+        {% include 'sidebar-order-summary.html' %}
+      </div>
+    </div>
+      <!-- Navigation (mobile)-->
+      <div class="row d-lg-none">
+        <div class="col-lg-8">
+          <div class="d-flex pt-4 mt-3">
+            <div class="w-50 pe-3"><a class="btn btn-secondary d-block w-100" href="{% url 'checkout:checkoutdetails' %}"><i class="ci-arrow-left mt-sm-0 me-1"></i><span class="d-none d-sm-inline">Adresse de facturation</span><span class="d-inline d-sm-none">Retour</span></a></div>
+            <div class="w-50 ps-2"><a class="btn btn-primary d-block w-100" href="{% url 'checkout:checkoutReview' %}"><span class="d-none d-sm-inline">Revoir votre commande</span><span class="d-inline d-sm-none">Revoir votre commande</span><i class="ci-arrow-right mt-sm-0 ms-1"></i></a></div>
+          </div>
+        </div>
+      </div>
+
+    <script src="https://www.paypal.com/sdk/js?client-id=AfAJjTbmkp4jc_x2za1Vm44HDxX3BnHwHuEw42AceArJwOw3cLissKo_UxTrHLYLBeVMVKLm2iqOZe3x&currency=USD"></script>
+
+      <script>
+
+    function getToken(name) {
+    var cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+      var cookies = document.cookie.split(';');
+      for (var i = 0; i < cookies.length; i++) {
+        var cookie = cookies[i].trim();
+        if (cookie.substring(0, name.length + 1) === (name + '=')) {
+          cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+          break;
+        }
+      }
+    }
+    return cookieValue;
+  }
+  var csrftoken = getToken('csrftoken');
+
+
+
+  function initPayPalButton() {
+
+    paypal.Buttons({
+      style: {
+        shape: 'rect',
+        color: 'gold',
+        layout: 'vertical',
+        label: 'paypal',
+
+      },
+    createOrder: function (data, actions) {
+        return actions.order.create({
+          purchase_units: [{
+            "amount": {
+              "currency_code": "USD",
+              "value": '{{cart.get_total}}'
+            }
+          }]
+        });
+      },
+    onApprove: function (data) {
+        var url = "{% url 'checkout:paypal-payment' %}"
+        return fetch(url, {
+          method: 'POST',
+          headers: {
+            'content-type': 'application/json',
+            'X-CSRFToken': csrftoken,
+          },
+          body: JSON.stringify({
+            orderID: data.orderID
+          })
+        }).then(function () {
+          location.href = '{% url 'checkout:checkoutComplete' %}';
+        })
+      },
+    }).render('#paypal-button-container');
+  }
+  initPayPalButton();
+    </script>
+{% endblock %}

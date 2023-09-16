@@ -1,0 +1,19 @@
+          {% load mptt_tags %}
+            <ul class="navbar-nav navbar-mega-nav pe-lg-2 me-lg-2">
+              <li class="nav-item dropdown"><a class="nav-link dropdown-toggle ps-lg-0" href="#" data-bs-toggle="dropdown"><i class="ci-menu align-middle mt-n1 me-2"></i>Shop</a>
+
+                <ul class="dropdown-menu py-1">
+                {% recursetree parent_children_categories %}
+                  <li class="dropdown"><a  href="/category/{{ node.id }}/{{ node.slug }}" class="dropdown-item dropdown-toggle" {% if not node.is_leaf_node %} data-bs-toggle="dropdown" aria-expanded="true" {% endif %}>{{ node.titre }}</a>
+                    <ul class="dropdown-menu">
+                      <li class="dropdown-item product-title fw-medium"><a href="/all-category/{{ node.id }}/{{ node.slug }}">Tous les {{ node.titre}}...<i class="ci-arrow-right fs-xs ms-1"></i></a></li>
+                        {% if not node.is_child_node %}
+                      <li class="dropdown-divider"></li>
+                      <li><a class="dropdown-item" href="/category/{{ node.id }}/{{ node.slug }}">{{ children }}</a></li>
+                        {% endif %}
+                    </ul>
+                  </li>
+                {% endrecursetree %}
+                </ul>
+              </li>
+            </ul>

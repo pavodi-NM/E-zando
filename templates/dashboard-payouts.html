@@ -1,0 +1,104 @@
+{% extends 'header-dashboard.html' %}
+{% load static %}
+{% block title %} Bilocost | Versements{% endblock %}
+{% block body %}
+        {% include 'sideBar-Dashboard.html' %}
+          <!-- Content-->
+          <section class="col-lg-8 pt-lg-4 pb-4 mb-3">
+            <div class="pt-2 px-4 ps-lg-0 pe-xl-5">
+              <h2 class="h3 py-2 text-center text-sm-start">Versements</h2>
+              <div class="row mx-n2 py-2">
+                <div class="col-sm-6 px-2 mb-4">
+                  <div class="bg-secondary h-100 rounded-3 p-4">
+                    <h3 class="h5">Prochain versement</h3>
+                    <p class="fs-sm">Vos revenus actuels de <span class='fw-medium'>$1,375.00</span> vous sera envoyé 8/15/2019</p>
+                  </div>
+                </div>
+                <div class="col-sm-6 px-2 mb-4">
+                  <div class="bg-secondary h-100 rounded-3 p-4">
+                    <h3 class="h5">Méthode de paiement</h3>
+                    <div class="d-flex flex-wrap align-items-center py-1 mb-2"><img class="d-block mb-2 me-2" src="{% static 'img/marketplace/account/paypal-logo.png' %}" width="100" alt="PayPal"><span class="fs-xs mb-2">{{ vendeur.email_adresse}}</span></div><a class="btn btn-primary btn-sm" href="#">Changement de méthode de paiement</a>
+                  </div>
+                </div>
+              </div>
+              <h3 class="h5 pb-2">Historique des paiements</h3>
+              <div class="table-responsive">
+                <table class="table table-layout-fixed fs-sm mb-0">
+                  <thead>
+                    <tr>
+                      <th>Montant</th>
+                      <th>Méthode de paiement</th>
+                      <th>Date de traitement</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>$1,233.84</td>
+                      <td>PayPal</td>
+                      <td>July 16, 2019</td>
+                    </tr>
+                    <tr>
+                      <td>$805.79</td>
+                      <td>PayPal</td>
+                      <td>July 1, 2019</td>
+                    </tr>
+                    <tr>
+                      <td>$1,564.98</td>
+                      <td>PayPal</td>
+                      <td>June 17, 2019</td>
+                    </tr>
+                    <tr>
+                      <td>$697.79</td>
+                      <td>PayPal</td>
+                      <td>June 2, 2019</td>
+                    </tr>
+                    <tr>
+                      <td>$2,060.80</td>
+                      <td>Payoneer</td>
+                      <td>May 15, 2019</td>
+                    </tr>
+                    <tr>
+                      <td>$754.30</td>
+                      <td>Payoneer</td>
+                      <td>May 1, 2019</td>
+                    </tr>
+                    <tr>
+                      <td>$1,372.26</td>
+                      <td>Payoneer</td>
+                      <td>April 16, 2019</td>
+                    </tr>
+                    <tr>
+                      <td>$1,296.41</td>
+                      <td>SWIFT</td>
+                      <td>April 3, 2019</td>
+                    </tr>
+                    <tr>
+                      <td>$339.57</td>
+                      <td>SWIFT</td>
+                      <td>March 17, 2019</td>
+                    </tr>
+                    <tr>
+                      <td>$493.24</td>
+                      <td>SWIFT</td>
+                      <td>February 28, 2019</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <hr class="mb-grid-gutter">
+              <!-- Pagination-->
+              <nav class="d-md-flex justify-content-between align-items-center text-center text-md-start" aria-label="Page navigation">
+                <div class="d-md-flex align-items-center w-100"><span class="fs-sm text-muted me-md-3">Showing 10 of 52 records</span>
+                  <div class="progress w-100 my-3 mx-auto mx-md-0" style="max-width: 10rem; height: 4px;">
+                    <div class="progress-bar" role="progressbar" style="width: 20%;" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>
+                  </div>
+                </div>
+                <button class="btn btn-outline-primary btn-sm" type="button">More records</button>
+              </nav>
+            </div>
+          </section>
+
+
+    <!-- Footer-->
+    {% include 'dahsboard-footer.html' %}
+{% endblock %}

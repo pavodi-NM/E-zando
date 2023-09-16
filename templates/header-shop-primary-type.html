@@ -1,0 +1,67 @@
+{% load static %}
+  <!-- Body-->
+  <body class="handheld-toolbar-enabled">
+    <!-- Sign in / sign up modal-->
+
+        {% include 'signIn-sinUp-Modal.html' %}
+
+    <!-- Navbar 3 Level (Light)-->
+    <header class="shadow-sm">
+      <!-- Topbar-->
+
+        {% include 'navbar_topbar.html' %}
+
+
+      <!-- Remove "navbar-sticky" class to make navigation bar scrollable with the page.-->
+        {% include 'navBar-sticky.html' %}
+
+        <div class="navbar navbar-expand-lg navbar-light navbar-stuck-menu mt-n2 pt-0 pb-2">
+          <div class="container">
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+             <form method="GET" onsubmit="return executeQueryMobile();">
+                {% csrf_token %}
+                <!-- Search (mobile)-->
+              <div class="d-lg-none py-3">
+                <div class="input-group"><i class="ci-search position-absolute top-50 start-0 translate-middle-y ms-3"></i>
+                  <input class="form-control rounded-start"  name="search" id="search_here_mobile" type="text" placeholder="De quoi avez-vous besoin?">
+                </div>
+              </div>
+             </form>
+
+
+              <!-- Departments menu-->
+                    {% include 'departmentMenu.html' %}
+              <!-- Primary menu-->
+                    {% include 'primaryMenu.html' %}
+            </div>
+          </div>
+        </div>
+      </div>
+      <!--  search bar dropdown  -->
+       <div class="search-box collapse" id="searchBox">
+        <form method="GET" onsubmit="return executeQuery();">
+        <div class="container py-2">
+          <div class="input-group"><i class="ci-search position-absolute top-50 start-0 translate-middle-y ms-3"></i>
+              <input class="form-control rounded-start" name="search" id="search_here" type="text" placeholder="De quoi avez vous besoin?">
+          </div>
+        </div>
+      </form>
+      </div>
+    </header>
+
+<script>
+        function executeQuery(){
+        var query = document.getElementById("search_here").value;
+        if (query){
+        window.location.replace("{% url 'standardApps:search_produit' %}?search=" +query);
+        return false;
+            }
+        }
+        function executeQueryMobile(){
+        var query = document.getElementById("search_here_mobile").value;
+        if (query){
+        window.location.replace("{% url 'standardApps:search_produit' %}?search=" +query);
+        return false;
+            }
+    }
+</script>

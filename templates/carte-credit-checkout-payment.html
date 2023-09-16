@@ -1,0 +1,74 @@
+{% extends 'simple_base.html' %}
+{% load static %}
+{% block title %} Paiement en ligne par carte de crédit ou carte de débit {% endblock %}
+{% block body %}
+    <!-- Page Title-->
+    <div class="page-title-overlap bg-dark pt-4">
+      <div class="container d-lg-flex justify-content-between py-2 py-lg-3">
+        <div class="order-lg-2 mb-3 mb-lg-0 pt-lg-2">
+          <nav aria-label="breadcrumb">
+            <ol class="breadcrumb breadcrumb-light flex-lg-nowrap justify-content-center justify-content-lg-start">
+              <li class="breadcrumb-item"><a class="text-nowrap" href="{% url 'standardApps:home' %}"><i class="ci-home"></i>Home</a></li>
+              <li class="breadcrumb-item text-nowrap"><a href="shop-grid-ls.html">Shop</a>
+              </li>
+              <li class="breadcrumb-item text-nowrap active" aria-current="page">Checkout</li>
+            </ol>
+          </nav>
+        </div>
+        <div class="order-lg-1 pe-lg-4 text-center text-lg-start">
+          <h1 class="h3 text-light mb-0">Paiement en ligne</h1>
+        </div>
+      </div>
+    </div>
+    <div class="container pb-5 mb-2 mb-md-4">
+      <div class="row">
+        <section class="col-lg-8">
+              <!-- Steps-->
+                {% include 'checkout-payment-steps.html' %}
+              <!-- Payment methods accordion-->
+              <h2 class="h6 pb-3 mb-2">Vous avez choisi le paiement par Carte credit</h2>
+            <hr/>
+
+                          <!-- Paypal integration -->
+            <div class="accordion-item">
+              <h3 class="accordion-header"><a class="accordion-button" href="#card" data-bs-toggle="collapse"><i class="ci-card fs-lg me-2 mt-n1 align-middle"></i>Payer avec une carte de crédit</a></h3>
+              <div class="accordion-collapse collapse show" id="card" data-bs-parent="#payment-method">
+                <div class="accordion-body">
+                  <p class="fs-sm">Nous acceptons les cartes de crédit suivantes:&nbsp;&nbsp;<img class="d-inline-block align-middle" src="{% static 'img/cards.png' %}" width="187" alt="Cerdit Cards"></p>
+                  <div class="credit-card-wrapper"></div>
+                  <form class="credit-card-form row">
+                    <div class="mb-3 col-sm-6">
+                      <input class="form-control" type="text" name="number" placeholder="Numéro de la carte" required>
+                    </div>
+                    <div class="mb-3 col-sm-6">
+                      <input class="form-control" type="text" name="name" placeholder="Nom" required>
+                    </div>
+                    <div class="mb-3 col-sm-3">
+                      <input class="form-control" type="text" name="expiry" placeholder="MM/AA" required>
+                    </div>
+                    <div class="mb-3 col-sm-3">
+                      <input class="form-control" type="text" name="cvc" placeholder="CVC" required>
+                    </div>
+                    <div class="col-sm-6">
+                      <button class="btn btn-outline-primary d-block w-100 mt-0" type="submit">Valider</button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+
+        </section>
+            <!-- Sidebar-->
+        {% include 'sidebar-order-summary.html' %}
+      </div>
+    </div>
+      <!-- Navigation (mobile)-->
+      <div class="row d-lg-none">
+        <div class="col-lg-8">
+          <div class="d-flex pt-4 mt-3">
+            <div class="w-50 pe-3"><a class="btn btn-secondary d-block w-100" href="checkout-shipping.html"><i class="ci-arrow-left mt-sm-0 me-1"></i><span class="d-none d-sm-inline">Revenir a la livraison</span><span class="d-inline d-sm-none">Retour</span></a></div>
+            <div class="w-50 ps-2"><a class="btn btn-primary d-block w-100" href="#"><span class="d-none d-sm-inline">Revoir votre commande</span><span class="d-inline d-sm-none">Revoir votre commande</span><i class="ci-arrow-right mt-sm-0 ms-1"></i></a></div>
+          </div>
+        </div>
+      </div>
+{% endblock %}>

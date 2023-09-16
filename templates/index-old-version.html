@@ -1,0 +1,166 @@
+    <div class="container pb-5 mb-2 mb-md-10 mt-lg-4">
+      <div class="row">
+        <!-- Sidebar-->
+        <aside class="col-lg-3">
+              {% include 'sidebar-home-category-list.html' %}
+          <!-- Sidebar-->
+
+        </aside>
+        <!-- Content  -->
+        <section class="col-lg-9 mt-2">
+          <section class="tns-carousel mb-3 mb-md-5">
+            <div class="tns-carousel-inner" data-carousel-options="{&quot;items&quot;: 1, &quot;mode&quot;: &quot;gallery&quot;, &quot;nav&quot;: false, &quot;responsive&quot;: {&quot;0&quot;: {&quot;nav&quot;: true, &quot;controls&quot;: false}, &quot;576&quot;: {&quot;nav&quot;: false, &quot;controls&quot;: true}}}">
+              <!-- Slide 1-->
+              <div>
+                <div class="rounded-3 px-md-5 text-center text-xl-start" style="background-color: #59c879;">
+                 <h4 class="text-light">Produits nouvellement arrivés. 24/7 Service de livraison.</h4>
+                  <div class="d-xl-flex justify-content-between align-items-center px-4 px-sm-5 mx-auto" style="max-width: 1226px;">
+                      <div class="col-md-4 col-sm-6 px-2 mb-4">
+                          <div class="card product-card">
+                          <div class="product-card-actions d-flex align-items-center"><a class="btn-action nav-link-style me-2" href="{% url 'standardApps:compare-products' last_other_item_two.slug %}"><i class="ci-compare me-1"></i>Compare</a>
+                          <a class="btn-wishlist btn-sm" href="{% url 'account:addWishlist' last_other_item.slug %}" type="button" data-bs-toggle="tooltip" data-bs-placement="left" title="Ajouter à la liste de souhaits"><i class="ci-heart"></i></a>
+                          </div><a class="card-img-top d-block overflow-hidden" href="{{ last_other_item.get_absolute_url }}"><img src="{{ last_other_item.imageProduit.url}}" alt="Product"></a>
+                           <div class="card-body py-2"><a class="product-meta d-block fs-xs pb-1" href="#">{{ last_other_item.titreProduit }} </a>
+                           <h3 class="product-title fs-sm"><a href="shop-single-v2.html">{{ last_other_itemDescriptionProduit }}</a></h3>
+                            <div class="d-flex justify-content-between">
+                            <div class="product-price"><span class="text-accent">${{ last_other_item.prixActual }}.<small>00</small></span></div>
+                            <div class="star-rating"><i class="star-rating-icon ci-star-filled active"></i><i class="star-rating-icon ci-star-filled active"></i><i class="star-rating-icon ci-star-filled active"></i><i class="star-rating-icon ci-star-filled active"></i><i class="star-rating-icon ci-star-filled active"></i>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="card-body card-body-hidden">
+                          <a  class="btn btn-primary btn-sm d-block w-100 mb-2 " href="{{ last_other_item.get_adding_to_cart_url }}" type="button"><i class="ci-cart fs-sm me-1"></i>Ajouter au panier</a>
+                          <div class="text-center"><a class="nav-link-style fs-ms" href="{% url 'chat:chat-room' vendor_pk last_other_item.slug %}" ><i class="ci-phone align-middle me-1"></i>Contacter le vendeur</a></div>
+                        </div>
+                      </div>
+                           <hr class="d-sm-none">
+                      </div>
+                      <div class="col-md-4 col-sm-6 px-2 mb-4">
+                             <div class="card product-card">
+                          <div class="product-card-actions d-flex align-items-center"><a class="btn-action nav-link-style me-2" href="{% url 'standardApps:compare-products' last_other_item_two.slug %}"><i class="ci-compare me-1"></i>Compare</a>
+                          <a class="btn-wishlist btn-sm" href="{% url 'account:addWishlist' last_other_item_two.slug %}" type="button" data-bs-toggle="tooltip" data-bs-placement="left" title="Ajouter à la liste de souhaits"><i class="ci-heart"></i></a>
+                          </div><a class="card-img-top d-block overflow-hidden" href="{{ last_other_item_two.get_absolute_url }}"><img src="{{ last_other_item_two.imageProduit.url}}" alt="Product"></a>
+                           <div class="card-body py-2"><a class="product-meta d-block fs-xs pb-1" href="#">{{ last_other_item_two.titreProduit }} </a>
+                           <h3 class="product-title fs-sm"><a href="shop-single-v2.html">{{ last_other_item_two.DescriptionProduit }}</a></h3>
+                            <div class="d-flex justify-content-between">
+                            <div class="product-price"><span class="text-accent">${{ last_other_item_two.prixActual }}.<small>00</small></span></div>
+                            <div class="star-rating"><i class="star-rating-icon ci-star-filled active"></i><i class="star-rating-icon ci-star-filled active"></i><i class="star-rating-icon ci-star-filled active"></i><i class="star-rating-icon ci-star-filled active"></i><i class="star-rating-icon ci-star-filled active"></i>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="card-body card-body-hidden">
+                          <a  class="btn btn-primary btn-sm d-block w-100 mb-2 " href="{{ last_other_item_two.get_adding_to_cart_url }}" type="button"><i class="ci-cart fs-sm me-1"></i>Ajouter au panier</a>
+                          <div class="text-center"><a class="nav-link-style fs-ms" href="{% url 'chat:chat-room' last_other_item.vendeur.pk last_other_item_two.slug %}" ><i class="ci-phone align-middle me-1"></i>Contacter le vendeur</a></div>
+                        </div>
+
+                      </div>
+                      </div>
+                      <div class="col-md-4 col-sm-6 px-2 mb-4">
+                          <div class="card product-card">
+                          <div class="product-card-actions d-flex align-items-center"><a class="btn-action nav-link-style me-2" href="{% url 'standardApps:compare-products' last_item.slug %}"><i class="ci-compare me-1"></i>Compare</a>
+                          <a class="btn-wishlist btn-sm" href="{% url 'account:addWishlist' last_item.slug %}" type="button" data-bs-toggle="tooltip" data-bs-placement="left" title="Ajouter à la liste de souhaits"><i class="ci-heart"></i></a>
+                          </div><a class="card-img-top d-block overflow-hidden" href="{{ last_item.get_absolute_url }}"><img src="{{ last_item.imageProduit.url}}" alt="Product"></a>
+                           <div class="card-body py-2"><a class="product-meta d-block fs-xs pb-1" href="#">{{ last_item.titreProduit }} </a>
+                           <h3 class="product-title fs-sm"><a href="shop-single-v2.html">{{ last_item.DescriptionProduit }}</a></h3>
+                            <div class="d-flex justify-content-between">
+                            <div class="product-price"><span class="text-accent">${{ last_item.prixActual }}.<small>00</small></span></div>
+                            <div class="star-rating"><i class="star-rating-icon ci-star-filled active"></i><i class="star-rating-icon ci-star-filled active"></i><i class="star-rating-icon ci-star-filled active"></i><i class="star-rating-icon ci-star-filled active"></i><i class="star-rating-icon ci-star-filled active"></i>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="card-body card-body-hidden">
+                          <a  class="btn btn-primary btn-sm d-block w-100 mb-2 " href="{{ last_item.get_adding_to_cart_url }}" type="button"><i class="ci-cart fs-sm me-1"></i>Ajouter au panier</a>
+                          <div class="text-center"><a class="nav-link-style fs-ms" href="{% url 'chat:chat-room' vendor_last_item last_item.slug %}" ><i class="ci-phone align-middle me-1"></i>Contacter le vendeur</a></div>
+                        </div>
+
+                      </div>
+                      </div>
+                  </div>
+                  <h6 class="text-light pb-3">Vous êtes en déplacement ? Essayez notre application mobile</h6>
+                  <div class="d-flex flex-wrap justify-content-center justify-content-xl-start"><a class="btn-market btn-apple me-2 mb-2" href="#" role="button"><span class="btn-market-subtitle">Télécharger sur le</span><span class="btn-market-title">App Store</span></a><a class="btn-market btn-google mb-2" href="#" role="button"><span class="btn-market-subtitle">Télécharger sur le</span><span class="btn-market-title">Google Play</span></a></div>
+                </div>
+              </div>
+              <!-- Slide 2-->
+              <div>
+                <div class="rounded-3 px-md-5 text-center text-xl-start" style="background-color: #1a6fb0;">
+                  <div class="d-xl-flex justify-content-between align-items-center px-4 px-sm-5 mx-auto" style="max-width: 1226px;">
+                    <div class="py-5 me-xl-4 mx-auto mx-xl-0" style="max-width: 490px;">
+                      <h2 class="h1 text-light">24/7 Service de livraison</h2>
+                      <p class="text-light pb-4">Commandez n'importe quel article de notre magasin en ligne et nous vous le livrons à votre porte à l'heure qui vous convient.</p>
+                      <h6 class="text-light pb-3">Vous êtes en déplacement ? Essayez notre application mobile</h6>
+                      <div class="d-flex flex-wrap justify-content-center justify-content-xl-start"><a class="btn-market btn-apple me-2 mb-2" href="#" role="button"><span class="btn-market-subtitle">Télécharger sur le</span><span class="btn-market-title">App Store</span></a><a class="btn-market btn-google mb-2" href="#" role="button"><span class="btn-market-subtitle">Télécharger sur le</span><span class="btn-market-title">Google Play</span></a></div>
+                    </div>
+        {% for plist in list_product|slice:'1' %}
+           <div class="card product-card">
+                <div class="product-card-actions d-flex align-items-center"><a class="btn-action nav-link-style me-2" href="{% url 'standardApps:compare-products' plist.slug %}"><i class="ci-compare me-1"></i>Compare</a>
+                  <a class="btn-wishlist btn-sm" href="{% url 'account:addWishlist' plist.slug %}" type="button" data-bs-toggle="tooltip" data-bs-placement="left" title="Ajouter à la liste de souhaits"><i class="ci-heart"></i></a>
+                    </div><a class="card-img-top d-block overflow-hidden" href="{{ plist.get_absolute_url }}"><img src="{{ plist.imageProduit.url}}" alt="Product"></a>
+                    <div class="card-body py-2"><a class="product-meta d-block fs-xs pb-1" href="#">{{ plist.titreProduit }} </a>
+                      <h3 class="product-title fs-sm"><a href="shop-single-v2.html">{{ plist.DescriptionProduit }}</a></h3>
+                  <div class="d-flex justify-content-between">
+                    <div class="product-price"><span class="text-accent">${{ plist.prixActual }}.<small>00</small></span></div>
+                    <div class="star-rating"><i class="star-rating-icon ci-star-filled active"></i><i class="star-rating-icon ci-star-filled active"></i><i class="star-rating-icon ci-star-filled active"></i><i class="star-rating-icon ci-star-filled active"></i><i class="star-rating-icon ci-star-filled active"></i>
+                    </div>
+                  </div>
+            </div>
+            <div class="card-body card-body-hidden">
+              <a  class="btn btn-primary btn-sm d-block w-100 mb-2 " href="{{ plist.get_adding_to_cart_url }}" type="button"><i class="ci-cart fs-sm me-1"></i>Ajouter au panier</a>
+              <div class="text-center"><a class="nav-link-style fs-ms" href="{% url 'chat:chat-room' plist.vendeur.pk plist.slug %}" ><i class="ci-phone align-middle me-1"></i>Contacter le vendeur</a></div>
+            </div>
+          </div>
+          {% endfor %}
+
+
+
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- Banner-->
+          <div class="py-sm-2">
+            <div class="d-sm-flex justify-content-between align-items-center bg-secondary overflow-hidden mb-4 rounded-3">
+              <div class="py-4 my-2 my-md-0 py-md-5 px-4 ms-md-3 text-center text-sm-start">
+                <h4 class="fs-lg fw-light mb-2">Converse All Star</h4>
+                <h3 class="mb-4">Make Your Day Comfortable</h3><a class="btn btn-primary btn-shadow btn-sm" href="#">Shop Now</a>
+              </div><img class="d-block ms-auto" src="img/shop/catalog/banner.jpg" alt="Shop Converse">
+            </div>
+          </div>
+          <!-- Products grid-->
+
+          <hr class="my-3">
+          <!-- Pagination-->
+          <section class="pt-3 pt-md-4">
+            <!-- Heading-->
+            <div class="d-flex flex-wrap justify-content-between align-items-center pt-1 border-bottom pb-4 mb-4">
+              <h2 class="h3 mb-0 pt-3 me-3">Produits en promotion</h2>
+              <div class="pt-3"><a class="btn btn-outline-accent btn-sm" href="grocery-catalog.html">Plus de produits<i class="ci-arrow-right ms-1 me-n1"></i></a></div>
+            </div>
+            <div class="tns-carousel tns-controls-static tns-controls-outside tns-nav-enabled pt-2">
+              <div class="tns-carousel-inner" data-carousel-options="{&quot;items&quot;: 2, &quot;gutter&quot;: 16, &quot;controls&quot;: true, &quot;autoHeight&quot;: true, &quot;responsive&quot;: {&quot;0&quot;:{&quot;items&quot;:1}, &quot;480&quot;:{&quot;items&quot;:2}, &quot;720&quot;:{&quot;items&quot;:3}, &quot;991&quot;:{&quot;items&quot;:2}, &quot;1140&quot;:{&quot;items&quot;:3}, &quot;1300&quot;:{&quot;items&quot;:4}, &quot;1500&quot;:{&quot;items&quot;:5}}}">
+                <!-- Product-->
+                  {% for disc_prod in discount_products %}
+                <div>
+                  <div class="card product-card card-static pb-3"><span class="badge bg-danger badge-shadow">Promo</span>
+                    <a class="btn-wishlist btn-sm" href="{% url 'account:addWishlist' disc_prod.slug %}"  type="button" data-bs-toggle="tooltip" data-bs-placement="left" title="Ajouter à la liste de souhaits"><i class="ci-heart"></i></a><a class="card-img-top d-block overflow-hidden" href="{% url 'shopSingleV2' disc_prod.slug %}"><img src="{{ disc_prod.imageProduit.url }}" alt="Product"></a>
+                    <div class="card-body py-2"><a class="product-meta d-block fs-xs pb-1" href="#">{{ disc_prod.titreProduit }}</a>
+                      <h3 class="product-title fs-sm text-truncate"><a href="{% url 'shopSingleV2' disc_prod.slug %}">{{ disc_prod.DescriptionProduit|slice:'20' }}...</a></h3>
+                      <div class="product-price"><a class="text-decoration-line-through">${{ disc_prod.prixActual }}.<small>00</small></a>
+                      </div>
+                        <span class="fs-sm text-muted">${{ disc_prod.prixDiscount }}.<small>00</small></span>
+                    </div>
+                    <div class="product-floating-btn">
+                      <a href="{{ disc_prod.get_adding_to_cart_url }}"  class="btn btn-primary btn-shadow btn-sm" type="button">+<i class="ci-cart fs-base ms-1"></i></a>
+                    </div>
+                  </div>
+                </div>
+                  {% endfor %}
+              </div>
+            </div>
+          </section>
+        </section>
+      </div>
+    </div>

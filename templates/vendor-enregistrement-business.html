@@ -1,0 +1,157 @@
+{% extends 'simple_base.html'  %}
+{% load crispy_forms_tags %}
+{% load static %}
+ {% block title %} Details Checkout {% endblock %}
+
+{% block body %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $('.chbox').click(function (){
+                var text ="";
+                $('.chbox:checked').each(function (){
+                   text+=$(this).val()+',';
+                });
+                $('#checktext').val(text);
+            });
+        });
+    </script>
+
+    <!-- Page Title-->
+    <div class="page-title-overlap bg-dark pt-4">
+      <div class="container d-lg-flex justify-content-between py-2 py-lg-3">
+        <div class="order-lg-2 mb-3 mb-lg-0 pt-lg-2">
+          <nav aria-label="breadcrumb">
+            <ol class="breadcrumb breadcrumb-light flex-lg-nowrap justify-content-center justify-content-lg-start">
+              <li class="breadcrumb-item"><a class="text-nowrap" href="{% url 'standardApps:home' %}"><i class="ci-home"></i>Home</a></li>
+              <li class="breadcrumb-item text-nowrap"><a href="shop-grid-ls.html">vendor enregistrement</a>
+              </li>
+
+            </ol>
+          </nav>
+        </div>
+
+      </div>
+    </div>
+    <div class="container pb-5 mb-2 mb-md-4">
+       <div class="d-flex justify-content-center h-100">
+        <section class="col-lg-6">
+          <!-- Steps-->
+              <div class="steps steps-light pt-2 pb-3 mb-5"><a class="step-item active" href="{% url 'vendor-enregistrement' %}">
+              <div class="step-progress"><span class="step-count">1</span></div>
+              <div class="step-label"><i class="ci-user-circle"></i>Infos personnelles</div></a><a class="step-item active" href="{% url 'vendor-enregistrement-business' %}">
+              <div class="step-progress"><span class="step-count">2</span></div>
+              <div class="step-label"><i class="ci-cart"></i>infos business</div></a><a class="step-item" href="#">
+              <div class="step-progress"><span class="step-count">3</span></div>
+              <div class="step-label"><i class="ci-locked"></i>Finaliser le compte</div></a></div>
+
+          <!-- Autor info-->
+
+          <!-- Shipping address-->
+          <h2 class="h6 pt-1 pb-3 mb-3 border-bottom">Veuillez fournir les informations sur votre business</h2>
+                     <div class="card border-0 shadow">
+                            <div class="card-body">
+             <h2 class="h4 mb-3">Parlez nous de votre business</h2>
+                <p class="fs-sm text-muted mb-4">Ceci nous permet de bien identifier les clients potentiels pour votre business.</p>
+
+                 <form class="needs-validation" novalidate method="POST">
+                    {% csrf_token %}
+
+
+                <div class="row gx-4 gy-3">
+
+                   <div class="mb-3 pb-2">
+                      <label class="form-label" for="unp-product-name">Nom public du business</label>
+                      {{ form.nom_business }}
+                      <div class="form-text">Saississez un nom business auxquels les clients peuvent referer!.</div>
+                    </div>
+
+                     <div class="mb-3 pb-2">
+                     <select name="business_type" class="form-select" aria-label="Default select example">
+                        <option selected>sélectionner le type de business</option>
+                        <option value="grossiste">Grossiste</option>
+                        <option value="detaillant">Detaillant</option>
+                        <option value="fabricants">Fabricants</option>
+                        <option value="exportateur">Exportateur</option>
+                        <option value="importateur">Importateur</option>
+                        <option value="societe commerciale">Sociétés commerciales</option>
+                    </select>
+                     </div>
+
+                    <div class="mb-3 pb-2">
+                      <label class="form-label" for="unp-product-name">Categories de choses vendues</label>
+                      {{ form.categories_choses_vendues }}
+                      <div class="form-text">Saississez votre la categorie s'il vous plait!.</div>
+                    </div>
+
+                   <div class="mb-3 pb-2">
+                     <label class="form-label" for="unp-product-name">Pays</label>
+                      {{ form.pays }}
+
+                    </div>
+                    <div class="mb-3 pb-2">
+                      <label class="form-label" for="unp-product-name">Lieu physique du shop</label>
+                      {{ form.adresse_shop }}
+
+                    </div>
+                  <div class="mb-3 pb-2">
+                      <label class="form-label" for="unp-product-name">Choisissez le mode de payement accepte</label>
+                        <div class="form-check">
+                          <input class="chbox" type="checkbox" value="Cash" >
+                              <label class="form-check-label" for="flexCheckDefault">
+                                Cash
+                              </label>
+                        </div>
+                      <div class="form-check">
+                          <input class="chbox" type="checkbox" value="Carte Credit" >
+                             <label class="form-check-label" for="flexCheckDefault">
+                                Carte credit
+                              </label>
+                        </div>
+                        <div class="form-check">
+                          <input class="chbox" type="checkbox" value="Paypal" >
+                              <label class="form-check-label" for="flexCheckDefault">
+                                Paypal
+                              </label>
+                        </div>
+                        <div class="form-check">
+                          <input  class="chbox" type="checkbox" value="Mpesa" >
+                              <label class="form-check-label" for="flexCheckDefault">
+                                Mpesa
+                              </label>
+                        </div>
+                      <div class="form-check">
+                          <input class="chbox" type="checkbox" value="Airtel money" >
+                              <label class="form-check-label" for="flexCheckDefault">
+                                Airtel Money
+                              </label>
+                        </div>
+                         <div class="form-check">
+                          <input class="chbox" type="checkbox" value="Orange money" >
+                              <label class="form-check-label" for="flexCheckDefault">
+                                Orange Money
+                              </label>
+                        </div>
+
+                    <input type="text" id="checktext" name="paymentmode" hidden="hidden">
+                    </div>
+
+
+                     <small> Vous avez un compte? <a href="#" class="ml-2"> Connectez vous ici </a> pour vendre vos produits</small>
+
+                      <div class="col-12 text-end">
+                        <button class="btn btn-primary" type="submit"><i class="ci-user me-2 ms-n1"></i>Suivant</button>
+                      </div>
+
+                    </div>
+                  </form>
+                </div>
+               </div>
+        </section>
+
+    </div>
+    </div>
+
+    <!-- Footer-->
+  {% include 'footer.html' %}
+{% endblock %}

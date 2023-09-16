@@ -1,0 +1,62 @@
+   <div class="modal fade" id="signin-modal" tabindex="-1" role="dialog">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header bg-secondary">
+            <ul class="nav nav-tabs card-header-tabs" role="tablist">
+              <li class="nav-item"><a class="nav-link fw-medium active" href="#signin-tab" data-bs-toggle="tab" role="tab" aria-selected="true"><i class="ci-unlocked me-2 mt-n1"></i>Connexion</a></li>
+              <li class="nav-item"><a class="nav-link fw-medium" href="#signup-tab" data-bs-toggle="tab" role="tab" aria-selected="false"><i class="ci-user me-2 mt-n1"></i>S'inscrire</a></li>
+            </ul>
+            <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body tab-content py-4">
+            <form class="needs-validation tab-pane fade show active" method="POST" action="{% url 'sign-in-radio-vendor' %}" autocomplete="off" novalidate id="signin-tab">
+                {% csrf_token %}
+
+              <div class="mb-3">
+             <div class="form-check">
+                <input class="form-check-input" type="radio" id="su-name" name="signin" value="client_signin" checked>
+                <label class="form-label" for="su-name">Se connecter comme <strong>Client</strong></label>
+              </div>
+              </div>
+              <div class="mb-3">
+              <div class="form-check">
+                <input class="form-check-input" type="radio" id="su-name" name="signin" value="vendor_signin">
+                <label class="form-label" for="su-name">Se connecter comme <strong>Vendeur</strong></label>
+              </div>
+              </div>
+              <button class="btn btn-primary btn-shadow d-block w-100" type="submit">Connexion</button>
+            </form>
+            <form class="needs-validation tab-pane fade" method="POST" action="{% url 'sign-in-radio-vendor' %}" novalidate id="signup-tab">
+                {% csrf_token %}
+            <div class="mb-3">
+             <div class="form-check">
+                <input class="form-check-input" type="radio" id="su-name" name="signup" value="client_signup" checked>
+                <label class="form-label" for="su-name">S'inscrire comme <strong>Client</strong></label>
+              </div>
+              </div>
+              <div class="mb-3">
+              <div class="form-check">
+                <input class="form-check-input" type="radio" id="su-name" name="signup" value="vendeur_signup">
+                <label class="form-label" for="su-name">S'inscrire comme <strong>Vendeur</strong></label>
+              </div>
+              </div>
+              <button class="btn btn-primary btn-shadow d-block w-100" type="submit">S'inscrire</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+ <script>
+    function executeQuery(){
+        var type = document.getElementsByName("signup");
+        if (type[0].checked){
+        window.location.replace("{% url 'account:signup-client' %}");
+        //return false;
+            }
+        else if (type[1].checked){
+        window.location.replace("{% url 'signup-vendeur' %}");
+        //return false;
+        }
+    }
+</script>

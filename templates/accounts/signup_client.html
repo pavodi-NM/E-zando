@@ -1,0 +1,81 @@
+
+{% load i18n %}
+{% block content %}
+    {% include 'header-links.html' %}
+        <script>
+                function terms_changed(termsCheckBox){
+            if(termsCheckBox.checked){
+                document.getElementById('senddata').disabled = false;
+            } else {
+                document.getElementById('senddata').disabled = true;
+            }
+        }
+     </script>
+
+<div class="container h-100 py-4 py-lg-5 my-4">
+		<div class="d-flex justify-content-center h-100">
+            <div class="col-md-6">
+            <ul class="errorlist">
+            {% for key, value in form.errors.items %}
+                <li>{% if key != '__all__' %}{{ key }} {% endif %}<small class="text-danger">{{ value }}</small></li>
+            {% endfor %}
+            </ul>
+            <div class="user_card">
+              <div class="card border-0 shadow">
+               <div class="card-body">
+
+                    <h1>{% trans "CREER UN COMPTE" %}</h1>
+
+                    <p>{% blocktrans %}Vous avez déjà un compte ? Alors, veuillez <a href="{{ login_url }}">Se connecter</a>.{% endblocktrans %}</p>
+                    <hr class="mb-4">
+                      {% if form.errors %}
+                            <small class="text-danger">{{form.non_field_errors}}</small>
+                      {% endif %}
+                    <form class="signup" id="signup_form" method="POST" action="{% url 'account:signup-client' %}">
+                      {% csrf_token %}
+                        <div class="input-group mb-3"><i class="ci-user position-absolute top-50 translate-middle-y text-muted fs-base ms-3"></i>
+                            {{ form.username }}
+                        </div>
+                        <div class="input-group mb-3"><i class="ci-mail position-absolute top-50 translate-middle-y text-muted fs-base ms-3"></i>
+                            {{ form.email }}
+                        </div>
+                       <div class="input-group mb-3"><i class="ci-add-location position-absolute top-50 translate-middle-y text-muted fs-base ms-3"></i>
+                            {{ form.adresse }}
+                        </div>
+                        <div class="input-group mb-3"><i class="ci-locked position-absolute top-50 translate-middle-y text-muted fs-base ms-3"></i>
+                          <div class="password-toggle w-100">
+                            {{ form.password1 }}
+                            <label class="password-toggle-btn" aria-label="Show/hide password">
+                              <input class="password-toggle-check" type="checkbox"><span class="password-toggle-indicator"></span>
+                            </label>
+                          </div>
+                        </div>
+                       <div class="input-group mb-3"><i class="ci-locked position-absolute top-50 translate-middle-y text-muted fs-base ms-3"></i>
+                          <div class="password-toggle w-100">
+                            {{ form.password2 }}
+                            <label class="password-toggle-btn" aria-label="Show/hide password">
+                              <input class="password-toggle-check" type="checkbox"><span class="password-toggle-indicator"></span>
+                            </label>
+                          </div>
+                        </div>
+                     <div class="mb-3 pb-2">
+                          <label class="form-label" for="unp-product-name">Termes et conditions</label>
+                              <div class="form-check">
+                              <input name="politique" class="form-check-input" type="checkbox" value="agree" id="checkme" onclick="terms_changed(this)" checked>
+                              <label class="form-check-label" for="flexCheckDefault">
+                                J'accepte <a href="{% url 'pdf' %}" target="_blank" rel="noopener noreferrer"> les termes et conditions </a> qui régissent les vendeurs sur cette plateforme.
+                              </label>
+                            </div>
+                        </div>
+          {% if redirect_field_value %}
+          <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+          {% endif %}
+          <button class="btn btn-primary" id="senddata" type="submit">{% trans "S'inscrire" %} &raquo;</button>
+</form>
+               </div>
+              </div>
+            </div>
+            </div>
+        </div>
+</div>
+{% endblock %}

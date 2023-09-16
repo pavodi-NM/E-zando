@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block body %}
+    <!-- Page Title-->
+    <div class="page-title-overlap bg-dark pt-4">
+      <div class="container d-lg-flex justify-content-between py-2 py-lg-3">
+        <div class="order-lg-2 mb-3 mb-lg-0 pt-lg-2">
+          <nav aria-label="breadcrumb">
+            <ol class="breadcrumb breadcrumb-light flex-lg-nowrap justify-content-center justify-content-lg-start">
+              <li class="breadcrumb-item"><a class="text-nowrap" href="{% url 'home' %}"><i class="ci-home"></i>Home</a></li>
+              <li class="breadcrumb-item text-nowrap"><a href="shop-grid-ls.html">Shop</a>
+              </li>
+              <li class="breadcrumb-item text-nowrap active" aria-current="page">Checkout</li>
+            </ol>
+          </nav>
+        </div>
+        <div class="order-lg-1 pe-lg-4 text-center text-lg-start">
+          <h1 class="h3 text-light mb-0">Checkout</h1>
+        </div>
+      </div>
+    </div>
+    <div class="container pb-5 mb-2 mb-md-4">
+      <div class="row">
+        <section class="col-lg-8">
+              <!-- Steps-->
+                {% include 'checkout-payment-steps.html' %}
+              <!-- Payment methods accordion-->
+              <h2 class="h6 pb-3 mb-2">Vous avez choisi le mode de paiement Orange Money</h2>
+            <hr/>
+
+                          <!-- Paypal integration -->
+            <p>Veuillez nous deposer votre some d'argent a ce numero: <span> +243 85 68 350 22</span></p>
+
+        </section>
+            <!-- Sidebar-->
+        {% include 'sidebar-order-summary.html' %}
+      </div>
+    </div>
+      <!-- Navigation (mobile)-->
+      <div class="row d-lg-none">
+        <div class="col-lg-8">
+          <div class="d-flex pt-4 mt-3">
+            <div class="w-50 pe-3"><a class="btn btn-secondary d-block w-100" href="checkout-shipping.html"><i class="ci-arrow-left mt-sm-0 me-1"></i><span class="d-none d-sm-inline">Revenir a la livraison</span><span class="d-inline d-sm-none">Retour</span></a></div>
+            <div class="w-50 ps-2"><a class="btn btn-primary d-block w-100" href="{% url 'checkoutReview' %}"><span class="d-none d-sm-inline">Revoir votre commande</span><span class="d-inline d-sm-none">Revoir votre commande</span><i class="ci-arrow-right mt-sm-0 ms-1"></i></a></div>
+          </div>
+        </div>
+      </div>
+{% endblock %}

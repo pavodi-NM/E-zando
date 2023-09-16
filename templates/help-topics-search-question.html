@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+{% block title %} Centre d'aide questions {% endblock %}
+{% block body %}
+
+    <!-- Hero section with search-->
+    <section class="position-relative bg-dark bg-size-cover bg-position-center-x position-relative py-5 mb-5" style="background-image: url(img/pages/help-hero-bg.jpg);"><span class="position-absolute top-0 start-0 w-100 h-100 bg-darker" style="opacity: .65;"></span>
+      <div class="container position-relative zindex-5 py-4 my-3">
+        <div class="row justify-content-center">
+          <div class="col-lg-8">
+            <h1 class="text-light text-center">Comment pouvons-nous vous aider ?</h1>
+            <p class="pb-3 text-light text-center">Posez des questions. Parcourir les sujets. Trouvez des réponses.</p>
+            <form method="GET" onsubmit="return executeQueryQuestion();">
+            <div class="input-group input-group-lg mb-3"><i class="ci-search position-absolute top-50 translate-middle-y text-muted fs-base ms-3"></i>
+              <input class="form-control rounded-start" id="ask_search_qs" name="ask_qs" type="search" placeholder="Posez votre question...">
+            </div>
+            </form>
+            <div class="fs-sm"><span class="text-light opacity-50 me-1">Suggestions:</span><a class="nav-link-style nav-link-light me-1 pb-1 border-bottom border-light" href="#"> Tableau de bord,</a><a class="nav-link-style nav-link-light me-1 pb-1 border-bottom border-light" href="#">Paiement,</a><a class="nav-link-style nav-link-light me-1 pb-1 border-bottom border-light" href="#"> Remboursements,</a><a class="nav-link-style nav-link-light me-1 pb-1 border-bottom border-light" href="#"> Livraison</a></div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Topics grid-->
+    <section class="container py-3">
+      <h2 class="h3 text-center">Réponses à votre question: {{ ask_search|title }}</h2>
+      <div class="row pt-4">
+          {% for qs in qs_search %}
+        <div class="col-lg-4 col-sm-6 mb-grid-gutter">
+          <div class="card border-0 shadow">
+            <div class="card-body text-center"><i class="ci-user-circle h2 mt-2 mb-4 text-primary"></i>
+              <h6>{{ qs.sujet|title }}</h6>
+              <p class="fs-sm text-muted pb-2">Proin nec turpis vel tortor venenatis tempus. Sed mollis vel arcu in tempor. Mauris enim purus, laoreet nec elit non euismod tempur accusantium.</p><a class="btn btn-outline-primary btn-sm stretched-link mb-2" href="help-single-topic.html">plus d'informations</a>
+            </div>
+          </div>
+        </div>
+          {% endfor %}
+      </div>
+    </section>
+    <!-- FAQ-->
+    <section class="container pt-4 pb-5">
+      <h2 class="h3 text-center">F.A.Q.</h2>
+      <div class="row pt-4">
+        <div class="col-sm-6">
+          <ul class="list-unstyled">
+            <li class="mb-0"><a class="nav-link-style d-flex align-items-center border-bottom pb-3 mb-3" href="#"><i class="ci-book opacity-60 me-2"></i><span>Combien de temps la livraison prendra-t-elle ?</span></a></li>
+            <li class="mb-0"><a class="nav-link-style d-flex align-items-center border-bottom pb-3 mb-3" href="#"><i class="ci-book opacity-60 me-2"></i><span>Quels modes de paiement acceptez-vous ?</span></a></li>
+            <li class="mb-0"><a class="nav-link-style d-flex align-items-center border-bottom pb-3 mb-3" href="#"><i class="ci-book opacity-60 me-2"></i><span>Expédiez-vous à l'étranger ?</span></a></li>
+            <li class="mb-0"><a class="nav-link-style d-flex align-items-center border-bottom pb-3 mb-3" href="#"><i class="ci-book opacity-60 me-2"></i><span>Ai-je besoin d'un compte pour passer une commande ?</span></a></li>
+            <li class="mb-0"><a class="nav-link-style d-flex align-items-center border-bottom pb-3 mb-3" href="#"><i class="ci-book opacity-60 me-2"></i><span>Comment puis-je suivre ma commande ?</span></a></li>
+          </ul>
+        </div>
+        <div class="col-sm-6">
+          <ul class="list-unstyled">
+            <li class="mb-0"><a class="nav-link-style d-flex align-items-center border-bottom pb-3 mb-3" href="#"><i class="ci-book opacity-60 me-2"></i><span>Quelles sont les conditions de remboursement des produits ?</span></a></li>
+            <li class="mb-0"><a class="nav-link-style d-flex align-items-center border-bottom pb-3 mb-3" href="#"><i class="ci-book opacity-60 me-2"></i><span>Offrez-vous des remises aux clients qui reviennent ?</span></a></li>
+            <li class="mb-0"><a class="nav-link-style d-flex align-items-center border-bottom pb-3 mb-3" href="#"><i class="ci-book opacity-60 me-2"></i><span>Comment fonctionne votre programme de parrainage ?</span></a></li>
+            <li class="mb-0"><a class="nav-link-style d-flex align-items-center border-bottom pb-3 mb-3" href="#"><i class="ci-book opacity-60 me-2"></i><span>Où puis-je consulter et télécharger les factures de mes commandes ?</span></a></li>
+            <li class="mb-0"><a class="nav-link-style d-flex align-items-center border-bottom pb-3 mb-3" href="#"><i class="ci-book opacity-60 me-2"></i><span>Fournissez-vous une assistance technique après l'achat ?</span></a></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+    <!-- Submit request-->
+    <section class="container text-center pt-1 pb-5 mb-2">
+      <h2 class="h4 pb-3">Vous n'avez pas trouvé la réponse ? Nous pouvons vous aider.</h2><i class="ci-help h3 text-primary d-block mb-4"></i><a class="btn btn-primary" href="{% url 'helpSubmitRequest' %}">Soumettre une demande</a>
+      <p class="fs-sm pt-4">Contactez-nous et nous vous répondrons dans les plus brefs délais.</p>
+    </section>
+    <!-- Footer-->
+  {% include 'footer.html' %}
+    <script>
+        function executeQueryQuestion(){
+        var qs = document.getElementById("ask_search_qs").value;
+        if (qs){
+        window.location.replace("{% url 'centre_aide_question' %}?ask_qs=" +qs);
+        return false;
+            }
+        }
+</script>
+{% endblock %}

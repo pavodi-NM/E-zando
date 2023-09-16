@@ -1,0 +1,89 @@
+{% include 'header-links.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+<title>Enregistrement vendeur</title>
+{% block body %}
+
+    <!-- Page Title-->
+    <div class="page-title-overlap bg-dark">
+      <div class="container d-lg-flex justify-content-between py-1 py-lg-1">
+        <div class="order-lg-2 mb-3 mb-lg-0 pt-lg-2">
+          <nav aria-label="breadcrumb">
+            <ol class="breadcrumb breadcrumb-light flex-lg-nowrap justify-content-center justify-content-lg-start">
+              <li class="breadcrumb-item"><a class="text-nowrap" href="{% url 'standardApps:home' %}"><i class="ci-home"></i>Home</a></li>
+              <li class="breadcrumb-item text-nowrap"><a href="shop-grid-ls.html">vendor enregistrement</a>
+              </li>
+
+            </ol>
+          </nav>
+        </div>
+
+      </div>
+    </div>
+    <div class="container pb-15 mb-10 mb-md-1">
+       <div class="d-flex justify-content-center h-100">
+        <section class="col-lg-6">
+          <!-- Steps-->
+            {% include 'vendor-enregistrement-steps.html' %}
+          <!-- Autor info-->
+
+          <!-- Shipping address-->
+          <h2 class="h6 pt-1 pb-3 mb-3 border-bottom">Veuillez fournir vos informations personnelles</h2>
+                     {% if form.errors %}
+                        <small class="text-danger">{{form.non_field_errors}}</small>
+                      {% endif %}
+                     <div class="card border-0 shadow">
+                            <div class="card-body">
+             <h2 class="h4 mb-3">Pas de compte? S'inscrire</h2>
+                <p class="fs-sm text-muted mb-4">L'inscription prend moins d'une minute mais vous donne le controle totale de votre business.</p>
+
+                 <form class="signup" id="signup_form" method="POST">
+                    {% csrf_token %}
+
+
+                    <div class="row gx-4 gy-3">
+                      <div class="col-sm-6">
+                        {{ form.username }}
+                      </div>
+
+                      <div class="col-sm-6">
+                        {{ form.adresse }}
+                      </div>
+                      <div class="col-sm-6">
+                        {{ form.email }}
+                      </div>
+                      <div class="col-sm-6">
+                        {{ form.phone }}
+                      </div>
+                      <div class="col-sm-6">
+                        {{ form.password1 }}
+                      </div>
+                      <div class="col-sm-6">
+                       {{ form.password2 }}
+                      </div>
+                     <div class="col-sm-6">
+                        {{ form.pays }}
+                      </div>
+
+
+                     <hr class="mt-4">
+                     <small> Vous avez un compte? <a href="{% url 'vendorlogin' %}" class="ml-2"> Connectez vous ici </a> pour vendre vos produits</small>
+                      <div class="col-12 text-end">
+                        <button class="btn btn-primary" type="submit"><i class="ci-user me-2 ms-n1"></i>Suivant</button>
+                      </div>
+
+            </div>
+
+          <input type="hidden" name="{{ redirect_field_name }}" value="{% url 'vendor-enregistrement-business' %}" />
+
+          </form>
+        </div>
+                     </div>
+        </section>
+
+    </div>
+    </div>
+    <hr class="mb-10">
+    <!-- Footer-->
+
+{% endblock %}
